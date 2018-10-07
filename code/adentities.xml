@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- This file should be included in your own -->
+<Entities>
+
+	<!-- The entity used when the game is paused -->
+	<Entity id="10000">
+		<Forms>
+			<!-- The form used when the game is paused 
+				 It is a simple ball rolling in a circle. --> 
+			<Form id="10003"/>
+		</Forms>
+		<Capacities>
+		</Capacities>
+		<Physics>
+		</Physics>
+		<Movements>
+			<!-- This movement means totally stopped -->
+			<Movement id="10000"/>
+		</Movements>
+		<Animations>
+			<!-- When paused -->
+			<Animation id="0" type="0">
+				<Attributes>
+					<Attribute id="FORM" value="10003"/>
+					<Attribute id="INITIALASPECT" value="0"/>
+					<Attribute id="FINALASPECT" value="16"/>
+					<Attribute id="FRACTIONTOCHANGE" value="6"/>
+					<Attribute id="LOOP" value="1"/>
+				</Attributes>
+			</Animation>
+		</Animations>
+		<States>
+			<!-- Just in pause -->
+			<State id="0" animation="0" movement="10000"/>
+		</States>
+	</Entity>
+
+</Entities>

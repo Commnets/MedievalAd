@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Sounds>
+
+	<!-- wav sounds -->
+	<Sound id="10000" type="1" loop="0"  file="sounds/jump.wav"/>
+	<Sound id="10001" type="1" loop="0"  file="sounds/eat.wav"/>
+	<Sound id="10002" type="1" loop="0"  file="sounds/catch.wav"/>
+	<Sound id="10003" type="1" loop="0"  file="sounds/throw.wav"/>
+	<Sound id="10004" type="1" loop="-1" file="sounds/rain.wav"/>
+	<Sound id="10005" type="1" loop="-1" file="sounds/earthquake.wav"/>
+	<Sound id="10006" type="1" loop="-1" file="sounds/wind.wav"/>
+	<Sound id="10007" type="1" loop="0"  file="sounds/thunder.wav"/>
+	<Sound id="10008" type="1" loop="0"  file="sounds/hurt.wav"/>
+	<Sound id="10009" type="1" loop="-1" file="sounds/wick.wav"/>
+	<Sound id="10010" type="1" loop="0"  file="sounds/explosion.wav"/>
+	<Sound id="10011" type="1" loop="0"  file="sounds/beep.wav"/>
+	<!-- -->
+	
+</Sounds>

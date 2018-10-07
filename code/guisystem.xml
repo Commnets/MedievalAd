@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<GUISystems>
+
+	<Include file="adguisystem.xml"/>
+
+	<!-- Option to ask for the name of a player -->
+	<GUISystem id="100" main="101">
+		<!-- The main widget has to be a composite (type 0)
+			 to allow  the reference to other widgets -->
+		<Widget id="101" type="0" position="0,0,0">
+			<RefWidget id="102"/>
+		</Widget>
+		
+		<!-- Option 1: Just one option to introduce the name of a player -->
+		<Widget id="102" type="2" position="320,350,0">
+			<Attributes>
+				<Attribute id="Form" value="20020"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="255"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Chars" value="3"/>
+				<Attribute id="Mask" value="A"/>
+				<Attribute id="CursorColor" value="150,150,150,255"/>
+				<Attribute id="Location" value="RIGHT"/>
+				<Attribute id="Text" value="Player Name?: "/>
+			</Attributes>
+		</Widget>
+	</GUISystem>
+	
+</GUISystems>

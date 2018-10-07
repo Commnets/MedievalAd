@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Sounds>
+
+	<Include file="adsounds.xml"/>
+	
+	<Sound id="100" type="1" loop="-1"  file="sounds/introsound.wav"/>
+	<Sound id="101" type="1" loop="-1"  file="sounds/menusound.wav"/>
+	<Sound id="102" type="1" loop="-1"  file="sounds/halloffamesound.wav"/>
+	<Sound id="103" type="1" loop="00"  file="sounds/gamefinished.wav"/>
+	<Sound id="104" type="1" loop="00"  file="sounds/playerwins.wav"/>
+	<Sound id="105" type="1" loop="-1"  file="sounds/backgroundsound.wav"/>
+	<Sound id="106" type="1" loop="00"  file="sounds/crywhendie.wav"/>
+	<Sound id="107" type="1" loop="00"  file="sounds/fallapart.wav"/>
+	<Sound id="108" type="1" loop="-1"  file="sounds/intromusic.wav"/>
+	<Sound id="109" type="1" loop="-1"  file="sounds/playingbackground.wav"/>
+	<Sound id="110" type="1" loop="00"  file="sounds/playerhasdied.wav"/>
+
+</Sounds>

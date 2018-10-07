@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<GUISystems>
+
+	<!-- Standard main menu used in selection game states -->
+	<GUISystem id="10000" main="10001">
+		<!-- The main widget has to be a composite (type 0)
+			 to allow  the reference to other widgets -->
+		<Widget id="10001" type="0" position="10,10,0">
+			<RefWidget id="10002"/>
+			<RefWidget id="10003"/>	
+			<RefWidget id="10004"/>	
+			<RefWidget id="10005"/>	
+			<RefWidget id="10006"/>	
+			<RefWidget id="10007"/>	
+			<RefWidget id="10008"/>	
+			<RefWidget id="10009"/>	
+			<RefWidget id="10010"/>	
+		</Widget>
+
+		<!-- Option 1: To start the game -->
+		<Widget id="10002" type="1" position="0,0,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="Text" value="Start the game"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 2: To load the last game  -->
+		<Widget id="10003" type="1" position="0,50,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="Text" value="Load last game"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 3: To introduce the number of players -->
+		<Widget id="10004" type="2" position="0,100,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Chars" value="1"/>
+				<Attribute id="Mask" value="9"/>
+				<Attribute id="CursorColor" value="150,150,150,255"/>
+				<Attribute id="Location" value="RIGHT"/>
+				<Attribute id="Text" value="Number of players: "/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 4: To select the type of control used to manage the game  -->
+		<Widget id="10005" type="3" position="0,150,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" value="Joystick,Keyboard"/>
+				<Attribute id="Text" value="Keyboard"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 5: To configure the keys of the game  -->
+		<Widget id="10006" type="1" position="0,200,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="Text" value="Configure keys"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 6: To select the difficulty of the game  -->
+		<Widget id="10007" type="3" position="0,250,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" value="Easy,Medium,Difficult"/>
+				<Attribute id="Text" value="Easy"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 7: To determinate whether the music is on or off  -->
+		<Widget id="10008" type="3" position="0,300,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" value="Music On,Music Off"/>
+				<Attribute id="Text" value="Music On"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 8: Hall of fame -->
+		<Widget id="10009" type="1" position="0,350,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="Text" value="Hall of fame"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 9: Exit -->
+		<Widget id="10010" type="1" position="0,400,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="Text" value="Exit"/>
+			</Attributes>
+		</Widget>
+	</GUISystem>
+	
+	<!-- Standard menu to change the keys used to manage the usual movements -->
+	<GUISystem id="10100" main="10101">
+		<!-- The main widget has to be a composite (type 0)
+			 to allow  the reference to other widgets -->
+		<Widget id="10101" type="0" position="10,10,0">
+			<RefWidget id="10102"/>
+			<RefWidget id="10103"/>	
+			<RefWidget id="10104"/>	
+			<RefWidget id="10105"/>	
+			<RefWidget id="10106"/>
+			<!-- ADDED TO THE STANDARD BASIC IMPLEMENTATION
+				 TO CONSIDER TWO ADDITIONAL KEY FOR LEAVING AND CTACHING THINGS -->
+			<RefWidget id="10110"/>	
+			<RefWidget id="10111"/>
+			<!-- -->
+			<RefWidget id="10107"/>	
+			<RefWidget id="10108"/>	
+			<RefWidget id="10109"/>	
+		</Widget>
+
+		<!-- Option 1: Selecting key for moving up -->
+		<Widget id="10102" type="3" position="0,0,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="UP: Q,UP: W,UP: E,UP: R,UP: T,UP: Y,UP: U,UP: I,UP: O,UP: P,UP: A,UP: S,UP: D,UP: F,UP: G,UP: H,UP: J,UP: K,UP: L,UP: Z,UP: X,UP: C,UP: V,UP: B,UP: N,UP: M,UP: 1,UP: 2,UP: 3,UP: 4,UP: 5,UP: 6,UP: 7,UP: 8,UP: 9,UP: 0,UP: SPACE,UP: UP,UP: DOWN,UP: LEFT,UP: RIGHT"/>
+				<Attribute id="Text" value="UP: P"/>
+			</Attributes>
+		</Widget>
+
+		<!-- Option 2: Selecting key for moving down -->
+		<Widget id="10103" type="3" position="0,50,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="DOWN: Q,DOWN: W,DOWN: E,DOWN: R,DOWN: T,DOWN: Y,DOWN: U,DOWN: I,DOWN: O,DOWN: P,DOWN: A,DOWN: S,DOWN: D,DOWN: F,DOWN: G,DOWN: H,DOWN: J,DOWN: K,DOWN: L,DOWN: Z,DOWN: X,DOWN: C,DOWN: V,DOWN: B,DOWN: N,DOWN: M,DOWN: 1,DOWN: 2,DOWN: 3,DOWN: 4,DOWN: 5,DOWN: 6,DOWN: 7,DOWN: 8,DOWN: 9,DOWN: 0,DOWN: SPACE,DOWN: UP,DOWN: DOWN,DOWN: LEFT,DOWN: RIGHT"/>
+				<Attribute id="Text" value="DOWN: L"/>
+			</Attributes>
+		</Widget>
+
+		<!-- Option 3: Selecting key for moving left -->
+		<Widget id="10104" type="3" position="0,100,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="LEFT: Q,LEFT: W,LEFT: E,LEFT: R,LEFT: T,LEFT: Y,LEFT: U,LEFT: I,LEFT: O,LEFT: P,LEFT: A,LEFT: S,LEFT: D,LEFT: F,LEFT: G,LEFT: H,LEFT: J,LEFT: K,LEFT: L,LEFT: Z,LEFT: X,LEFT: C,LEFT: V,LEFT: B,LEFT: N,LEFT: M,LEFT: 1,LEFT: 2,LEFT: 3,LEFT: 4,LEFT: 5,LEFT: 6,LEFT: 7,LEFT: 8,LEFT: 9,LEFT: 0,LEFT: SPACE,LEFT: UP,LEFT: DOWN,LEFT: LEFT,LEFT: RIGHT"/>
+				<Attribute id="Text" value="LEFT: A"/>
+			</Attributes>
+		</Widget>
+
+		<!-- Option 4: Selecting key for moving right -->
+		<Widget id="10105" type="3" position="0,150,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="RIGHT: Q,RIGHT: W,RIGHT: E,RIGHT: R,RIGHT: T,RIGHT: Y,RIGHT: U,RIGHT: I,RIGHT: O,RIGHT: P,RIGHT: A,RIGHT: S,RIGHT: D,RIGHT: F,RIGHT: G,RIGHT: H,RIGHT: J,RIGHT: K,RIGHT: L,RIGHT: Z,RIGHT: X,RIGHT: C,RIGHT: V,RIGHT: B,RIGHT: N,RIGHT: M,RIGHT: 1,RIGHT: 2,RIGHT: 3,RIGHT: 4,RIGHT: 5,RIGHT: 6,RIGHT: 7,RIGHT: 8,RIGHT: 9,RIGHT: 0,RIGHT: SPACE,RIGHT: UP,RIGHT: DOWN,RIGHT: LEFT,RIGHT: RIGHT"/>
+				<Attribute id="Text" value="RIGHT: S"/>
+			</Attributes>
+		</Widget>
+
+		<!-- Option 5: Selecting key for fighting -->
+		<Widget id="10106" type="3" position="0,200,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="FIGHT: Q,FIGHT: W,FIGHT: E,FIGHT: R,FIGHT: T,FIGHT: Y,FIGHT: U,FIGHT: I,FIGHT: O,FIGHT: P,FIGHT: A,FIGHT: S,FIGHT: D,FIGHT: F,FIGHT: G,FIGHT: H,FIGHT: J,FIGHT: K,FIGHT: L,FIGHT: Z,FIGHT: X,FIGHT: C,FIGHT: V,FIGHT: B,FIGHT: N,FIGHT: M,FIGHT: 1,FIGHT: 2,FIGHT: 3,FIGHT: 4,FIGHT: 5,FIGHT: 6,FIGHT: 7,FIGHT: 8,FIGHT: 9,FIGHT: 0,FIGHT: SPACE,FIGHT: UP,FIGHT: DOWN,FIGHT: LEFT,FIGHT: RIGHT"/>
+				<Attribute id="Text" value="FIGHT: SPACE"/>
+			</Attributes>
+		</Widget>
+
+		<!-- ADDED TO THE STANDARD BASIC IMPLEMENTATION
+			 TO CONSIDER TWO ADDITIONAL KEY FOR LEAVING AND CTACHING THINGS 
+			 TAKE THIS INTO ACCOUNT WHEN UPDATING THIS FILE -->
+
+		<!-- Option 9: Selecting key for iterating the things -->
+		<Widget id="10110" type="3" position="0,250,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="ITERATE: Q,ITERATE: W,ITERATE: E,ITERATE: R,ITERATE: T,ITERATE: Y,ITERATE: U,ITERATE: I,ITERATE: O,ITERATE: P,ITERATE: A,ITERATE: S,ITERATE: D,ITERATE: F,ITERATE: G,ITERATE: H,ITERATE: J,ITERATE: K,ITERATE: L,ITERATE: Z,ITERATE: X,ITERATE: C,ITERATE: V,ITERATE: B,ITERATE: N,ITERATE: M,ITERATE: 1,ITERATE: 2,ITERATE: 3,ITERATE: 4,ITERATE: 5,ITERATE: 6,ITERATE: 7,ITERATE: 8,ITERATE: 9,ITERATE: 0,ITERATE: SPACE,ITERATE: UP,ITERATE: DOWN,ITERATE: LEFT,ITERATE: RIGHT"/>
+				<Attribute id="Text" value="CATCH: Q"/>
+			</Attributes>
+		</Widget>
+
+		<!-- Option 10: Selecting key for catching / leaving the things -->
+		<Widget id="10111" type="3" position="0,300,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="CATCHLEAVE: Q,CATCHLEAVE: W,CATCHLEAVE: E,CATCHLEAVE: R,CATCHLEAVE: T,CATCHLEAVE: Y,CATCHLEAVE: U,CATCHLEAVE: I,CATCHLEAVE: O,CATCHLEAVE: P,CATCHLEAVE: A,CATCHLEAVE: S,CATCHLEAVE: D,CATCHLEAVE: F,CATCHLEAVE: G,CATCHLEAVE: H,CATCHLEAVE: J,CATCHLEAVE: K,CATCHLEAVE: L,CATCHLEAVE: Z,CATCHLEAVE: X,CATCHLEAVE: C,CATCHLEAVE: V,CATCHLEAVE: B,CATCHLEAVE: N,CATCHLEAVE: M,CATCHLEAVE: 1,CATCHLEAVE: 2,CATCHLEAVE: 3,CATCHLEAVE: 4,CATCHLEAVE: 5,CATCHLEAVE: 6,CATCHLEAVE: 7,CATCHLEAVE: 8,CATCHLEAVE: 9,CATCHLEAVE: 0,CATCHLEAVE: SPACE,CATCHLEAVE: UP,CATCHLEAVE: DOWN,CATCHLEAVE: LEFT,CATCHLEAVE: RIGHT"/>
+				<Attribute id="Text" value="CATCHLEAVE: W"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- -->
+
+		<!-- Option 6: Selecting key for pausing the game -->
+		<Widget id="10107" type="3" position="0,350,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="PAUSE: Q,PAUSE: W,PAUSE: E,PAUSE: R,PAUSE: T,PAUSE: Y,PAUSE: U,PAUSE: I,PAUSE: O,PAUSE: P,PAUSE: A,PAUSE: S,PAUSE: D,PAUSE: F,PAUSE: G,PAUSE: H,PAUSE: J,PAUSE: K,PAUSE: L,PAUSE: Z,PAUSE: X,PAUSE: C,PAUSE: V,PAUSE: B,PAUSE: N,PAUSE: M,PAUSE: 1,PAUSE: 2,PAUSE: 3,PAUSE: 4,PAUSE: 5,PAUSE: 6,PAUSE: 7,PAUSE: 8,PAUSE: 9,PAUSE: 0,PAUSE: SPACE,PAUSE: UP,PAUSE: DOWN,PAUSE: LEFT,PAUSE: RIGHT"/>
+				<Attribute id="Text" value="PAUSE: Z"/>
+			</Attributes>
+		</Widget>
+
+		<!-- Option 7: Selecting key for save -->
+		<Widget id="10108" type="3" position="0,400,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="StringValues" 
+					value="SAVE: Q,SAVE: W,SAVE: E,SAVE: R,SAVE: T,SAVE: Y,SAVE: U,SAVE: I,SAVE: O,SAVE: P,SAVE: A,SAVE: S,SAVE: D,SAVE: F,SAVE: G,SAVE: H,SAVE: J,SAVE: K,SAVE: L,SAVE: Z,SAVE: X,SAVE: C,SAVE: V,SAVE: B,SAVE: N,SAVE: M,SAVE: 1,SAVE: 2,SAVE: 3,SAVE: 4,SAVE: 5,SAVE: 6,SAVE: 7,SAVE: 8,SAVE: 9,SAVE: 0,SAVE: SPACE,SAVE: UP,SAVE: DOWN,SAVE: LEFT,SAVE: RIGHT"/>
+				<Attribute id="Text" value="SAVE: F1"/>
+			</Attributes>
+		</Widget>
+		
+		<!-- Option 8: Back to the main menu -->
+		<Widget id="10109" type="1" position="0,450,0">
+			<Attributes>
+				<Attribute id="Form" value="20021"/>
+				<Attribute id="BaseChr" value="32"/>
+				<Attribute id="AlphaOn" value="255"/>
+				<Attribute id="AlphaOff" value="150"/>
+				<Attribute id="PixelsAmong" value="0"/>
+				<Attribute id="Direction" value="HORIZONTALRIGHT"/>
+				<Attribute id="Text" value="Back to main menu"/>
+			</Attributes>
+		</Widget>
+	</GUISystem>
+	
+</GUISystems>

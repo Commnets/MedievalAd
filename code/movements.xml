@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Movements>
+
+	<!-- Includes -->
+	<Include file="admovements.xml"/>
+
+	<!-- Knight movements -->
+	<!-- Linear movement -->
+	<Movement id="100">
+		<!-- Speed -->
+		<Variable id="0" value="2"/>
+	</Movement>
+	<!-- Staying movement -->
+	<Movement id="101"/>
+
+	<!-- Villaner movements -->
+	<!-- Linear movements -->
+	<SetOfMovements fromId="200" number="10">
+		<!-- Speed -->
+		<Variable id="0" value="2"/>
+	</SetOfMovements>
+	<!-- Staying movements -->
+	<SetOfMovements fromId="201" number="10"/>
+	
+	<!-- No movement of the things -->
+	<SetOfMovements fromId="300" number="15"/>
+	
+	<!-- No movement of the meal -->
+	<SetOfMovements fromId="400" number="10"/>
+
+</Movements>

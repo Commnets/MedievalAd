@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Properties>
+	<!-- Where to extract all resources used by the game -->
+	<Property id="DATADIR" value="D:/Temp"/>
+	<!-- What is the name of the game -->
+	<Property id="GAMENAME" value="Commtynets Game"/>
+	<!-- What is the number of form to represent the icon of the game -->
+	<Property id="GAMEICON" value="10000">
+	<!-- Where to locate the window to play -->
+	<Property id="SCREENXPOSITION" value="10"/>
+	<Property id="SCREENYPOSITION" value="10"/>
+	<!-- The size of the window to play -->
+	<Property id="SCREENWIDTH" value="640"/>
+	<Property id="SCREENHEIGHT" value="480"/>
+</Properties>
