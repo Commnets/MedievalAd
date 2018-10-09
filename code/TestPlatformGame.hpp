@@ -281,7 +281,6 @@ namespace TestPlatformGame
 		const VillanerLocation& description () const
 							{ return (_description); }
 		void setDescription (const VillanerLocation& vL);
-		void setNoDescription ();
 
 		/** Energy level. */
 		int energyLevel () const
@@ -301,6 +300,9 @@ namespace TestPlatformGame
 
 		/** @see parent. */
 		virtual void whenCollisionWith (QGAMES::Entity* e);
+
+		/** @see parent. */
+		virtual void processEvent (const QGAMES::Event& e);
 
 		private:
 		// Different actions are managed in a private way...

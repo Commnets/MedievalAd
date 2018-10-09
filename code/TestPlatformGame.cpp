@@ -756,15 +756,9 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 			__BD (currentForm () -> frameHeightForFrame (currentAspect ()) - 
 				 (currentForm () -> frameWidthForFrame (currentAspect ()) >> 1))));
 
+	// By default the entity is not visible...
+	// Each time it is update, the visible attribute will be updated...
 	setVisible (true);
-}
-
-// ---
-void TestPlatformGame::Villaner::setNoDescription ()
-{
-	_description = TestPlatformGame::VillanerLocation ();
-
-	setVisible (false);
 }
 
 // ---
@@ -808,6 +802,8 @@ void TestPlatformGame::Villaner::updatePositions ()
 {
 	QGAMES::PlatformArtist::updatePositions ();
 
+	setVisible (((TestPlatformGame::Game*) game ()) -> mazeScene () == _description._roomNumber);
+
 	// The position is updated whether the villaner is visible or not...
 	// The way the villaner moves is quite similar to knight's but it isn't controlled bu the user!
 
@@ -836,6 +832,7 @@ void TestPlatformGame::Villaner::drawOn (QGAMES::Screen* s, const QGAMES::Positi
 {
 	if (!isVisible ())
 		return; // The villaner can be in another room scene so it won't be drawn!
+				// The attribute is set in the updatePositions method...
 
 	QGAMES::PlatformArtist::drawOn (s, p);
 }
@@ -844,6 +841,14 @@ void TestPlatformGame::Villaner::drawOn (QGAMES::Screen* s, const QGAMES::Positi
 void TestPlatformGame::Villaner::whenCollisionWith (QGAMES::Entity* e)
 {
 	// TODO
+}
+
+// ---
+void TestPlatformGame::Villaner::processEvent (const QGAMES::Event& e)
+{
+	// TODO
+
+	QGAMES::PlatformArtist::processEvent (e);
 }
 
 // ---
@@ -1301,15 +1306,6 @@ void TestPlatformGame::World::setMazeScene (int nM)
 	((TestPlatformGame::Game*) game ()) -> setMazeScene (nM);
 	((TestPlatformGame::Scene*) activeScene ()) -> setSceneType (_MAZESCENES [nM]);
 
-	// Active the villaners in the room, and desactive the rest...
-	int nV = 0;
-	std::vector <TestPlatformGame::VillanerLocation> vll = ((TestPlatformGame::Game*) game ()) -> villanersInMazeRoom (nM);
-	for (int i = 0; i < (int) vll.size (); i++, nV++)
-		((TestPlatformGame::Villaner*) (__AGM game ()) -> artist (__GAMETEST_VILLANERCHARACTERBASEID__ + i)) -> setDescription (vll [i]);
-	for (int i = nV; i < __GAMETEST_NUMBERVILLANERS__; i++)
-		((TestPlatformGame::Villaner*) (__AGM game ()) -> artist (__GAMETEST_VILLANERCHARACTERBASEID__ + i)) -> setNoDescription ();
-	// but all of them will update his position...
-
 	// Active the things that can be caught...
 	int aT = 0;
 	std::vector <TestPlatformGame::ThingToCatchLocation> thgs = ((TestPlatformGame::Game*) game ()) -> thingsInMaze () [nM];
@@ -1393,6 +1389,13 @@ void TestPlatformGame::World::initialize ()
 		(__AT (__AGM game ()) -> artist (__GAMETEST_THINGTOCATCHBASEID__ + i)) -> setMap (activeScene () -> activeMap ());
 	for (int i = 0; i < __GAMETEST_MAXNUMBEROFMEALSINMAZEPERROOM__; i++)
 		(__AT (__AGM game ()) -> artist (__GAMETEST_MEALBASEID__ + i)) -> setMap (activeScene () -> activeMap ());
+
+	// The villaners are set at the early beginning...
+	const std::vector <TestPlatformGame::VillanerLocation>& vll = ((TestPlatformGame::Game*) game ()) -> villanersInMaze ();
+	assert ((int) vll.size () == __GAMETEST_NUMBERVILLANERS__); // To be sure...
+	for (int i = 0; i < (int) vll.size (); i++)
+		((TestPlatformGame::Villaner*) (__AGM game ()) -> 
+			artist (__GAMETEST_VILLANERCHARACTERBASEID__ + i)) -> setDescription (vll [i]);
 }
 
 void TestPlatformGame::World::drawOn (QGAMES::Screen* s, const QGAMES::Position& p)
