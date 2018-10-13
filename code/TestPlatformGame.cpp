@@ -750,11 +750,17 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 			assert (0); // It shouldn't be here...
 	};
 
+	// Sets the position...
 	setPosition (_description._position - // The position kept is always with no z coordinate...
 		QGAMES::Vector (__BD 0, __BD 0, __BD 32) -
 		QGAMES::Vector (__BD 0, __BD 0, 
 			__BD (currentForm () -> frameHeightForFrame (currentAspect ()) - 
 				 (currentForm () -> frameWidthForFrame (currentAspect ()) >> 1))));
+
+	// ...and a movement if any...
+	if (_description._initialMazeRoom != _description._finalMazeRoom)
+		moveFollowingPath (((TestPlatformGame::World*) (__AGM game ()) -> activeWorld ()) -> 
+			worldModel ().shortestWayToGo (_description._initialMazeRoom, _description._finalMazeRoom));
 
 	// By default the entity is not visible...
 	// Each time it is update, the visible attribute will be updated...
@@ -762,27 +768,33 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 }
 
 // ---
-bool TestPlatformGame::Villaner::canMove (const QGAMES::Vector& d, const QGAMES::Vector& a)
+void TestPlatformGame::Villaner::setNextMazeScene (const QGAMES::Vector& dir)
 {
-	if (!isVisible ())
-		return (true); // Nothing to stop it while it is not visible...
+	// Change the maze scene...
+	int rR = (_description._roomNumber / __GAMETEST_HORIZONTALSCENESINMAZE__) + (int) dir.posY ();
+	int rC = (_description._roomNumber % __GAMETEST_HORIZONTALSCENESINMAZE__) + (int) dir.posX ();
+	assert (rR < __GAMETEST_VERTICALSCENESINMAZE__ && rC < __GAMETEST_HORIZONTALSCENESINMAZE__); // Just to be sure...
+	_description._roomNumber = (rR * __GAMETEST_HORIZONTALSCENESINMAZE__) + rC;
 
-	QGAMES::Position oldPos = position ();
-	setPosition (position () + d);
+	// ...and the position too...
+	setPosition (position () - 
+		QGAMES::Vector (dir.posX () * __BD (map () -> width () >> 1),
+						dir.posY () * __BD (map () -> height ()),
+						__BD 0) + (__BD 10 * dir));
 
-	// Not possible to move if there is going to be a collicion with something that can be caught...
-	bool result = true;
-	const QGAMES::Entities& eties = map () -> scene () -> entities ();
-	for (QGAMES::Entities::const_iterator i = eties.begin (); i != eties.end () && result; i++)
-		if ((*i).second != this && // Not me...
-			(*i).second -> isVisible () && dynamic_cast <TestPlatformGame::ThingToCatch*> ((*i).second) && // Something visible to catch
-			hasCollisionWith ((*i).second)) // ...and with collision
-			result = false; // No movement possible...
-	// Take into account that collisions are not detected with meal!
+	// just in case...
+	setVisible (false);
+}
 
-	setPosition (oldPos);
+// ---
+void TestPlatformGame::Villaner::moveFollowingPath (const std::vector <QGAMES::MazeModel::PositionInMaze>& pth)
+{
+	_path = pth;
+	if (_path.empty ())
+		return;
 
-	return (result);
+	setControlMonitorToRoom (((int) _path.size () > 1) 
+		? _path [_description._currentPathPosition + 1] : _path [_description._currentPathPosition]);
 }
 
 // ---
@@ -801,6 +813,26 @@ void TestPlatformGame::Villaner::initialize ()
 void TestPlatformGame::Villaner::updatePositions ()
 {
 	QGAMES::PlatformArtist::updatePositions ();
+
+	// When to change the path...
+	if (_changePath)
+	{
+		_changePath = false;
+
+		_description._currentPathPosition++;
+		if (_description._currentPathPosition >= ((int) _path.size () - 1)) 
+		{ 
+			// The opposite situation...
+			QGAMES::MazeModel::PositionInMaze tP = _description._initialMazeRoom; 
+			_description._initialMazeRoom = _description._finalMazeRoom; _description._finalMazeRoom = tP;
+			// Starts back...
+			_description._currentPathPosition = 0; 
+			moveFollowingPath (((TestPlatformGame::World*) (__AGM game ()) -> activeWorld ()) -> 
+				worldModel ().shortestWayToGo (_description._initialMazeRoom, _description._finalMazeRoom));
+		}
+		else 
+			setControlMonitorToRoom (_path [_description._currentPathPosition + 1]);
+	}
 
 	setVisible (((TestPlatformGame::Game*) game ()) -> mazeScene () == _description._roomNumber);
 
@@ -825,6 +857,16 @@ void TestPlatformGame::Villaner::updatePositions ()
 	else if (basePosition ().posY () >=
 		__BD ((__AGM game ()) -> activeWorld () -> activeScene () -> activeMap () -> height ()))
 		notify (QGAMES::Event (__GAMETEST_VILLANERREACHEDDOWNLIMIT__, this));
+
+	// Actualize the position and the orientation in the description object...
+	//The z coordinate is not kept (is just the position of the base)
+	_description._position = QGAMES::Position (position ().posX (), position ().posY (), __BD 0);
+	_description._orientation = orientation ();
+	// Both can be changed during the excution of this method (even after notifying an event)
+
+	// The information has to be updated also in the configuration entities
+	// just in case the game is saved...
+	((TestPlatformGame::Game*) game ()) -> actualizeVillanersInfo (_description);
 }
 
 // ---
@@ -846,9 +888,14 @@ void TestPlatformGame::Villaner::whenCollisionWith (QGAMES::Entity* e)
 // ---
 void TestPlatformGame::Villaner::processEvent (const QGAMES::Event& e)
 {
-	// TODO
-
-	QGAMES::PlatformArtist::processEvent (e);
+	// The end of the movement has been reached
+	// So it is time to add a new one, of to finish the movement!
+	if (e.code () == __QGAMES_CHRSTEPSMONITORLASTSTEP__)
+		_changePath = true;
+		// The monitor can't be changed in this moment, because the notification comes 
+		// from the monitor itself... 
+	else
+		QGAMES::PlatformArtist::processEvent (e);
 }
 
 // ---
@@ -867,7 +914,7 @@ void TestPlatformGame::Villaner::toStay (const QGAMES::Vector& o)
 			// (1,-1)  : Going to the right - up, and the form representing that is the right one.
 			else if (to.posY () == __BD -1) setCurrentState (__GAMETEST_VILLANERIDLESTATERIGHT__);
 			// (1,0)   : Going to the right, and the form representing that is the right - down one.
-			else setCurrentState (__GAMETEST_KNIGHTIDLESTATERIGHTDOWN__);
+			else setCurrentState (__GAMETEST_VILLANERIDLESTATERIGHTDOWN__);
 		}
 		else if (to.posX () == __BD -1)
 		{
@@ -888,6 +935,7 @@ void TestPlatformGame::Villaner::toStay (const QGAMES::Vector& o)
 			else assert (0); // Just in case, to generate a mistake in debug mode!!
 		}
 
+		_description._status = 0;
 		_lastOrientation = to;
 	}
 }
@@ -927,6 +975,7 @@ void TestPlatformGame::Villaner::toWalk (const QGAMES::Vector& o)
 			else assert (0); // Just in case, to generate a mistake in debug mode!!
 		}
 
+		_description._status = 1;
 		_lastOrientation = to;
 	}
 }
@@ -966,6 +1015,7 @@ void TestPlatformGame::Villaner::toDie (const QGAMES::Vector& o)
 			else assert (0); // Just in case, to generate a mistake in debug mode!!
 		}
 
+		_description._status = 2;
 		_lastOrientation = to;
 
 		game () -> sound (__GAMETEST_CRYSOUNDID__) -> play (__GAMETEST_VILLANERSOUNDCHANNEL__);
@@ -1050,6 +1100,62 @@ QGAMES::Vector TestPlatformGame::Villaner::currentStateOrientation () const
 
 	return (result);
 }
+
+// ---
+void TestPlatformGame::Villaner::setControlMonitorToRoom (const QGAMES::MazeModel::PositionInMaze& p)
+{
+	QGAMES::Vector dir = QGAMES::Vector::_cero;
+	if (((p._positionY * __GAMETEST_HORIZONTALSCENESINMAZE__) + p._positionX) != _description._roomNumber)
+	{
+		// Across maze scenes...
+		int cRR = _description._roomNumber / __GAMETEST_HORIZONTALSCENESINMAZE__;
+		int cRC = _description._roomNumber % __GAMETEST_HORIZONTALSCENESINMAZE__;
+		dir = QGAMES::Vector (__BD ((p._positionX > cRC) ? 1 : ((p._positionX < cRC) ? -1 : 0)),
+							  __BD ((p._positionY > cRR) ? 1 : ((p._positionY < cRR) ? -1 : 0)),
+							  __BD 0);
+	}
+	else
+		dir = _description._orientation;
+
+	QGAMES::CharacterControlSteps stps;
+	stps.push_back (new TestPlatformGame::Villaner::ControlStep (dir));
+	addControlStepsMonitor (new QGAMES::CharacterControlStepsMonitor (0, stps, this, false)); // It is observed...
+}
+
+// ---
+void TestPlatformGame::Villaner::ControlStep::initializeOn (QGAMES::Character* a)
+{
+	_startingMove = 0;
+	assert (dynamic_cast <TestPlatformGame::Villaner*> (a)); // It has to be a villaner...
+	((TestPlatformGame::Villaner*) a) -> toWalk (_direction); // Starts to wals...
+}
+
+// ---
+bool TestPlatformGame::Villaner::ControlStep::isEndOn (QGAMES::Character* a)
+{
+	if (++_startingMove < 5)
+		return (false);
+	// During the first 5 steaps after starting the control step the position is not checked...
+
+	bool result = false;
+
+	// The maximum desviation of the position will depend on the speed...
+	int mD = 1;
+	if (dynamic_cast <QGAMES::SimpleLinearMovement*> (a -> currentMovement ()))
+		mD = 2 * (int) ((QGAMES::SimpleLinearMovement*) a -> currentMovement ()) -> speed ();
+
+	// Depending on the diredction of the movement
+	// The villan will get the end reaching whether the x or the y central position
+	if (_direction == QGAMES::Vector (__BD 1, __BD 0, __BD 0) ||
+		_direction == QGAMES::Vector (__BD -1, __BD 0, __BD 0)) // That's it, he's moving in the x axis...
+		result = (a -> position ().posX () >= (11 * 32) && a -> position ().posX () <= ((11 * 32) + mD));
+	else // It is supossed the villan is moving in the y axis...
+		result = (a -> position ().posY () >= (13 * 32) && a -> position ().posY () <= ((13 * 32) + mD));
+	// The first 5 steps are not taked into account
+	// if the speed is greater than 5...then the control will be lost...
+
+	return (result);
+}
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
@@ -1109,10 +1215,10 @@ void TestPlatformGame::ThingToCatch::initialize ()
 // ---
 void TestPlatformGame::ThingToCatch::updatePositions ()
 {
-	QGAMES::PlatformArtist::updatePositions ();
-
 	if (!isVisible ())
 		return; // No needed...
+
+	QGAMES::PlatformArtist::updatePositions ();
 
 	if (onOffSwitch (_SWITCHCONTAINERBEINGDESTROYED) -> isOn () &&
 	    counter (_COUNTERDECREMENTINTENSITY) -> isEnd () &&
@@ -1220,6 +1326,15 @@ void TestPlatformGame::Meal::initialize ()
 }
 
 // ---
+void TestPlatformGame::Meal::updatePositions ()
+{
+	if (!isVisible ())
+		return;
+
+	QGAMES::PlatformArtist::updatePositions ();
+}
+
+// ---
 void TestPlatformGame::Meal::drawOn (QGAMES::Screen* s, const QGAMES::Position& p)
 {
 	if (!isVisible ())
@@ -1293,6 +1408,53 @@ QGAMES::Movement* TestPlatformGame::MovementBuilder::createMovement (const QGAME
 	else
 		result = QGAMES::AdvancedMovementBuilder::createMovement (def);
 
+	return (result);
+}
+// --------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------
+// ---
+TestPlatformGame::WorldModel::WorldModel ()
+	: QGAMES::MazeModel (__GAMETEST_HORIZONTALSCENESINMAZE__, 
+						 __GAMETEST_VERTICALSCENESINMAZE__, 
+						 std::vector <int> (__GAMETEST_HORIZONTALSCENESINMAZE__ * __GAMETEST_VERTICALSCENESINMAZE__, 0 /** not used. */))
+{
+	assert (_mazeModel.size () == (sizeof (TestPlatformGame::World::_MAZESCENES) / sizeof (int)));
+	for (int i = 0; i < (int) _mazeModel.size (); i++)
+		_mazeModel [i] = TestPlatformGame::World::_MAZESCENES [i];
+	// Now both will be the same...
+	// What is kept in the maze model vector is the type of scene...
+}
+
+// ---
+std::vector <bool> TestPlatformGame::WorldModel::possibleConnectionsAt (const QGAMES::MazeModel::PositionInMaze& p)
+{
+	std::vector<bool> result (8, false); 
+	// possible maximum connections, by default all of them are not possible...
+	
+	bool r = false; bool l = false; bool u = false; bool d = false;
+	switch (mazeInfoAt (QGAMES::MazeModel::PositionInMaze (p._positionX, p._positionY)))
+	{
+		case  1: u = d =			true; break;
+		case  2: r = l =			true; break;
+		case  3: r = d =			true; break;
+		case  4: l = d =			true; break;
+		case  5: l = u =			true; break;
+		case  6: r = u =			true; break;
+		case  7: l = r = u =		true; break;
+		case  8: l = r = d =		true; break;
+		case  9: r = u = d =		true; break;
+		case 10: l = u = d =		true; break;
+		case 11: l =				true; break;
+		case 12: d =				true; break;
+		case 13: r =				true; break;
+		case 14: u =				true; break;
+		case 15: 
+		case  0: r = l = u = d =	true; break;
+		default: assert (0); // It shouldn't be here...
+	}
+
+	result [0] = r; result [2] = d; result [4] = l; result [6] = u;
 	return (result);
 }
 // --------------------------------------------------------------------------------
@@ -1391,6 +1553,7 @@ void TestPlatformGame::World::initialize ()
 		(__AT (__AGM game ()) -> artist (__GAMETEST_MEALBASEID__ + i)) -> setMap (activeScene () -> activeMap ());
 
 	// The villaners are set at the early beginning...
+	// Because they are visible not depending on the room the knight is in.
 	const std::vector <TestPlatformGame::VillanerLocation>& vll = ((TestPlatformGame::Game*) game ()) -> villanersInMaze ();
 	assert ((int) vll.size () == __GAMETEST_NUMBERVILLANERS__); // To be sure...
 	for (int i = 0; i < (int) vll.size (); i++)
@@ -1456,35 +1619,59 @@ void TestPlatformGame::World::drawOn (QGAMES::Screen* s, const QGAMES::Position&
 // ---
 void TestPlatformGame::World::processEvent (const QGAMES::Event& e)
 {
-	if (e.code () == __GAMETEST_KNIGHTREACHEDLEFTLIMIT__ ||
-		e.code () == __GAMETEST_KNIGHTREACHEDRIGHTLIMIT__ ||
-		e.code () == __GAMETEST_KNIGHTREACHEDUPLIMIT__ ||
-		e.code () == __GAMETEST_KNIGHTREACHEDDOWNLIMIT__)
+	// Comming from the knight or from the villaner, but with similar sense...
+	if (e.code () == __GAMETEST_KNIGHTREACHEDLEFTLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDLEFTLIMIT__ ||
+		e.code () == __GAMETEST_KNIGHTREACHEDRIGHTLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDRIGHTLIMIT__ ||
+		e.code () == __GAMETEST_KNIGHTREACHEDUPLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDUPLIMIT__ ||
+		e.code () == __GAMETEST_KNIGHTREACHEDDOWNLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDDOWNLIMIT__)
 	{
+		// Is the knight who notifies?
+		bool knight = (e.code () == __GAMETEST_KNIGHTREACHEDLEFTLIMIT__ ||
+					   e.code () == __GAMETEST_KNIGHTREACHEDRIGHTLIMIT__ ||
+					   e.code () == __GAMETEST_KNIGHTREACHEDUPLIMIT__ ||
+					   e.code () == __GAMETEST_KNIGHTREACHEDDOWNLIMIT__);
+
 		QGAMES::Vector dr = QGAMES::Vector::_cero;
 		switch (e.code ())
 		{
-			// Comming from the knight...
+			// Comming from the knight or the villaner...
 			case __GAMETEST_KNIGHTREACHEDLEFTLIMIT__:
+			case __GAMETEST_VILLANERREACHEDLEFTLIMIT__:
 				dr = QGAMES::Vector (__BD -1, __BD 0, __BD 0); // Previous maze scene
 				break;
 			case __GAMETEST_KNIGHTREACHEDRIGHTLIMIT__:
+			case __GAMETEST_VILLANERREACHEDRIGHTLIMIT__:
 				dr = QGAMES::Vector (__BD 1, __BD 0, __BD 0); // Next maze scene
 				break;
 			case __GAMETEST_KNIGHTREACHEDUPLIMIT__:
-				dr = QGAMES::Vector (__BD 0, __BD -1, __BD 0);
+			case __GAMETEST_VILLANERREACHEDUPLIMIT__:
+				dr = QGAMES::Vector (__BD 0, __BD -1, __BD 0); // Previous row of scenes...
 				break;
 			case __GAMETEST_KNIGHTREACHEDDOWNLIMIT__:
-				dr = QGAMES::Vector (__BD 0, __BD 1, __BD 0);
+			case __GAMETEST_VILLANERREACHEDDOWNLIMIT__:
+				dr = QGAMES::Vector (__BD 0, __BD 1, __BD 0); // Next row of scenes...
 				break;
 
 			default:
 				break; // Not needed really...
 		}
 
-		// Changes the scene and verifies whether the exit scene has been already reached
-		if (setNextMazeSceneInDirection (dr))
-			notify (QGAMES::Event (__GAMETEST_KNIGHTREACHEDENDOFMAZE__, this));
+		// Only when the notifier is the knight, the scene has to be changed
+		// Otherwise what it has to be updated is only
+		// its position in the maze, but not to change also the room visualized.
+		if (knight)
+		{
+			// Changes the room visualized, unless the exit was reached
+			// In that case a notification to finalize the game would be launched
+			if (setNextMazeSceneInDirection (dr))
+				notify (QGAMES::Event (__GAMETEST_KNIGHTREACHEDENDOFMAZE__, this));
+		}
+		else
+			((TestPlatformGame::Villaner*) e.data ()) -> setNextMazeScene (dr);
 	}
 	else if (e.code () == __GAMETEST_SCENETIMEFINISHES__)
 		notify (e); // There is nothing special to do so far with this event...
@@ -1565,11 +1752,15 @@ void TestPlatformGame::Scene::initialize ()
 // ---
 void TestPlatformGame::Scene::processEvent (const QGAMES::Event& e)
 {
-	// Comming from the knight...
-	if (e.code () == __GAMETEST_KNIGHTREACHEDLEFTLIMIT__  ||
-		e.code () == __GAMETEST_KNIGHTREACHEDRIGHTLIMIT__ ||
-		e.code () == __GAMETEST_KNIGHTREACHEDUPLIMIT__ ||
-		e.code () == __GAMETEST_KNIGHTREACHEDDOWNLIMIT__)
+	// Comming from the knight...or from the villaner...
+	if (e.code () == __GAMETEST_KNIGHTREACHEDLEFTLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDLEFTLIMIT__ ||
+		e.code () == __GAMETEST_KNIGHTREACHEDRIGHTLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDRIGHTLIMIT__ ||
+		e.code () == __GAMETEST_KNIGHTREACHEDUPLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDUPLIMIT__ ||
+		e.code () == __GAMETEST_KNIGHTREACHEDDOWNLIMIT__ || 
+		e.code () == __GAMETEST_VILLANERREACHEDDOWNLIMIT__)
 		notify (e); // and send it upper to the world...
 	// From the knight too when it eat something proving more time...
 	else if (e.code () == __GAMETEST_SCENETIMETOBEINCREMENTED__)
@@ -2301,6 +2492,9 @@ void TestPlatformGame::Playing::processEvent (const QGAMES::Event& evnt)
 					toAdd = -__GAMETEST_HORIZONTALSCENESINMAZE__; break;
 				case QGAMES::KeyCode::QGAMES_DOWN:
 					toAdd = __GAMETEST_HORIZONTALSCENESINMAZE__;  break;
+				case QGAMES::KeyCode::QGAMES_0:
+					((TestPlatformGame::Knight*) (game () -> entity (__GAMETEST_MAINCHARACTERID__))) -> toDie ();
+					break;
 				case QGAMES::KeyCode::QGAMES_ESCAPE:
 					game () -> exitGame (); break;
 				default:
@@ -2328,7 +2522,7 @@ void TestPlatformGame::Playing::processEvent (const QGAMES::Event& evnt)
 // --------------------------------------------------------------------------------
 // ---
 TestPlatformGame::PlayerHasDied::PlayerHasDied ()
-	: QGAMES::SpendingTimeGameState (__GAMETEST_PLAYERHASDIEDGAMESTATE__, __BD 3 /** Seconds before the state finishes */,
+	: QGAMES::SpendingTimeGameState (__GAMETEST_PLAYERHASDIEDGAMESTATE__, __BD 5 /** Seconds before the state finishes */,
 		new QGAMES::PlayingASoundGameState (__GAMETEST_PLAYERHASDIEDGAMESTATE__ + 1)),
 	  _playingSound (NULL)
 {
@@ -2385,7 +2579,7 @@ TestPlatformGame::LevelCompleted::~LevelCompleted ()
 // --------------------------------------------------------------------------------
 // ---
 TestPlatformGame::GameHasEnded::GameHasEnded ()
-	: QGAMES::SpendingTimeGameState (__GAMETEST_GAMEHASENDEDGAMESTATE__, __BD 10 /** seconds */,
+	: QGAMES::SpendingTimeGameState (__GAMETEST_GAMEHASENDEDGAMESTATE__, __BD 12 /** seconds */,
 		new TestPlatformGame::ShowingGameHasEnded (__GAMETEST_GAMEHASENDEDGAMESTATE__ + 1,
 		new QGAMES::ShowingFixFormGameState (__GAMETEST_GAMEHASENDEDGAMESTATE__ + 2,
 			QGAMES::ShowingFixFormGameState::Properties (),
@@ -2876,26 +3070,43 @@ void TestPlatformGame::Game::Conf::cfgFromStream (std::istringstream& iS)
 // ---
 void TestPlatformGame::Game::Conf::distributeVillanersInTheMaze (int nP)
 {
-	QGAMES::Position posLeft (__BD (01 * 32), __BD (14 * 32), __BD 0);
-	QGAMES::Position posMiddle (__BD (10 * 32), __BD (14 * 32), __BD 0);
-	
-	std::vector <int> rUsed (__GAMETEST_NUMBERVILLANERS__, -1);
+	QGAMES::Position posLeft (__BD (01 * 32), __BD (13 * 32), __BD 0);
+	QGAMES::Position posMiddle (__BD (11 * 32), __BD (13 * 32), __BD 0);
+
+	QGAMES::MazeModel::PositionInMaze tPM1 (5, 4);
+	QGAMES::MazeModel::PositionInMaze tPM2 (7, 7);
+
+	// A vector with scenes already used and where another villaner can't be located...
+	std::vector <int> rUsed;
 	// The first and the central room have always a villaner...
-	rUsed [0] = __GAMETEST_EXITSCENEINTHEMAZE__; rUsed [1] = __GAMETEST_CENTERSCENEINTHEMAZE__; 
+	rUsed.push_back (__GAMETEST_EXITSCENEINTHEMAZE__); 
+	rUsed.push_back (__GAMETEST_CENTERSCENEINTHEMAZE__);
+	// The central villaner always move to the same position...
+	rUsed.push_back (63); 
 
 	std::vector <TestPlatformGame::VillanerLocation> vll = _villanersInMaze [nP];
-	vll [0] = TestPlatformGame::VillanerLocation (0, rUsed [0], posLeft, QGAMES::Vector (__BD 1, __BD 0, __BD 0));
-	vll [1] = TestPlatformGame::VillanerLocation (0, rUsed [1], posMiddle, QGAMES::Vector (__BD 1, __BD 0, __BD 0));
-	for (int i = 0; i < (__GAMETEST_NUMBERVILLANERS__ - 2); i++) // All of them except two are placed aleatory...
+	// The first villan is at the exit scene...
+	// This villan doesn't move until the knight put a collection of objects at the center scene
+	vll [0] = TestPlatformGame::VillanerLocation (0, 0, rUsed [0], posLeft, QGAMES::Vector (__BD 1, __BD 0, __BD 0),
+		QGAMES::MazeModel::PositionInMaze (0, 0), QGAMES::MazeModel::PositionInMaze (0, 0), 0);
+	// There is a villan at the center of the maze moving to a very specific scene room...
+	vll [1] = TestPlatformGame::VillanerLocation (1, 0, rUsed [1], posMiddle, QGAMES::Vector (__BD 1, __BD 0, __BD 0),
+		tPM1, QGAMES::MazeModel::PositionInMaze (3, 6) /* 63 = rUsed [2]. */, 0); // This villan moves in a very special way...
+
+	// Now the rest of the villan ar located ramdomly...
+	for (int i = 0; i < (__GAMETEST_NUMBERVILLANERS__ - 2); i++) 
 	{
 		int nM = -1;
 		do
 		{
 			nM = rand () % __GAMETEST_NUMBEROFSCENESINTHEMAZE__; // In which room?
-		} while (std::find (rUsed.begin (), rUsed.end (), nM) != rUsed.end ());
+		} while (std::find (rUsed.begin (), rUsed.end (), nM) != rUsed.end ()); // Until finding a room not ocuppied already...
 
-		rUsed [i + 2] = nM;
-		vll [i + 2] = TestPlatformGame::VillanerLocation (0, nM, posMiddle, QGAMES::Vector (__BD 1, __BD 0, __BD 0));
+		rUsed.push_back (nM);
+		QGAMES::MazeModel::PositionInMaze pM (nM % __GAMETEST_HORIZONTALSCENESINMAZE__, nM / __GAMETEST_HORIZONTALSCENESINMAZE__);
+		vll [i + 2] = TestPlatformGame::VillanerLocation (i + 2, 0, nM, posMiddle, 
+			QGAMES::Vector (__BD 1, __BD 0, __BD 0), pM, ((rand () % 2) == 0) ? tPM1 : tPM2, 0); 
+		// Two possible targets...
 	}
 
 	_villanersInMaze [nP] = vll;

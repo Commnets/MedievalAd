@@ -17,10 +17,10 @@
 	<!-- Linear movements -->
 	<SetOfMovements fromId="200" number="10">
 		<!-- Speed -->
-		<Variable id="0" value="2"/>
+		<Variable id="0" value="1"/>
 	</SetOfMovements>
 	<!-- Staying movements -->
-	<SetOfMovements fromId="201" number="10"/>
+	<SetOfMovements fromId="210" number="10"/>
 	
 	<!-- No movement of the things -->
 	<SetOfMovements fromId="300" number="15"/>

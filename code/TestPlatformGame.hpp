@@ -15,8 +15,7 @@
 #define __QGAMES_TESTPLATFORMGAME__
 
 #include "Defs.hpp"
-#include <Platform/ptartist.hpp>
-#include <Platform/ptbuilders.hpp>
+#include <Platform/ptinclude.hpp>
 
 namespace TestPlatformGame
 {
@@ -235,31 +234,53 @@ namespace TestPlatformGame
 	struct VillanerLocation
 	{
 		VillanerLocation ()
-			: _status (0), // Staying...
+			: _villanerId (-1), // No id by default...
+			  _status (0), // Staying...
 			  _roomNumber (-1), // Not defined
 			  _position (QGAMES::Position::_cero), // None
-			  _orientation (QGAMES::Vector (__BD 1, __BD 0, __BD 0)) // Looking to the right...
+			  _orientation (QGAMES::Vector (__BD 1, __BD 0, __BD 0)), // Looking to the right...
+			  _initialMazeRoom (),
+			  _finalMazeRoom (),
+			  _currentPathPosition (0)
 							{ }
 
-		VillanerLocation (int s, int r, const QGAMES::Position& p, const QGAMES::Vector& v)
-			: _status (s), 
+		VillanerLocation (int vId, int s, int r, const QGAMES::Position& p, const QGAMES::Vector& v,
+				const QGAMES::MazeModel::PositionInMaze& iP, const QGAMES::MazeModel::PositionInMaze& fP,
+				int cPP)
+			: _villanerId (vId),
+			  _status (s), 
 			  _roomNumber (r),
 			  _position (p),
-			  _orientation (v)
-							{ assert (s < 2 &&
-									  _roomNumber >= 0 && _roomNumber < __GAMETEST_NUMBEROFSCENESINTHEMAZE__); }
+			  _orientation (v),
+			  _initialMazeRoom (iP),
+			  _finalMazeRoom (fP),
+			  _currentPathPosition (cPP)
+							{ assert (_villanerId >= 0 && _villanerId < __GAMETEST_NUMBERVILLANERS__ && 
+									   _status < 2 &&
+									  _roomNumber >= 0 && _roomNumber < __GAMETEST_NUMBEROFSCENESINTHEMAZE__ &&
+									  _currentPathPosition >= 0); }
 
 		friend std::ostream& operator << (std::ostream& oS, const VillanerLocation& vL)
-							{ oS << vL._status << std::endl << vL._roomNumber << std::endl 
-								 << vL._position << std::endl << vL._orientation; return (oS); }
+							{ oS << vL._villanerId << std::endl << vL._status << std::endl << vL._roomNumber << std::endl 
+								 << vL._position << std::endl << vL._orientation << std::endl
+								 << vL._initialMazeRoom << std::endl << vL._finalMazeRoom << std::endl
+								 << vL._currentPathPosition << std::endl; 
+							  return (oS); }
 		friend std::istream& operator >> (std::istream& iS, VillanerLocation& vL)
-							{ iS >> vL._roomNumber 
-								 >> vL._position >> vL._orientation; return (iS); }
+							{ iS >> vL._villanerId >> vL._status >> vL._roomNumber 
+								 >> vL._position >> vL._orientation
+								 >> vL._initialMazeRoom >> vL._finalMazeRoom
+								 >> vL._currentPathPosition; 
+							  return (iS); }
 
+		int _villanerId;
 		int _status;
 		int _roomNumber;
 		QGAMES::Position _position;
 		QGAMES::Vector _orientation;
+		QGAMES::MazeModel::PositionInMaze _initialMazeRoom;
+		QGAMES::MazeModel::PositionInMaze _finalMazeRoom;
+		int _currentPathPosition;
 	};
 
 	/** Defines the villaner of the game. */
@@ -270,7 +291,10 @@ namespace TestPlatformGame
 				const QGAMES::Forms& frms = QGAMES::Forms (), const QGAMES::Entity::Data& dt = QGAMES::Entity::Data ())
 			: QGAMES::PlatformArtist (id, frms, dt),
 			  _description (),
-			  _energyLevel (100) // By default...
+			  _energyLevel (100), // By default...
+			  _lastOrientation (QGAMES::Vector::_cero),
+			  _path (),
+			  _changePath (false)
 							{ }
 
 		/** @see parent. */
@@ -290,8 +314,11 @@ namespace TestPlatformGame
 							  if (_energyLevel < 0) _energyLevel = 0;
 							  if (_energyLevel > 100) _energyLevel = 100; }
 
-		/** @see parent. */
-		virtual bool canMove (const QGAMES::Vector& d, const QGAMES::Vector& a);
+		/** To change the room where the villan is following a direction. */
+		void setNextMazeScene (const QGAMES::Vector& dir);
+
+		/** To move the villaner in a direction. */
+		void moveFollowingPath (const std::vector <QGAMES::MazeModel::PositionInMaze>& pth);
 
 		/** @see parent. */
 		virtual void initialize ();
@@ -319,7 +346,34 @@ namespace TestPlatformGame
 		/** To know wich is the current state orientation... */
 		QGAMES::Vector currentStateOrientation () const;
 
+		/** To set the control monitor pointing out to a room. */
+		void setControlMonitorToRoom (const QGAMES::MazeModel::PositionInMaze& p);
+
 		private:
+		/** To control the movement of the villan an special step is needed. 
+			This step moves the villan in the direction received as parameter
+			until the center tile of the maze scene is reached. */
+		class ControlStep : public QGAMES::CharacterControlStep
+		{
+			public:
+			ControlStep (const QGAMES::Vector& d)
+				: QGAMES::CharacterControlStep (__GAMETEST_VILLANCONTROLSTEPID__),
+				  _direction (d),
+				  _startingMove (0)
+							{ }
+
+			/** @see parent. */
+			virtual void initializeOn (QGAMES::Character* a);
+			virtual bool isEndOn (QGAMES::Character* a);
+			virtual void updateOn (QGAMES::Character* a) { }
+			virtual void executeOn (QGAMES::Character* a) { }
+
+			private:
+			QGAMES::Vector _direction;
+			// Implementation
+			int _startingMove;
+		};
+
 		/** The description. */
 		VillanerLocation _description;
 		/** The energy level. 
@@ -330,6 +384,10 @@ namespace TestPlatformGame
 		/** The last orientation when moving.
 			It is useful to set states like dieing. */
 		QGAMES::Vector _lastOrientation;
+		/** The path to follow when moving automatically from one maze room to another. */
+		std::vector <QGAMES::MazeModel::PositionInMaze> _path;
+		/** When to cahnge the path. */
+		bool _changePath;
 	};
 
 	/** This structure is used to keep information about the things distributed across the maze. */
@@ -478,6 +536,7 @@ namespace TestPlatformGame
 
 		/** @see parent. */
 		virtual void initialize ();
+		virtual void updatePositions ();
 		virtual void drawOn (QGAMES::Screen* s, const QGAMES::Position& p = QGAMES::Position::_noPoint);
 
 		/** @see parent. */
@@ -515,14 +574,34 @@ namespace TestPlatformGame
 	// --------------------------------------------------------------------------------
 
 	// -------The world, scenes and maps-------------------------------------------------------------------------
+	/** The model representing the maze.
+		In this case, the value in each position doesn't represent anything. */
+	class WorldModel : public QGAMES::MazeModel
+	{
+		public:
+		WorldModel ();
+
+		/** @see parent. */
+		virtual std::vector <bool> possibleConnectionsAt (const QGAMES::MazeModel::PositionInMaze& p);
+	};
+
 	/** The class defining the head world. */
 	class World : public QGAMES::World
 	{
 		public:
+		friend WorldModel;
+
 		World (int c, const QGAMES::Scenes& s, 
 				const QGAMES::WorldProperties& p = QGAMES::WorldProperties ())
-			: QGAMES::World (c, s, p)
+			: QGAMES::World (c, s, p),
+			  _worldModel ()
 							{ }
+
+		/** To get the world model. */
+		const WorldModel& worldModel () const
+							{ return (_worldModel); }
+		WorldModel& worldModel () // An special situation...
+							{ return (_worldModel); }
 
 		/** To set the maze represented by the scene. */
 		void setMazeScene (int nM);
@@ -540,6 +619,11 @@ namespace TestPlatformGame
 		virtual void processEvent (const QGAMES::Event& e);
 
 		private:
+		// Implementation
+		/** A model of the world. 
+			Used to calculate movements of the villaners among rooms e.g. */
+		WorldModel _worldModel;
+
 		/** Definition of the maze (defines wich kind of scene is every part of the maze) */
 		static const int _MAZESCENES [__GAMETEST_NUMBEROFSCENESINTHEMAZE__];
 	};
@@ -1102,6 +1186,8 @@ namespace TestPlatformGame
 							{ assert (nP > 0 && nP <= (int) _villanersInMaze.size ());
 							  return (_villanersInMaze [nP -1]); }
 			const std::vector <VillanerLocation> villanersInMaze (int nP, int nR) const;
+			void actualizeVillanersInfo (int nP, const VillanerLocation& vL)
+							{ _villanersInMaze [nP - 1][vL._villanerId] = vL; }
 
 			const std::vector <std::vector <ThingToCatchLocation>>& thingsInMaze (int nP) const 
 							{ assert (nP > 0 && nP <= (int) _thingsInMaze.size ());
@@ -1231,6 +1317,9 @@ namespace TestPlatformGame
 		const std::vector <VillanerLocation> villanersInMazeRoom (int nR, int nP = -1) const 
 							{ return (((Game::Conf*) configuration ()) -> 
 								villanersInMaze ((nP == -1) ? currentPlayer () : nP, nR)); }
+		void actualizeVillanersInfo (const VillanerLocation& vL, int nP = -1)
+							{ ((Game::Conf*) configuration ()) -> actualizeVillanersInfo 
+								((nP == -1) ? currentPlayer () : nP, vL); }
 		const std::vector <std::vector <ThingToCatchLocation>>& thingsInMaze (int nP = -1) const 
 							{ return (((Game::Conf*) configuration ()) -> 
 								thingsInMaze ((nP == -1) ? currentPlayer () : nP)); }

@@ -530,7 +530,7 @@
 			<!-- Moving always -->
 			<Movement id="200"/>
 			<!-- Staying always -->
-			<Movement id="201"/>
+			<Movement id="210"/>
 		</MovementsBase>
 		<Animations>
 			<!-- Animations related with staying -->
@@ -638,7 +638,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="0"/>
 					<Attribute id="FINALASPECT" value="14"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -649,7 +649,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="15"/>
 					<Attribute id="FINALASPECT" value="29"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -660,7 +660,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="30"/>
 					<Attribute id="FINALASPECT" value="44"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -671,7 +671,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="45"/>
 					<Attribute id="FINALASPECT" value="59"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -682,7 +682,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="60"/>
 					<Attribute id="FINALASPECT" value="74"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -693,7 +693,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="75"/>
 					<Attribute id="FINALASPECT" value="89"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -704,7 +704,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="90"/>
 					<Attribute id="FINALASPECT" value="104"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -715,7 +715,7 @@
 					<Attribute id="FORM" value="301"/>
 					<Attribute id="INITIALASPECT" value="105"/>
 					<Attribute id="FINALASPECT" value="119"/>
-					<Attribute id="FRACTIONTOCHANGE" value="2"/>
+					<Attribute id="FRACTIONTOCHANGE" value="5"/>
 					<Attribute id="LOOP" value="1"/>
 					<!-- Not linked with anyone -->
 				</Attributes>
@@ -817,21 +817,21 @@
 		<States>
 			<!-- States related with staying -->
 			<!-- Staying down -->
-			<State id="0" animation="0" movementBase="201"/>
+			<State id="0" animation="0" movementBase="210"/>
 			<!-- Staying right - down -->
-			<State id="1" animation="1" movementBase="201"/>
+			<State id="1" animation="1" movementBase="210"/>
 			<!-- Staying right -->
-			<State id="2" animation="2" movementBase="201"/>
+			<State id="2" animation="2" movementBase="210"/>
 			<!-- Staying right - up -->
-			<State id="3" animation="3" movementBase="201"/>
+			<State id="3" animation="3" movementBase="210"/>
 			<!-- Staying up -->
-			<State id="4" animation="4" movementBase="201"/>
+			<State id="4" animation="4" movementBase="210"/>
 			<!-- Staying left - up -->
-			<State id="5" animation="5" movementBase="201"/>
+			<State id="5" animation="5" movementBase="210"/>
 			<!-- Staying left -->
-			<State id="6" animation="6" movementBase="201"/>
+			<State id="6" animation="6" movementBase="210"/>
 			<!-- Staying left - down -->
-			<State id="7" animation="7" movementBase="201"/>
+			<State id="7" animation="7" movementBase="210"/>
 
 			<!-- States related with walking -->
 			<!-- Walking down -->
@@ -885,24 +885,24 @@
 
 			<!-- States related with dieing -->
 			<!-- Dieing down -->
-			<State id="20" animation="20" movementBase="201"/>
+			<State id="20" animation="20" movementBase="210"/>
 			<!-- Dieing right - down -->
-			<State id="21" animation="21" movementBase="201"/>
+			<State id="21" animation="21" movementBase="210"/>
 			<!-- Dieing right -->
-			<State id="22" animation="22" movementBase="201"/>
+			<State id="22" animation="22" movementBase="210"/>
 			<!-- Dieing right - up -->
-			<State id="23" animation="23" movementBase="201"/>
+			<State id="23" animation="23" movementBase="210"/>
 			<!-- Dieing up -->
-			<State id="24" animation="24" movementBase="201"/>
+			<State id="24" animation="24" movementBase="210"/>
 			<!-- Dieing left - up -->
-			<State id="25" animation="25" movementBase="201"/>
+			<State id="25" animation="25" movementBase="210"/>
 			<!-- Dieing left -->
-			<State id="26" animation="26" movementBase="201"/>
+			<State id="26" animation="26" movementBase="210"/>
 			<!-- Dieing left - down -->
-			<State id="27" animation="27" movementBase="201"/>
+			<State id="27" animation="27" movementBase="210"/>
 			
 			<!-- States happen after the entity dies -->
-			<State id="30" animation="30" movementBase="201"/>
+			<State id="30" animation="30" movementBase="210"/>
 		</States>
 	</SetOfEntities>
 	

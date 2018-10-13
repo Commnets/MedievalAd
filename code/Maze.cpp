@@ -150,7 +150,7 @@ const std::string TestPlatformGame::Map::_LAYERNAME [__GAMETEST_NUMBEROFLAYERSPO
 const int TestPlatformGame::Game::Conf::_POSITIONSPERSCENETYPE
 				[__GAMETEST_NUMBEROFTYPESOFSCENES__][__GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__] =
 	{ {  0,  1,  2,  3,  4 }, // Type 0
-	  {  0,  2,  4, -1, -1 }, // 1
+	  {  0,  2,  4, -1, -1 }, // 1 (-1 means no location at this position possible)
 	  {  1,  2,  3, -1, -1 }, // 2
 	  {  2,  3,  4, -1, -1 }, // 3
 	  {  1,  2,  4, -1, -1 }, // 4
