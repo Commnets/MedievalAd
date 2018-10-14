@@ -519,10 +519,16 @@
 		<Forms>
 			<!-- Staying -->
 			<Form id="300"/>
-			<!-- Walking -->
 			<Form id="301"/>
-			<!-- Dieing -->
 			<Form id="302"/>
+			<!-- Walking -->
+			<Form id="310"/>
+			<Form id="311"/>
+			<Form id="312"/>
+			<!-- Dieing -->
+			<Form id="320"/>
+			<Form id="321"/>
+			<Form id="322"/>
 		</Forms>
 		<Capacities/>
 		<Physics/>
@@ -635,7 +641,7 @@
 			<!-- Moving to the down  -->
 			<Animation id="10" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="0"/>
 					<Attribute id="FINALASPECT" value="14"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -646,7 +652,7 @@
 			<!-- Moving to the right - down  -->
 			<Animation id="11" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="15"/>
 					<Attribute id="FINALASPECT" value="29"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -657,7 +663,7 @@
 			<!-- Moving to the right -->
 			<Animation id="12" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="30"/>
 					<Attribute id="FINALASPECT" value="44"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -668,7 +674,7 @@
 			<!-- Moving to the right - up -->
 			<Animation id="13" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="45"/>
 					<Attribute id="FINALASPECT" value="59"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -679,7 +685,7 @@
 			<!-- Moving to the up -->
 			<Animation id="14" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="60"/>
 					<Attribute id="FINALASPECT" value="74"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -690,7 +696,7 @@
 			<!-- Moving to the left - up -->
 			<Animation id="15" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="75"/>
 					<Attribute id="FINALASPECT" value="89"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -701,7 +707,7 @@
 			<!-- Moving to the left -->
 			<Animation id="16" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="90"/>
 					<Attribute id="FINALASPECT" value="104"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -712,7 +718,7 @@
 			<!-- Moving to the left - down -->
 			<Animation id="17" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="301"/>
+					<Attribute id="FORM" value="310"/>
 					<Attribute id="INITIALASPECT" value="105"/>
 					<Attribute id="FINALASPECT" value="119"/>
 					<Attribute id="FRACTIONTOCHANGE" value="5"/>
@@ -725,7 +731,7 @@
 			<!-- Dieing to the down  -->
 			<Animation id="20" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="0"/>
 					<Attribute id="FINALASPECT" value="15"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>
@@ -736,7 +742,7 @@
 			<!-- Dieing to the right - down  -->
 			<Animation id="21" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="16"/>
 					<Attribute id="FINALASPECT" value="31"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>
@@ -747,7 +753,7 @@
 			<!-- Dieing to the right -->
 			<Animation id="22" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="32"/>
 					<Attribute id="FINALASPECT" value="47"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>
@@ -758,7 +764,7 @@
 			<!-- Dieing to the right - up -->
 			<Animation id="23" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="48"/>
 					<Attribute id="FINALASPECT" value="63"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>
@@ -769,7 +775,7 @@
 			<!-- Dieing to the up -->
 			<Animation id="24" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="64"/>
 					<Attribute id="FINALASPECT" value="79"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>
@@ -780,7 +786,7 @@
 			<!-- Dieing to the left - up -->
 			<Animation id="25" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="80"/>
 					<Attribute id="FINALASPECT" value="95"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>
@@ -791,7 +797,7 @@
 			<!-- Dieing to the left -->
 			<Animation id="26" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="96"/>
 					<Attribute id="FINALASPECT" value="111"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>
@@ -802,7 +808,7 @@
 			<!-- Dieing to the left - down -->
 			<Animation id="27" type="0">
 				<Attributes>
-					<Attribute id="FORM" value="302"/>
+					<Attribute id="FORM" value="320"/>
 					<Attribute id="INITIALASPECT" value="112"/>
 					<Attribute id="FINALASPECT" value="127"/>
 					<Attribute id="FRACTIONTOCHANGE" value="6"/>

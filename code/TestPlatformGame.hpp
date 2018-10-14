@@ -233,51 +233,35 @@ namespace TestPlatformGame
 		2 Dieding. */
 	struct VillanerLocation
 	{
-		VillanerLocation ()
-			: _villanerId (-1), // No id by default...
-			  _status (0), // Staying...
-			  _roomNumber (-1), // Not defined
-			  _position (QGAMES::Position::_cero), // None
-			  _orientation (QGAMES::Vector (__BD 1, __BD 0, __BD 0)), // Looking to the right...
-			  _initialMazeRoom (),
-			  _finalMazeRoom (),
-			  _currentPathPosition (0)
-							{ }
+		VillanerLocation ();
+		/** 
+		 * To build up info.
+		 * @param vId	The id,
+		 * @param tp	The type of villan (0:NORMAL, 1:DARK, 2:WHITE).
+		 * @param s		The status (0: IDLE, 1:WALKING, 2:DEADTH).
+		 * @param r		The room where the villan is in.
+		 * @param p		The position in the room.
+		 * @param v		The orientation (the direction the villan is looking to).
+		 * @param spd	The speed of the movement (if any).
+		 * @param iP	The initial position in the maze.
+		 * @param fP	The final position inthe maze (when moves).
+		 * @param cpp	The last position in the movement in the maze (0 at the beginning).
+		 */
+		VillanerLocation 
+			(int vId, int tp, int s, int r, const QGAMES::Position& p, const QGAMES::Vector& v, int spd,
+			 const QGAMES::MazeModel::PositionInMaze& iP, const QGAMES::MazeModel::PositionInMaze& fP,
+			 int cPP);
 
-		VillanerLocation (int vId, int s, int r, const QGAMES::Position& p, const QGAMES::Vector& v,
-				const QGAMES::MazeModel::PositionInMaze& iP, const QGAMES::MazeModel::PositionInMaze& fP,
-				int cPP)
-			: _villanerId (vId),
-			  _status (s), 
-			  _roomNumber (r),
-			  _position (p),
-			  _orientation (v),
-			  _initialMazeRoom (iP),
-			  _finalMazeRoom (fP),
-			  _currentPathPosition (cPP)
-							{ assert (_villanerId >= 0 && _villanerId < __GAMETEST_NUMBERVILLANERS__ && 
-									   _status < 2 &&
-									  _roomNumber >= 0 && _roomNumber < __GAMETEST_NUMBEROFSCENESINTHEMAZE__ &&
-									  _currentPathPosition >= 0); }
-
-		friend std::ostream& operator << (std::ostream& oS, const VillanerLocation& vL)
-							{ oS << vL._villanerId << std::endl << vL._status << std::endl << vL._roomNumber << std::endl 
-								 << vL._position << std::endl << vL._orientation << std::endl
-								 << vL._initialMazeRoom << std::endl << vL._finalMazeRoom << std::endl
-								 << vL._currentPathPosition << std::endl; 
-							  return (oS); }
-		friend std::istream& operator >> (std::istream& iS, VillanerLocation& vL)
-							{ iS >> vL._villanerId >> vL._status >> vL._roomNumber 
-								 >> vL._position >> vL._orientation
-								 >> vL._initialMazeRoom >> vL._finalMazeRoom
-								 >> vL._currentPathPosition; 
-							  return (iS); }
+		friend std::ostream& operator << (std::ostream& oS, const VillanerLocation& vL);
+		friend std::istream& operator >> (std::istream& iS, VillanerLocation& vL);
 
 		int _villanerId;
+		int _type; // 0 (the normal), 1 (another type) o 2 (the one looking after the exit)
 		int _status;
 		int _roomNumber;
 		QGAMES::Position _position;
 		QGAMES::Vector _orientation;
+		int _speed; // From 1 to 3...
 		QGAMES::MazeModel::PositionInMaze _initialMazeRoom;
 		QGAMES::MazeModel::PositionInMaze _finalMazeRoom;
 		int _currentPathPosition;
@@ -292,6 +276,7 @@ namespace TestPlatformGame
 			: QGAMES::PlatformArtist (id, frms, dt),
 			  _description (),
 			  _energyLevel (100), // By default...
+			  _inmortal (true), // By default...
 			  _lastOrientation (QGAMES::Vector::_cero),
 			  _path (),
 			  _changePath (false)
@@ -314,11 +299,11 @@ namespace TestPlatformGame
 							  if (_energyLevel < 0) _energyLevel = 0;
 							  if (_energyLevel > 100) _energyLevel = 100; }
 
-		/** To change the room where the villan is following a direction. */
-		void setNextMazeScene (const QGAMES::Vector& dir);
-
-		/** To move the villaner in a direction. */
-		void moveFollowingPath (const std::vector <QGAMES::MazeModel::PositionInMaze>& pth);
+		/** To know whether the villan ir or not inmortal. */
+		bool inmortal () const
+							{ return (_inmortal); }
+		void setInmortal (bool i)
+							{ _inmortal = i; }
 
 		/** @see parent. */
 		virtual void initialize ();
@@ -331,11 +316,14 @@ namespace TestPlatformGame
 		/** @see parent. */
 		virtual void processEvent (const QGAMES::Event& e);
 
+		/** To change the room where the villan is following a direction. */
+		void moveToMazeScene (const QGAMES::Vector& dir);
+
 		private:
 		// Different actions are managed in a private way...
 		void toStay (const QGAMES::Vector& o = QGAMES::Vector::_noPoint);
 		bool staying () const;
-		void toWalk (const QGAMES::Vector& o = QGAMES::Vector::_noPoint);
+		void toWalk (const QGAMES::Vector& o = QGAMES::Vector::_noPoint, int spd = 1);
 		bool walking () const;
 		void toDie (const QGAMES::Vector& o = QGAMES::Vector::_noPoint); 
 		bool dieing () const;
@@ -346,6 +334,8 @@ namespace TestPlatformGame
 		/** To know wich is the current state orientation... */
 		QGAMES::Vector currentStateOrientation () const;
 
+		/** To move the villaner in a direction. */
+		void moveFollowingPath (const std::vector <QGAMES::MazeModel::PositionInMaze>& pth);
 		/** To set the control monitor pointing out to a room. */
 		void setControlMonitorToRoom (const QGAMES::MazeModel::PositionInMaze& p);
 
@@ -356,9 +346,10 @@ namespace TestPlatformGame
 		class ControlStep : public QGAMES::CharacterControlStep
 		{
 			public:
-			ControlStep (const QGAMES::Vector& d)
+			ControlStep (const QGAMES::Vector& d, int spd)
 				: QGAMES::CharacterControlStep (__GAMETEST_VILLANCONTROLSTEPID__),
 				  _direction (d),
+				  _speed (spd),
 				  _startingMove (0)
 							{ }
 
@@ -370,6 +361,7 @@ namespace TestPlatformGame
 
 			private:
 			QGAMES::Vector _direction;
+			int _speed;
 			// Implementation
 			int _startingMove;
 		};
@@ -379,6 +371,8 @@ namespace TestPlatformGame
 		/** The energy level. 
 			It is not persistent. */
 		int _energyLevel; // Between 0 and 100. When becomes 0, the villaner dies...
+		/** Whether the villan is inmortal or not. */
+		bool _inmortal;
 
 		// Implementation
 		/** The last orientation when moving.
@@ -609,7 +603,7 @@ namespace TestPlatformGame
 		static int typeMazeScene (int nM);
 		/** To set that scene attending to a direction.
 			The method returns true when the exit has been reached. */
-		bool setNextMazeSceneInDirection (const QGAMES::Vector& dr);
+		bool moveToMazeSceneInDirection (const QGAMES::Vector& dr);
 
 		/** @see parent. */
 		virtual void initialize ();
