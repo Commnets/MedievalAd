@@ -323,21 +323,29 @@ namespace TestPlatformGame
 		// Different actions are managed in a private way...
 		void toStay (const QGAMES::Vector& o = QGAMES::Vector::_noPoint);
 		bool staying () const;
+		/** To know which would the state be for an specific orientation when standing. */
+		int standingStateForOrientation (const QGAMES::Vector& o) const;
 		void toWalk (const QGAMES::Vector& o = QGAMES::Vector::_noPoint, int spd = 1);
 		bool walking () const;
+		/** To know which would the state be for an specific orientation when walking. */
+		int walkingStateForOrientation (const QGAMES::Vector& o) const;
 		void toDie (const QGAMES::Vector& o = QGAMES::Vector::_noPoint); 
 		bool dieing () const;
 		bool died () const;
 		bool alive () const
 							{ return (!dieing () && !died ()); }
 
-		/** To know wich is the current state orientation... */
+		/** To know which is the current state orientation... */
 		QGAMES::Vector currentStateOrientation () const;
 
 		/** To move the villaner in a direction. */
 		void moveFollowingPath (const std::vector <QGAMES::MazeModel::PositionInMaze>& pth);
 		/** To set the control monitor pointing out to a room. */
 		void setControlMonitorToRoom (const QGAMES::MazeModel::PositionInMaze& p);
+		/** To set the control monitor to avoid an obstacle.
+			Starting rotating to left, then twice right and finally left again to be in the
+			same orientation that at the beginning. */
+		void setControlMonitorToAvoidObstacle (QGAMES::Entity* e);
 
 		private:
 		/** To control the movement of the villan an special step is needed. 
@@ -352,6 +360,10 @@ namespace TestPlatformGame
 				  _speed (spd),
 				  _startingMove (0)
 							{ }
+
+			/** @see parent. */
+			virtual QGAMES::CharacterControlStep* clone ()
+								{ return (new ControlStep (*this)); }
 
 			/** @see parent. */
 			virtual void initializeOn (QGAMES::Character* a);
@@ -1210,7 +1222,7 @@ namespace TestPlatformGame
 			// Implementation
 			void distributeVillanersInTheMaze (int nP);
 			void distributeElementsInTheMaze (int nP);
-			void distributeMaleInTheMaze (int nP);
+			void distributeMealInTheMaze (int nP);
 
 			private:
 			std::vector <int> _score;
@@ -1360,11 +1372,7 @@ namespace TestPlatformGame
 		virtual QGAMES::WorldBuilder* createWorldBuilder ()
 							{ return (new WorldBuilder (parameter (__GAME_PROPERTYWORLDSFILE__), 
 								mapBuilder ())); }
-		virtual QGAMES::MapBuilder* createMapBuilder ()
-							{ QGAMES::MapBuilder* result = new QGAMES::MapBuilder (parameter (__GAME_MAPSOBJECTSFILE__));
-								result -> addAddsOn (new QGAMES::ObjectMapBuilderAddsOn (objectBuilder ()));
-								result -> addAddsOn (new QGAMES::PlatformTMXMapBuilder ((QGAMES::Sprite2DBuilder*) formBuilder ()));
-								return (result); }
+		virtual QGAMES::MapBuilder* createMapBuilder ();
 		virtual QGAMES::CharacterControlStepsMonitorBuilder* createCharacterMonitorBuilder ()
 							{ return (new QGAMES::CharacterControlStepsMonitorBuilder 
 								(parameter (__GAME_PROPERTUCHARACTERMONITORFILE__))); }
