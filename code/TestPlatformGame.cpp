@@ -556,6 +556,7 @@ bool TestPlatformGame::Knight::canMove (const QGAMES::Vector& d, const QGAMES::V
 	setPosition (position () + d);
 
 	// Not possible to move if there is going to be a collicion with something that can be caught...
+	// Take into account that collisions are not detected with meal!
 	bool result = true;
 	const QGAMES::Entities& eties = map () -> scene () -> entities ();
 	for (QGAMES::Entities::const_iterator i = eties.begin (); i != eties.end () && result; i++)
@@ -563,31 +564,12 @@ bool TestPlatformGame::Knight::canMove (const QGAMES::Vector& d, const QGAMES::V
 			(*i).second -> isVisible () && dynamic_cast <TestPlatformGame::ThingToCatch*> ((*i).second) && // Something visible to catch
 			hasCollisionWith ((*i).second)) // ...and with collision
 			result = false; // No movement possible...
-	// Take into account that collisions are not detected with meal!
-/*
-	// If the tile behind the next position is not a base position,
-	// the movement is not allowed either...
-	if (result) // If the movement is still possible...
-	{
-		bool pResult = false; // By default the movement is not possible at all...
-		QGAMES::Layers rLayers = _map -> relevantLayers ();
-		for (QGAMES::Layers::const_iterator i = rLayers.begin (); i != rLayers.end () && !pResult; i++)
-		{
-			if (dynamic_cast <QGAMES::PlatformTileLayer*> (*i) && (*i) -> isVisible ())
-			{
-				if (((QGAMES::TileLayer*) (*i)) -> tileAt (baseZone ().center ()) -> type () == __QGAMES_PTTBASETILETYPE__)
-				{
-					std::cout << "Position:" << baseZone ().center () << std::endl;
-					std::cout << "Tile Name:" << (*i) -> name () << std::endl;
-					std::cout << "Tile Behind:" << ((QGAMES::TileLayer*) (*i)) -> tileAt (baseZone ().center ()) -> type () << std::endl;
-					pResult |= true; // The tile behind is a base tile layer in one of the layers, so the movement is possible...
-				}
-			}
-		}
 
-		result = pResult;
-	}
-*/
+	// If the movement is still possible, then
+	// consider that the eneity is or not over a base...
+	if (result)
+		result = isOnABase ();
+
 	setPosition (oldPos);
 
 	return (result);
@@ -858,11 +840,8 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 	};
 
 	// Sets the position...
-	setPosition (_description._position - // The position kept is always without z coordinate...
-		__GAMETEST_REFERENCEALTITUDOFBASE__ -
-		QGAMES::Vector (__BD 0, __BD 0, 
-			__BD (currentForm () -> frameHeightForFrame (currentAspect ()) - 
-				 (currentForm () -> frameWidthForFrame (currentAspect ()) >> 1))));
+	setPosition (_description._position - 
+		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
 
 	// ...and a movement if any...
 	// the villan has to be alived...otherwise it stays...
@@ -1451,11 +1430,8 @@ void TestPlatformGame::ThingToCatch::setDescription (const TestPlatformGame::Thi
 	setCurrentAspect (_description._thingType);
 	setVisible (true);
 	
-	setPosition (_description._position - // The position kept is always with no z coordinate...
-		__GAMETEST_REFERENCEALTITUDOFBASE__ -
-		QGAMES::Vector (__BD 0, __BD 0, 
-			__BD (currentForm () -> frameHeightForFrame (currentAspect ()) - 
-				 (currentForm () -> frameWidthForFrame (currentAspect ()) >> 1))));
+	setPosition (_description._position - 
+		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
 
 	reStartAllCounters ();
 	reStartAllOnOffSwitches ();
@@ -1557,11 +1533,8 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 	QGAMES::Position nPos = baseZone ().center ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal);
 	// ...and also the position...
 	_description._position = position ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal) + (oPos - nPos);
-	setPosition (_description._position -
-		__GAMETEST_REFERENCEALTITUDOFBASE__ -
-		QGAMES::Vector (__BD 0, __BD 0, 
-			__BD (currentForm () -> frameHeightForFrame (currentAspect ()) - 
-				 (currentForm () -> frameWidthForFrame (currentAspect ()) >> 1))));
+	setPosition (_description._position - 
+		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
 
 	// Keep the changes in the configuration...
 	((TestPlatformGame::Game*) game ()) -> updateThingStatus (oldD, _description);
@@ -1580,11 +1553,8 @@ void TestPlatformGame::Meal::setDescription (const TestPlatformGame::MealLocatio
 	setCurrentAspect (mL._mealType);
 	setVisible (true);
 	
-	setPosition (mL._position - // The position kept is always with no z coordinate...
-		__GAMETEST_REFERENCEALTITUDOFBASE__ -
-		QGAMES::Vector (__BD 0, __BD 0, 
-			__BD (currentForm () -> frameHeightForFrame (currentAspect ()) - 
-				 (currentForm () -> frameWidthForFrame (currentAspect ()) >> 1))));
+	setPosition (_description._position - 
+		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
 }
 
 // ---
@@ -2689,11 +2659,7 @@ void TestPlatformGame::Playing::onEnter ()
 	// Sets the initial position of the entity...
 	QGAMES::Entity* ety = game () -> entity (__GAMETEST_MAINCHARACTERID__);
 	QGAMES::Position lP = ((TestPlatformGame::Game*) game ()) -> lastPosition ();
-	ety -> setPosition (lP - 
-		__GAMETEST_REFERENCEALTITUDOFBASE__ -
-		QGAMES::Vector (__BD 0, __BD 0, 
-			__BD (ety -> currentForm () -> frameHeightForFrame (ety -> currentAspect ()) - 
-				 (ety -> currentForm () -> frameWidthForFrame (ety -> currentAspect ()) >> 1))));
+	ety -> setPosition (lP - __GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD ety -> visualHeight ()));
 	
 	// Stops music if the configuration says so...
 	if (!((TestPlatformGame::Game::Conf*) game () -> configuration ()) -> musicOn ())
@@ -3511,15 +3477,15 @@ QGAMES::MapBuilder* TestPlatformGame::Game::createMapBuilder ()
 	// In the form representing the base tiles, the ones maked with 0 represent bases, 
 	// the others are decorate...
 	static int eE [64] =
-		{ 1,1,0,1,0,0,0,0,
-		  0,0,0,0,0,0,0,0,
+		{ 1,1,0,1,1,1,1,1,
+		  1,1,1,1,0,0,0,0,
 		  1,1,1,1,1,1,1,1,
 		  1,1,1,1,1,1,1,1,
 		  1,1,1,1,1,1,1,1,
 		  1,1,1,1,1,1,1,1,
 		  1,1,1,1,1,1,1,1,
 		  1,1,1,1,1,1,1,1 };
-
+	 
 	QGAMES::MapBuilder* result = new QGAMES::MapBuilder (parameter (__GAME_MAPSOBJECTSFILE__));
 	result -> addAddsOn (new QGAMES::ObjectMapBuilderAddsOn (objectBuilder ()));
 	QGAMES::PlatformTMXMapBuilder* mAdd = 

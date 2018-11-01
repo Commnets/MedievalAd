@@ -91,7 +91,7 @@
 #define __GAMETEST_FIRSTSCENEINTHEMAZE__				45 
 #define __GAMETEST_CENTERSCENEINTHEMAZE__				45
 #define __GAMETEST_FIRSTPOSITIONINMAZE__				QGAMES::Position (__BD 300, __BD 400, __BD 0)
-#define __GAMETEST_REFERENCEALTITUDOFBASE__				QGAMES::Vector (__BD 0, __BD 0, __BD 0)
+#define __GAMETEST_REFERENCEALTITUDOFBASE__				QGAMES::Vector (__BD 0, __BD 0, __BD 32)
 #define __GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__		5
 // The z axis is always set to 0, and kept as 0. It is set to the right number when the entity is got...
 // The game itself
