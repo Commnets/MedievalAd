@@ -3317,7 +3317,7 @@ void TestPlatformGame::Game::Conf::cfgFromStream (std::istringstream& iS)
 // ---
 void TestPlatformGame::Game::Conf::distributeVillanersInTheMaze (int nP)
 {
-	QGAMES::Position posWatching (__BD (01 * 32), __BD (12.5 * 32), __BD 0); // Only occuppied by the villaner looking at the ener...
+	QGAMES::Position posWatching (__BD (01 * 32), __BD (14 * 32), __BD 0); // Only occuppied by the villaner looking at the ener...
 	QGAMES::Position posMiddle (__BD (10 * 32), __BD (12 * 32), __BD 0);
 
 	// Posible destinations of the villan moving...
@@ -3384,8 +3384,8 @@ void TestPlatformGame::Game::Conf::distributeElementsInTheMaze (int nP)
 	// behind the villaner looking after that position...
 	// Those two stones are to avoid you can avoid the villaner by one side and scape...
 	std::vector <TestPlatformGame::ThingToCatchLocation> tL0 = tLR [0];
-	tL0 [0] = TestPlatformGame::ThingToCatchLocation (0, 0, QGAMES::Position (__BD (0 * 32), __BD (10.5 * 32), __BD 0));
-	tL0 [1] = TestPlatformGame::ThingToCatchLocation (0, 0, QGAMES::Position (__BD (0 * 32), __BD (12 * 32), __BD 0));
+	tL0 [0] = TestPlatformGame::ThingToCatchLocation (0, 0, QGAMES::Position (__BD (0 * 32), __BD (11.5 * 32), __BD 0));
+	tL0 [1] = TestPlatformGame::ThingToCatchLocation (0, 0, QGAMES::Position (__BD (0 * 32), __BD (13 * 32), __BD 0));
 	tLR [0] = tL0;
 
 	for (int j = 2 /** Two has already been located at room o. */; j < __GAMETEST_MAXNUMBEROFTHINGSINTHEMAZE__; j++)
