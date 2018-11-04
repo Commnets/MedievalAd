@@ -337,6 +337,8 @@ namespace TestPlatformGame
 
 		/** To know which is the current state orientation... */
 		QGAMES::Vector currentStateOrientation () const;
+		/** ...and the current movement speed. */
+		int currentSpeed () const;
 
 		/** To move the villaner in a direction. */
 		void moveFollowingPath (const std::vector <QGAMES::MazeModel::PositionInMaze>& pth);
@@ -619,16 +621,25 @@ namespace TestPlatformGame
 
 		/** @see parent. */
 		virtual void initialize ();
+		virtual void updatePositions ();
 		virtual void drawOn (QGAMES::Screen* s, const QGAMES::Position& p);
 
 		/** @see parent. */
 		virtual void processEvent (const QGAMES::Event& e);
 
 		private:
+		__DECLAREONOFFSWITCHES__ (OnOffSwitches);
+		virtual QGAMES::OnOffSwitches* createOnOffSwitches ()
+								{ return (new OnOffSwitches ()); }
+
+		private:
 		// Implementation
 		/** A model of the world. 
 			Used to calculate movements of the villaners among rooms e.g. */
 		WorldModel _worldModel;
+
+		/** Switch to control whether, it is time to incremente the number of seconds. */
+		static const int _SWITCHEXITVILLANTOMOVE = 0;
 
 		/** Definition of the maze (defines wich kind of scene is every part of the maze) */
 		static const int _MAZESCENES [__GAMETEST_NUMBEROFSCENESINTHEMAZE__];
@@ -1198,6 +1209,10 @@ namespace TestPlatformGame
 			const std::vector <std::vector <ThingToCatchLocation>>& thingsInMaze (int nP) const 
 							{ assert (nP > 0 && nP <= (int) _thingsInMaze.size ());
 							  return (_thingsInMaze [nP - 1]); }
+			const std::vector <ThingToCatchLocation>& thingsInARoom (int nP, int nR) const
+							{ assert (nP > 0 && nP <= (int) _thingsInMaze.size ());
+							  assert (nR >= 0 && nR < __GAMETEST_NUMBEROFSCENESINTHEMAZE__);
+							  return (_thingsInMaze [nP - 1][nR]); }
 			/** nR is the number of the room in the maze. */
 			void leaveThing (int nP, const ThingToCatchLocation& tL);
 			void removeThing (int nP, const ThingToCatchLocation& tL);
@@ -1329,6 +1344,9 @@ namespace TestPlatformGame
 		const std::vector <std::vector <ThingToCatchLocation>>& thingsInMaze (int nP = -1) const 
 							{ return (((Game::Conf*) configuration ()) -> 
 								thingsInMaze ((nP == -1) ? currentPlayer () : nP)); }
+		const std::vector <ThingToCatchLocation>& thingsInARoom (int nR, int nP = -1) const
+							{ return (((Game::Conf*) configuration ()) -> 
+								thingsInARoom ((nP == -1) ? currentPlayer () : nP, nR)); }
 		void removeThing (const ThingToCatchLocation& tL, int nP = -1)
 							{ ((Game::Conf*) configuration ()) -> removeThing ((nP == -1) ? currentPlayer () : nP, tL); }
 		void updateThingStatus (const ThingToCatchLocation& oTL, const ThingToCatchLocation& tL, int nP = -1)

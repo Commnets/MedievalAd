@@ -795,7 +795,7 @@ TestPlatformGame::VillanerLocation::VillanerLocation
 	assert (_villanerId >= 0 && _villanerId < __GAMETEST_NUMBERVILLANERS__ && 
 			_type >= 0 && _type < 3 &&
 			_status < 2 &&
-			_speed > 0 && _speed < 3 &&
+			_speed > 0 && _speed <= 3 &&
 			_roomNumber >= 0 && _roomNumber < __GAMETEST_NUMBEROFSCENESINTHEMAZE__ &&
 			_currentPathPosition >= 0); 
 }
@@ -842,6 +842,7 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 	// Sets the position...
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
+	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	// ...and a movement if any...
 	// the villan has to be alived...otherwise it stays...
@@ -938,13 +939,25 @@ void TestPlatformGame::Villaner::whenCollisionWith (QGAMES::Entity* e)
 {
 	if (dynamic_cast <TestPlatformGame::Knight*> (e) &&
 		((TestPlatformGame::Knight*) e) -> attacking () && !inmortal ())
-		setEnergyLevel (energyLevel () - 10); 
-	else 
-	if (dynamic_cast <TestPlatformGame::ThingToCatch*> (e) && 
-		stepsMonitor () && stepsMonitor () -> id () != __GAMETEST_STEPSMONITORTOAVOIDOBSTACLE__)
+		setEnergyLevel (energyLevel () - 10); // The knight can hit him...
+	// If the villaner is in collision with a thingToCatch, it has to roundeded it...
+	// Bu the position of the thing has to be in the direction of the movement...
+	else
+	if (dynamic_cast <TestPlatformGame::ThingToCatch*> (e))
 	{
-		setControlMonitorToAvoidObstacle (e);
-		stepsMonitor () -> run (); // To change defininetively...
+		QGAMES::Vector cV = e -> basePosition () - basePosition ();
+		cV = QGAMES::Vector (cV.posX (), cV.posY (), __BD 0); // Plane...
+		cV = QGAMES::Vector ((abs (cV.posX ()) >= abs (cV.posY ())) ? cV.posX () : __BD 0,
+							 (abs (cV.posY ()) >= abs (cV.posX ())) ? cV.posY () : __BD 0,
+							 __BD 0); // The relevant direction...
+		if (_description._orientation.posX () > 0 && cV.posX () > 0 ||
+			_description._orientation.posX () < 0 && cV.posX () < 0 ||
+			_description._orientation.posY () > 0 && cV.posY () < 0 ||
+			_description._orientation.posY () < 0 && cV.posY () < 0)
+		{
+			setControlMonitorToAvoidObstacle (e);
+			stepsMonitor () -> run (); // To change defininetively...
+		}
 	}
 }
 
@@ -1019,8 +1032,10 @@ void TestPlatformGame::Villaner::toStay (const QGAMES::Vector& o)
 		}
 
 		// Changes a little bit the form attending the type of villan...
-		setCurrentForm (currentForm () -> id () + _description._type);
-		_description._status = 0;
+		int cA = currentAspect (); // The aspect is lost when changing the form, so...
+		setCurrentForm (currentForm () -> id () + _description._type); setCurrentAspect (cA);
+		_description._status = 0; // To stay...
+
 		_lastOrientation = to;
 	}
 }
@@ -1066,7 +1081,9 @@ void TestPlatformGame::Villaner::toWalk (const QGAMES::Vector& o, int spd)
 
 	// @see toStay comments for further understanding about how the method works
 	if (alive () && 
-		(!walking () || (walking () && currentStateOrientation () != to)))
+		(!walking () || 
+		 (walking () && currentStateOrientation () != to) ||
+		 (walking () && currentStateOrientation () == to && currentSpeed () != spd)))
 	{
 		if (to.posX () == __BD 1)
 		{
@@ -1090,8 +1107,10 @@ void TestPlatformGame::Villaner::toWalk (const QGAMES::Vector& o, int spd)
 		assert (dynamic_cast <QGAMES::SimpleLinearMovement*> (currentMovement ())); // Just in case...
 		((QGAMES::SimpleLinearMovement*) currentMovement ()) -> setSpeed (__BD spd);
 
-		setCurrentForm (currentForm () -> id () + _description._type);
-		_description._status = 1;
+		int cA = currentAspect (); 
+		setCurrentForm (currentForm () -> id () + _description._type); setCurrentAspect (cA);
+		_description._status = 1; // To walk...
+
 		_lastOrientation = to;
 	}
 }
@@ -1158,8 +1177,11 @@ void TestPlatformGame::Villaner::toDie (const QGAMES::Vector& o)
 			else assert (0); // Just in case, to generate a mistake in debug mode!!
 		}
 
-		setCurrentForm (currentForm () -> id () + _description._type);
+		// When the form is changed, the aspect is set back to 0...
+		int cA = currentAspect ();
+		setCurrentForm (currentForm () -> id () + _description._type); setCurrentAspect (cA);
 		_description._status = 2;
+
 		_lastOrientation = to;
 
 		game () -> sound (__GAMETEST_CRYSOUNDID__) -> play (__GAMETEST_VILLANERSOUNDCHANNEL__);
@@ -1246,20 +1268,36 @@ QGAMES::Vector TestPlatformGame::Villaner::currentStateOrientation () const
 }
 
 // ---
+int TestPlatformGame::Villaner::currentSpeed () const
+{
+	int result = 0;
+	if (walking ())
+	{
+		assert (dynamic_cast <const QGAMES::SimpleLinearMovement*> (currentMovement ())); // It shouldn't but just in case...
+		result = (int) ((QGAMES::SimpleLinearMovement*) currentMovement ()) -> speed ();
+	}
+
+	return (result);
+}
+
+// ---
 void TestPlatformGame::Villaner::moveFollowingPath (const std::vector <QGAMES::MazeModel::PositionInMaze>& pth)
 {
 	_path = pth;
 	if (_path.empty ())
 		return;
 
-	setControlMonitorToRoom (((int) _path.size () > 1) 
+	setControlMonitorToRoom (_description._currentPathPosition < ((int) _path.size () - 1) 
 		? _path [_description._currentPathPosition + 1] : _path [_description._currentPathPosition]);
 }
 
 // ---
 void TestPlatformGame::Villaner::setControlMonitorToRoom (const QGAMES::MazeModel::PositionInMaze& p)
 {
-	QGAMES::Vector dir = QGAMES::Vector::_cero;
+	QGAMES::CharacterControlStep* stpNR = NULL;
+	QGAMES::Vector dir = _description._orientation;
+
+	// First of all, calculate the direction to follow to get the next room (ir the center of the current one)
 	if (((p._positionY * __GAMETEST_HORIZONTALSCENESINMAZE__) + p._positionX) != _description._roomNumber)
 	{
 		// Across maze scenes...
@@ -1268,12 +1306,45 @@ void TestPlatformGame::Villaner::setControlMonitorToRoom (const QGAMES::MazeMode
 		dir = QGAMES::Vector (__BD ((p._positionX > cRC) ? 1 : ((p._positionX < cRC) ? -1 : 0)),
 							  __BD ((p._positionY > cRR) ? 1 : ((p._positionY < cRR) ? -1 : 0)),
 							  __BD 0);
+		// There will be step to get the next room...
+		stpNR = new TestPlatformGame::Villaner::ControlStep (dir, _description._speed);
 	}
-	else
-		dir = _description._orientation;
-
+	// If the "next room" to get is where the villan is already could be due to two reasons:
+	// Either the path to follow is a one-step only path.
+	// Or the game was restarted (after e.g the knight died) when the villan was in te next room.
+	
+	// Now, does the villan to be center before moving (or not) to the next room?
+	// If the villan has not not move to any other room, this piece of code will be useful to get the center...
 	QGAMES::CharacterControlSteps stps;
-	stps.push_back (new TestPlatformGame::Villaner::ControlStep (dir, _description._speed));
+
+	// Now if the position is not close to the center
+	// Add a set of steps to get close the villan to the center...
+	QGAMES::Vector tCtr = QGAMES::Position (__BD (11 * 32), __BD (13 * 32),__BD 0) -
+						  QGAMES::Position (position ().posX (), position ().posY (), __BD 0);
+	if (tCtr.module () > 5)
+	{
+		if (std::abs (tCtr.posX ()) > __BD 3)
+		{
+			QGAMES::Vector drX (__BD ((tCtr.posX () > 0) ? 1 : -1), __BD 0, __BD 0);
+			if (drX.posX () == dir.posX () || dir.posX () == __BD 0)
+				stps.push_back (new TestPlatformGame::Villaner::ControlStep (drX, _description._speed));
+		}
+
+		if (std::abs (tCtr.posY ()) > __BD 3)
+		{
+			QGAMES::Vector drY (__BD 0, __BD ((tCtr.posY () > 0) ? 1 : -1), __BD 0);
+			if (drY.posY () == dir.posY () || dir.posY () == __BD 0)
+				stps.push_back (new TestPlatformGame::Villaner::ControlStep (drY, _description._speed));
+		}
+	}
+
+	// Then the movement to the next room, if any...
+	if (stpNR) stps.push_back (stpNR);
+	// If there is no movements to do, it would mean the villan is exactly at the end
+	// But an step to force the end would be event neccessary...
+	if (stps.empty ()) stps.push_back (new TestPlatformGame::Villaner::ControlStep (dir, _description._speed));
+
+	// ...and link everything in the monitor...
 	addControlStepsMonitor (new QGAMES::CharacterControlStepsMonitor 
 		(__GAMETEST_STEPSMONITORTOROOM__, stps, this, false)); // It is observed...not cyclical...
 }
@@ -1292,18 +1363,18 @@ void TestPlatformGame::Villaner::setControlMonitorToAvoidObstacle (QGAMES::Entit
 	{
 		// The number of steps walking down or up to avoid the obstacle are the visual height of the object...
 		nStA = e -> currentForm () -> visualDepth (e -> currentAspect ()) + 
-			currentForm () -> visualDepth (currentAspect ());
+			currentForm () -> visualDepth (currentAspect ()) + 10 /** To avoid the collision. */;
 		if (_description._orientation.posY () == 1) // Going down...
 		{
 			if (centerPosition ().posX () > e -> centerPosition ().posX ()) // To the left first
 			{
 				ang = -(__PI / __BD 2);
-				nStB = (int) (e -> baseZone ().pos2 ().posX () - baseZone ().pos1 ().posX ());
+				nStB = (int) (e -> baseZone ().pos2 ().posX () - baseZone ().pos1 ().posX ()) + 5;
 			}
 			else // To the right first...
 			{
 				ang = (__PI / __BD 2);
-				nStB = (int) (baseZone ().pos2 ().posX () - e -> baseZone ().pos1 ().posX ());
+				nStB = (int) (baseZone ().pos2 ().posX () - e -> baseZone ().pos1 ().posX ()) + 5;
 			}
 		}
 		else // Going up...
@@ -1311,12 +1382,12 @@ void TestPlatformGame::Villaner::setControlMonitorToAvoidObstacle (QGAMES::Entit
 			if (centerPosition ().posX () > e -> centerPosition ().posX ()) // To the right first
 			{
 				ang = (__PI / __BD 2);
-				nStB = (int) (e -> baseZone ().pos2 ().posX () - baseZone ().pos1 ().posX ());
+				nStB = (int) (e -> baseZone ().pos2 ().posX () - baseZone ().pos1 ().posX ()) + 5;
 			}
 			else // To the left first...
 			{
 				ang = -(__PI / __BD 2);
-				nStB = (int) (baseZone ().pos2 ().posX () - e -> baseZone ().pos1 ().posX ());
+				nStB = (int) (baseZone ().pos2 ().posX () - e -> baseZone ().pos1 ().posX ()) + 5;
 			}
 		}
 	}
@@ -1370,18 +1441,20 @@ void TestPlatformGame::Villaner::setControlMonitorToAvoidObstacle (QGAMES::Entit
 	stps.push_back (new QGAMES::CharacterControlJustMoveStep (iDir, QGAMES::Vector::_cero));
 	stps.push_back (new QGAMES::CharacterControlDistanceStep (__BD nStB));
 	iDir = iDir.rotate (QGAMES::Position::_cero, QGAMES::Position (__BD 0, __BD 0, __BD 1), ang);
-	stps.push_back (new QGAMES::CharacterControlChangeStateStep (standingStateForOrientation (iDir))); //...finally stands!!
+	stps.push_back (new QGAMES::CharacterControlChangeStateStep (walkingStateForOrientation (iDir))); 
+	stps.push_back (new QGAMES::CharacterControlJustMoveStep (iDir, QGAMES::Vector::_cero));
+	// Walk just a pixel to leave the orientation as at the beginning...
+	stps.push_back (new QGAMES::CharacterControlDistanceStep (__BD 1)); 
 
-	// ...and then add the previous movement if any...
+	// The new steps monitor is made up of those steps...
+	QGAMES::CharacterControlStepsMonitor* nSM = new QGAMES::CharacterControlStepsMonitor 
+		(__GAMETEST_STEPSMONITORTOAVOIDOBSTACLE__, stps, this, false);
+	// and what left from the previous one (if any)
 	if (stepsMonitor () != NULL)
-	{
-		for (QGAMES::CharacterControlSteps::const_iterator i = stepsMonitor () -> steps ().begin (); 
-				i != stepsMonitor () -> steps ().end (); i++)
-			stps.push_back ((*i) -> clone ());
-	}
+		nSM -> addStepsLeftFrom (stepsMonitor ());
 
-	addControlStepsMonitor (new QGAMES::CharacterControlStepsMonitor 
-		(__GAMETEST_STEPSMONITORTOAVOIDOBSTACLE__, stps, this, false)); // It is observed, not ciclycal...
+	// Finally, adds the new steps monitor...
+	addControlStepsMonitor (nSM); // It is observed, not ciclycal...
 }
 
 // ---
@@ -1410,9 +1483,9 @@ bool TestPlatformGame::Villaner::ControlStep::isEndOn (QGAMES::Character* a)
 	// The villan will get the end of the controlStep reaching whether the x or the y coordinate of central position
 	if (_direction == QGAMES::Vector (__BD 1, __BD 0, __BD 0) ||
 		_direction == QGAMES::Vector (__BD -1, __BD 0, __BD 0)) // That's it, he's moving in the x axis...
-		result = (a -> position ().posX () >= (10 * 32) && a -> position ().posX () <= ((10 * 32) + mD));
+		result = (a -> position ().posX () >= __BD (11 * 32) && a -> position ().posX () <= __BD ((11 * 32) + mD));
 	else 
-		result = (a -> position ().posY () >= (12 * 32) && a -> position ().posY () <= ((12 * 32) + mD));
+		result = (a -> position ().posY () >= __BD (13 * 32) && a -> position ().posY () <= __BD ((13 * 32) + mD));
 
 	return (result);
 }
@@ -1432,6 +1505,7 @@ void TestPlatformGame::ThingToCatch::setDescription (const TestPlatformGame::Thi
 	
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
+	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	reStartAllCounters ();
 	reStartAllOnOffSwitches ();
@@ -1535,6 +1609,7 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 	_description._position = position ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal) + (oPos - nPos);
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
+	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, position ().posZ ())); // anchor it to the floor...
 
 	// Keep the changes in the configuration...
 	((TestPlatformGame::Game*) game ()) -> updateThingStatus (oldD, _description);
@@ -1555,6 +1630,7 @@ void TestPlatformGame::Meal::setDescription (const TestPlatformGame::MealLocatio
 	
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
+	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 }
 
 // ---
@@ -1789,6 +1865,7 @@ bool TestPlatformGame::World::moveToMazeSceneInDirection (const QGAMES::Vector& 
 	return (false);
 }
 
+// ---
 void TestPlatformGame::World::initialize ()
 {
 	setScene (__GAMETEST_SCENEID__);
@@ -1810,8 +1887,45 @@ void TestPlatformGame::World::initialize ()
 	for (int i = 0; i < (int) vll.size (); i++)
 		((TestPlatformGame::Villaner*) (__AGM game ()) -> 
 			artist (__GAMETEST_VILLANERCHARACTERBASEID__ + i)) -> setDescription (vll [i]);
+
+	reStartAllOnOffSwitches ();
 }
 
+// ---
+void TestPlatformGame::World::updatePositions ()
+{
+	QGAMES::World::updatePositions ();
+
+	// Verify whether there are 5 (in conf) or more boxes of the type 8 (int conf) in the central scene....
+	// If they are, then the villan at the exit position starts to move towards the center...
+	// leaving the exit and allowing the knight to exit and finishs the game!
+	const std::vector <TestPlatformGame::ThingToCatchLocation>& thgs =
+		((TestPlatformGame::Game*) game ()) -> thingsInARoom (__GAMETEST_CENTERSCENEINTHEMAZE__);
+	
+	// Verifies (if it wasn't done previously) whether the central room has or not enought
+	// elements to attract the villan at the exit room...
+	if (!onOffSwitch (_SWITCHEXITVILLANTOMOVE) -> isOn ())
+	{
+		int nYStns = 0;
+		for (int i = 0; i < (int) thgs.size (); i++)
+			if (thgs [i]._canBeCaught && thgs [i]._thingType == __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE__)
+				nYStns++;
+		if (nYStns >= __GAMETEST_NUMBEROFTHINGSFORVILLANTOMOVE__)
+		{
+			onOffSwitch (_SWITCHEXITVILLANTOMOVE) -> set (true); // No more...
+			game () -> sound (__GAMETEST_DONESOUNDID__) -> play (__GAMETEST_WORLDSOUNDCHANNEL__); // A sound plays...
+
+			// The villan starts to move...
+			((TestPlatformGame::Villaner*) (__AGM game ()) -> artist (__GAMETEST_VILLANERCHARACTERBASEID__)) -> 
+				setDescription (TestPlatformGame::VillanerLocation (0, 2, 0, 0, 
+					QGAMES::Position (__BD (01 * 32), __BD (13 * 32), __BD 0), 
+					QGAMES::Vector (__BD 1, __BD 0, __BD 0), 3 /** Speed */, 
+					QGAMES::MazeModel::PositionInMaze (0, 0), QGAMES::MazeModel::PositionInMaze (5, 4), 0));
+		}
+	}
+}
+
+// ---
 void TestPlatformGame::World::drawOn (QGAMES::Screen* s, const QGAMES::Position& p)
 {
 	// Draws the background...
@@ -1930,6 +2044,12 @@ void TestPlatformGame::World::processEvent (const QGAMES::Event& e)
 		setMazeScene (((TestPlatformGame::Game*) game ()) -> mazeScene ());
 	else
 		QGAMES::World::processEvent (e);
+}
+
+// ---
+__IMPLEMENTONOFFSWITCHES__ (TestPlatformGame::World::OnOffSwitches)
+{
+	addOnOffSwitch (new QGAMES::OnOffSwitch (TestPlatformGame::World::_SWITCHEXITVILLANTOMOVE, false));
 }
 // --------------------------------------------------------------------------------
 
@@ -2628,10 +2748,10 @@ void TestPlatformGame::Playing::onEnter ()
 
 	game () -> addScoreObjects ();
 
-#ifndef NDEBUG
+//#ifndef NDEBUG
 	// Observe the input handler to move the visualization...
 	observe (game () -> inputHandler ());
-#endif
+//#endif
 
 	(__AGM game ()) -> setWorld (__GAMETEST_WORLDID__);
 	QGAMES::World* wrld = (__AGM game ()) -> world (__GAMETEST_WORLDID__);
@@ -2660,6 +2780,8 @@ void TestPlatformGame::Playing::onEnter ()
 	QGAMES::Entity* ety = game () -> entity (__GAMETEST_MAINCHARACTERID__);
 	QGAMES::Position lP = ((TestPlatformGame::Game*) game ()) -> lastPosition ();
 	ety -> setPosition (lP - __GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD ety -> visualHeight ()));
+	((TestPlatformGame::Knight*) ety) -> 
+		fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, ety -> basePosition ().posZ ())); // anchor it to the floor...
 	
 	// Stops music if the configuration says so...
 	if (!((TestPlatformGame::Game::Conf*) game () -> configuration ()) -> musicOn ())
@@ -2695,9 +2817,9 @@ void TestPlatformGame::Playing::onExit ()
 
 	unObserve ((__AGM game ()) -> world (__GAMETEST_WORLDID__));
 
-#ifndef NDEBUG
+//#ifndef NDEBUG
 	unObserve (game () -> inputHandler ());
-#endif
+//#endif
 
 	game () -> removeScoreObjects ();
 
@@ -2714,7 +2836,7 @@ void TestPlatformGame::Playing::onExit ()
 // ---
 void TestPlatformGame::Playing::processEvent (const QGAMES::Event& evnt)
 {
-#ifndef _NDEBUG
+//#ifndef _NDEBUG
 	// Only in debug mode to control what is being visualized!
 	if (evnt.code () == __QGAMES_MOUSEMOVEMENTEVENT__)
 	{
@@ -2754,7 +2876,7 @@ void TestPlatformGame::Playing::processEvent (const QGAMES::Event& evnt)
 		}
 	}
 	else
-#endif 
+//#endif 
 
 	// Comming from the knight...
 	if (evnt.code () == __GAMETEST_KNIGHTDIED__)
@@ -3318,7 +3440,7 @@ void TestPlatformGame::Game::Conf::cfgFromStream (std::istringstream& iS)
 void TestPlatformGame::Game::Conf::distributeVillanersInTheMaze (int nP)
 {
 	QGAMES::Position posWatching (__BD (01 * 32), __BD (14 * 32), __BD 0); // Only occuppied by the villaner looking at the ener...
-	QGAMES::Position posMiddle (__BD (10 * 32), __BD (12 * 32), __BD 0);
+	QGAMES::Position posMiddle (__BD (11 * 32), __BD (13 * 32), __BD 0);
 
 	// Posible destinations of the villan moving...
 	std::vector <QGAMES::MazeModel::PositionInMaze> tPM (4);
@@ -3372,11 +3494,11 @@ void TestPlatformGame::Game::Conf::distributeElementsInTheMaze (int nP)
 {
 	static std::vector <QGAMES::Position> _POSIBBLEPOSITIONS 
 		(__GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__, QGAMES::Position::_cero);
-	_POSIBBLEPOSITIONS [0] = QGAMES::Position (__BD (10 * 32), __BD (05 * 32), __BD 0);
-	_POSIBBLEPOSITIONS [1] = QGAMES::Position (__BD (05 * 32), __BD (11.5 * 32), __BD 0);
-	_POSIBBLEPOSITIONS [2] = QGAMES::Position (__BD (10 * 32), __BD (11.5 * 32), __BD 0);
-	_POSIBBLEPOSITIONS [3] = QGAMES::Position (__BD (17 * 32), __BD (11.5 * 32), __BD 0);
-	_POSIBBLEPOSITIONS [4] = QGAMES::Position (__BD (10 * 32), __BD (17 * 32), __BD 0);
+	_POSIBBLEPOSITIONS [0] = QGAMES::Position (__BD (11 * 32), __BD (05 * 32), __BD 0);
+	_POSIBBLEPOSITIONS [1] = QGAMES::Position (__BD (05 * 32), __BD (13 * 32), __BD 0);
+	_POSIBBLEPOSITIONS [2] = QGAMES::Position (__BD (11 * 32), __BD (13 * 32), __BD 0);
+	_POSIBBLEPOSITIONS [3] = QGAMES::Position (__BD (17 * 32), __BD (13 * 32), __BD 0);
+	_POSIBBLEPOSITIONS [4] = QGAMES::Position (__BD (11 * 32), __BD (17 * 32), __BD 0);
 
 	std::vector <std::vector <TestPlatformGame::ThingToCatchLocation>> tLR = _thingsInMaze [nP];
 
