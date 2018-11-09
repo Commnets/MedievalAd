@@ -227,17 +227,17 @@ TestPlatformGame::ThingsBeingCarriedScoreObject::ThingsBeingCarriedScoreObject (
 void TestPlatformGame::ThingsBeingCarriedScoreObject::drawOn (QGAMES::Screen* scr, const QGAMES::Position& p)
 {
 	// Draws all things...
-	std::vector <int> tC = ((TestPlatformGame::Game*) game ()) -> thingsCarried ();
+	std::vector <TestPlatformGame::ThingToCatchLocation> tC = ((TestPlatformGame::Game*) game ()) -> thingsCarried ();
 
 	for (int i = 0; i < (int) tC.size (); i++)
-		if (tC [i] != -1) // If there is something being carried at that position...
-			currentForm () -> frame (tC [i]) -> 
+		if (tC [i] != TestPlatformGame::ThingToCatchLocation ()) // If there is something being carried at that position...
+			currentForm () -> frame (tC [i]._thingType) -> 
 				drawOn (scr, p + QGAMES::Position (
 					__BD (__GAMETEST_SCREENWIDTH__ - 10 - (__GAMETEST_MAXNUMBERTHINGSCARRIED__ * 64 ) + (i * 64)), 
 					__BD 20, __BD 0));
 
 	// Round the first one, just if it exists...
-	if (tC [__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 1] != -1)
+	if (tC [__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 1]._thingType != -1)
 		scr -> drawCircle (p + QGAMES::Position (__BD (__GAMETEST_SCREENWIDTH__ - 10 - 36), __BD 10 + 32, __BD 10), 
 			QGAMES::Vector::_zNormal, 32, 32, __QGAMES_REDCOLOR__, false);
 }
@@ -311,41 +311,37 @@ void TestPlatformGame::Knight::toCatchLeave ()
 	TestPlatformGame::ThingToCatchLocation toLeave;
 	if (thg)
 	{
-		int tL = ((TestPlatformGame::Game*) game ()) -> carryThing (thg -> description ()._thingType); // I got it...
+		// and something to leave?...
+		toLeave = ((TestPlatformGame::Game*) game ()) -> carryThing (thg -> description ()); // I got it...
 		((TestPlatformGame::Game*) game ()) -> removeThing (thg -> description ()); // No longer in the maze!!...
 		thg -> setVisible (false); // Not visible now...
 
 		// Happy to get a thing finally...
 		game () -> sound (__QGAMES_EATWAVSOUND__) -> play (__GAMETEST_KNIGHTSOUNDCHANNEL__);
-
-		if (tL != -1)
-		{
-			toLeave = thg -> description (); // To reuse the position of the original mainly...
-			toLeave._thingType = tL; // the new type...
-			// The status should be the same than the things just taken...
-		}
 	}
+	// nothing to catch?
 	else
-	{
-		int tL = ((TestPlatformGame::Game*) game ()) -> carryThing (-1); // To leave something...
+		// But something to leave instead?
+		toLeave = ((TestPlatformGame::Game*) game ()) -> carryThing (TestPlatformGame::ThingToCatchLocation ());
 
-		if (tL != -1)
-		{
+	// Something real to leave?
+	// Then change where to leave it...(room number and position)
+	if (toLeave._thingId != -1)
+	{
 			QGAMES::Position pC = baseZone ().toBase ().center () -
 				game () -> form (__GAMETEST_THINGSCANBECAUGHTFORM__) -> baseZone (0).toBase ().center ();
-			toLeave = TestPlatformGame::ThingToCatchLocation (
-					tL, 
-					((TestPlatformGame::Game*) game ()) -> mazeScene (),
-					pC + (30 * _lastOrientation)); // Leave it following the same orientation the knight was...
-			toLeave._canBeDestroyed = false; toLeave._canBeCaught = true; // Already destroyed, and ready to be caught
-		}
-	}
+			toLeave._position = pC + (30 * _lastOrientation); // in the direction of the last movement...
+			toLeave._roomNumber = ((TestPlatformGame::Game*) game ()) -> mazeScene (); // Where the knight is now...
+			((TestPlatformGame::Game*) game ()) -> leaveThing (toLeave);
 
-	// There is something to leave eventually?
-	if (toLeave._thingType != -1)
-	{
-		((TestPlatformGame::Game*) game ()) -> leaveThing (toLeave);
-		notify (QGAMES::Event (__GAMETEST_TOREBUILDTHESCENE__, this)); // To rebuild the elements inside...
+			// If the thing left belongs to the type used to unblock the villan in the exit place...
+			// A special notification is thrown!
+			if (toLeave._thingType >= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE1__ &&
+				toLeave._thingType <= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE2__)
+				notify (QGAMES::Event (__GAMETEST_THINGTOMOVEVILLANERLEFT__, NULL)); 
+
+			// Any case, the scene has to be rebuilt...
+			notify (QGAMES::Event (__GAMETEST_TOREBUILDTHESCENE__, this)); // To rebuild the elements inside...
 	}
 }
 
@@ -808,7 +804,7 @@ std::ostream& TestPlatformGame::operator << (std::ostream& oS, const TestPlatfor
 	   << vL._status << std::endl 
 	   << vL._roomNumber << std::endl 
 	   << vL._position << std::endl << vL._orientation << std::endl << vL._speed << std::endl
-	   << vL._initialMazeRoom << std::endl << vL._finalMazeRoom << std::endl << vL._currentPathPosition << std::endl; 
+	   << vL._initialMazeRoom << std::endl << vL._finalMazeRoom << std::endl << vL._currentPathPosition; 
 	return (oS); 
 }
 
@@ -849,6 +845,8 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 	if (_description._initialMazeRoom != _description._finalMazeRoom && alive ()) 
 		moveFollowingPath (((TestPlatformGame::World*) (__AGM game ()) -> activeWorld ()) -> 
 			worldModel ().shortestWayToGo (_description._initialMazeRoom, _description._finalMazeRoom));
+	else
+		addControlStepsMonitor (NULL); // No monitor needed at all...
 
 	// By default the entity is not visible...
 	// Each time it is update, the visible attribute will be updated...
@@ -1908,7 +1906,9 @@ void TestPlatformGame::World::updatePositions ()
 	{
 		int nYStns = 0;
 		for (int i = 0; i < (int) thgs.size (); i++)
-			if (thgs [i]._canBeCaught && thgs [i]._thingType == __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE__)
+			if (thgs [i]._canBeCaught && 
+				(thgs [i]._thingType >= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE1__ && 
+				 thgs [i]._thingType <= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE2__)) // Including dark blue, light blue, green, orange, violet and purple
 				nYStns++;
 		if (nYStns >= __GAMETEST_NUMBEROFTHINGSFORVILLANTOMOVE__)
 		{
@@ -2042,6 +2042,12 @@ void TestPlatformGame::World::processEvent (const QGAMES::Event& e)
 		notify (e); // There is nothing special to do so far with this event...
 	else if (e.code () == __GAMETEST_TOREBUILDTHESCENE__)
 		setMazeScene (((TestPlatformGame::Game*) game ()) -> mazeScene ());
+	else if (e.code () == __GAMETEST_THINGTOMOVEVILLANERLEFT__)
+	{
+		// If something important has been left in the main scene...
+		if (((TestPlatformGame::Game*) game ()) -> mazeScene () == __GAMETEST_CENTERSCENEINTHEMAZE__)
+			game () -> sound (__GAMETEST_SOMETHINGLEFTSOUNDID__) -> play (__GAMETEST_WORLDSOUNDCHANNEL__); // A sound plays...
+	}
 	else
 		QGAMES::World::processEvent (e);
 }
@@ -2136,8 +2142,10 @@ void TestPlatformGame::Scene::processEvent (const QGAMES::Event& e)
 	// From the knight too when it eat something proving more time...
 	else if (e.code () == __GAMETEST_SCENETIMETOBEINCREMENTED__)
 		toAddMoreTime (20); // 20 more...
-	else if (e.code () ==  __GAMETEST_TOREBUILDTHESCENE__, this)
+	else if (e.code () ==  __GAMETEST_TOREBUILDTHESCENE__)
 		notify (e); // To be processed by the World...
+	else if (e.code () == __GAMETEST_THINGTOMOVEVILLANERLEFT__)
+		notify (e);
 	else
 		QGAMES::Scene::processEvent (e);
 }
@@ -2619,7 +2627,8 @@ TestPlatformGame::GameAboutToStart::GameAboutToStart ()
 	  _numberPlayer (NULL),
 	  _background (NULL),
 	  _guiSystem (NULL),
-	  _nameIntroduced (false)
+	  _nameIntroduced (false),
+	  _initialPlayerProperties ()
 {
 	_untilPressed = (TestPlatformGame::UntilReturnKeyOrMouseLeftButtonIsPressed*) nestedState ();
 	_numberPlayer = (TestPlatformGame::ShowingPlayerAboutToStart*) _untilPressed -> nestedState ();
@@ -2631,6 +2640,8 @@ TestPlatformGame::GameAboutToStart::GameAboutToStart ()
 		 QGAMES::Position (__BD 0.5, __BD 0.5, __BD 0), /** Reference position in the screen */
 		 QGAMES::ShowingFixFormGameState::Properties::PosReference::_CENTER /** Reference position of the form */
 		));
+
+	_initialPlayerProperties = _numberPlayer -> properties ();
 }
 
 // ---
@@ -2654,6 +2665,7 @@ void TestPlatformGame::GameAboutToStart::onEnter ()
 	if (!(_nameIntroduced = 
 			(((TestPlatformGame::Game*) game ()) -> playerName () != std::string (__NULL_STRING__))))
 	{
+		_numberPlayer -> setProperties (_initialPlayerProperties); // At the initial position...
 		_guiSystem = game () -> guiSystemBuilder () -> system (__GAMETEST_PLAYERNAMEGUISYSTEM__);
 		assert (dynamic_cast <QGAMES::CompositeWidget*> (_guiSystem -> mainWidget ())); // Just in case...
 		observe (_guiSystem -> mainWidget ());
@@ -2748,10 +2760,10 @@ void TestPlatformGame::Playing::onEnter ()
 
 	game () -> addScoreObjects ();
 
-//#ifndef NDEBUG
+#ifndef NDEBUG
 	// Observe the input handler to move the visualization...
 	observe (game () -> inputHandler ());
-//#endif
+#endif
 
 	(__AGM game ()) -> setWorld (__GAMETEST_WORLDID__);
 	QGAMES::World* wrld = (__AGM game ()) -> world (__GAMETEST_WORLDID__);
@@ -2817,9 +2829,9 @@ void TestPlatformGame::Playing::onExit ()
 
 	unObserve ((__AGM game ()) -> world (__GAMETEST_WORLDID__));
 
-//#ifndef NDEBUG
+#ifndef NDEBUG
 	unObserve (game () -> inputHandler ());
-//#endif
+#endif
 
 	game () -> removeScoreObjects ();
 
@@ -2836,7 +2848,7 @@ void TestPlatformGame::Playing::onExit ()
 // ---
 void TestPlatformGame::Playing::processEvent (const QGAMES::Event& evnt)
 {
-//#ifndef _NDEBUG
+#ifndef _NDEBUG
 	// Only in debug mode to control what is being visualized!
 	if (evnt.code () == __QGAMES_MOUSEMOVEMENTEVENT__)
 	{
@@ -2876,7 +2888,7 @@ void TestPlatformGame::Playing::processEvent (const QGAMES::Event& evnt)
 		}
 	}
 	else
-//#endif 
+#endif 
 
 	// Comming from the knight...
 	if (evnt.code () == __GAMETEST_KNIGHTDIED__)
@@ -3153,7 +3165,7 @@ void TestPlatformGame::Game::Conf::removeLastThingCarried (int nP)
 
 	for (int i = (__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 2); i >= 0 ; i--)
 		_thingsCarried [nP - 1][i + 1] = _thingsCarried [nP - 1][i];
-	_thingsCarried [nP - 1][0] = -1; // Empty...
+	_thingsCarried [nP - 1][0] = TestPlatformGame::ThingToCatchLocation (); // Empty...
 }
 
 // ---
@@ -3161,23 +3173,24 @@ void TestPlatformGame::Game::Conf::iterateThingsCarried (int nP)
 { 
 	assert (nP > 0 && nP <= (int) _thingsCarried.size ());
 	
-	int lT = _thingsCarried [nP - 1][__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 1];
+	TestPlatformGame::ThingToCatchLocation lT = _thingsCarried [nP - 1][__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 1];
 	for (int i = (__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 2); i >= 0; i--)
 		_thingsCarried [nP - 1][i + 1] = _thingsCarried [nP - 1][i];
 	_thingsCarried [nP - 1][0] = lT;
 }
 
 // ---
-int TestPlatformGame::Game::Conf::carryThing (int nP, int tC)
+TestPlatformGame::ThingToCatchLocation TestPlatformGame::Game::Conf::carryThing 
+	(int nP, const TestPlatformGame::ThingToCatchLocation& tC)
 { 
 	assert (nP > 0 && nP <= (int) _thingsCarried.size ());
 	
-	int lT = _thingsCarried [nP - 1][__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 1];
+	TestPlatformGame::ThingToCatchLocation lT = _thingsCarried [nP - 1][__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 1];
 	for (int i = (__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 2); i >= 0; i--)
 		_thingsCarried [nP - 1][i + 1] = _thingsCarried [nP - 1][i];
 	_thingsCarried [nP - 1][0] = tC;
 
-	return (lT);
+	return (lT); // Can be -1...
 }
 
 // ---
@@ -3268,8 +3281,9 @@ void TestPlatformGame::Game::Conf::adjustToPlayers (int nP)
 	_playerName		= std::vector <std::string> (_numberPlayers, std::string (__NULL_STRING__));
 	_lastPositions  = std::vector <QGAMES::Position> (_numberPlayers, __GAMETEST_FIRSTPOSITIONINMAZE__); // It will be modified later...
 	_mazeScene		= std::vector <int> (_numberPlayers, __GAMETEST_FIRSTSCENEINTHEMAZE__);
-	_thingsCarried	= std::vector <std::vector <int>> 
-		(_numberPlayers, std::vector <int> (__GAMETEST_MAXNUMBERTHINGSCARRIED__, -1 /** Nothing by default. */));
+	_thingsCarried	= std::vector <std::vector <TestPlatformGame::ThingToCatchLocation>> 
+		(_numberPlayers, std::vector <TestPlatformGame::ThingToCatchLocation> 
+			(__GAMETEST_MAXNUMBERTHINGSCARRIED__, TestPlatformGame::ThingToCatchLocation () /** Nothing by default. */));
 
 	// ...and the villaners distributed across the maze...
 	_villanersInMaze = std::vector <std::vector <TestPlatformGame::VillanerLocation>>
@@ -3506,8 +3520,8 @@ void TestPlatformGame::Game::Conf::distributeElementsInTheMaze (int nP)
 	// behind the villaner looking after that position...
 	// Those two stones are to avoid you can avoid the villaner by one side and scape...
 	std::vector <TestPlatformGame::ThingToCatchLocation> tL0 = tLR [0];
-	tL0 [0] = TestPlatformGame::ThingToCatchLocation (0, 0, QGAMES::Position (__BD (0 * 32), __BD (11.5 * 32), __BD 0));
-	tL0 [1] = TestPlatformGame::ThingToCatchLocation (0, 0, QGAMES::Position (__BD (0 * 32), __BD (13 * 32), __BD 0));
+	tL0 [0] = TestPlatformGame::ThingToCatchLocation (0, 0, 0, QGAMES::Position (__BD (0 * 32), __BD (11.5 * 32), __BD 0));
+	tL0 [1] = TestPlatformGame::ThingToCatchLocation (1, 0, 0, QGAMES::Position (__BD (0 * 32), __BD (13 * 32), __BD 0));
 	tLR [0] = tL0;
 
 	for (int j = 2 /** Two has already been located at room o. */; j < __GAMETEST_MAXNUMBEROFTHINGSINTHEMAZE__; j++)
@@ -3527,7 +3541,7 @@ void TestPlatformGame::Game::Conf::distributeElementsInTheMaze (int nP)
 				{ pM++; if (pM >= __GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__) { pM = 0; nII++; } }
 			if (nII < 2) 
 				tL [pF] = TestPlatformGame::ThingToCatchLocation 
-					(tM, nM, _POSIBBLEPOSITIONS [_POSITIONSPERSCENETYPE [tR][pM]]);
+					(j, tM, nM, _POSIBBLEPOSITIONS [_POSITIONSPERSCENETYPE [tR][pM]]);
 		}
 
 		tLR [nM] = tL;

@@ -16,5 +16,6 @@
 	<Sound id="110" type="1" loop="00"  file="sounds/playerhasdied.wav"/>
 	<Sound id="111" type="1" loop="-1"  file="sounds/footsteps.wav"/>
 	<Sound id="112" type="1" loop="00"  file="sounds/done.wav"/>
+	<Sound id="113" type="1" loop="00"  file="sounds/somethingleft.wav"/>
 
 </Sounds>

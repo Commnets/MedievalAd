@@ -402,30 +402,38 @@ namespace TestPlatformGame
 	struct ThingToCatchLocation
 	{
 		ThingToCatchLocation ()
-			: _thingType (-1),
+			: _thingId (-1),
+			  _thingType (-1),
 			  _roomNumber (-1),
 			  _canBeDestroyed (true), _canBeCaught (false),
 			  _position (QGAMES::Position::_noPoint)
 							{ }
-		ThingToCatchLocation (int tP, int nR, const QGAMES::Position& p)
-			: _thingType (tP),
+		ThingToCatchLocation (int id, int tP, int nR, const QGAMES::Position& p)
+			: _thingId (id), 
+			  _thingType (tP),
 			  _roomNumber (nR),
 			  _canBeDestroyed (true), _canBeCaught (false), // By default the things can be destroyed first and then destroyed...
 			  _position (p)
-							{ assert (_thingType >= 0 && _thingType < __GAMETEST_MAXTYPESOFTHINGSTOBECARRIED__ &&
+							{ assert (_thingId >= 0 && 
+									  _thingType >= 0 && _thingType < __GAMETEST_MAXTYPESOFTHINGSTOBECARRIED__ &&
 									  _roomNumber >= 0 && _roomNumber < __GAMETEST_NUMBEROFSCENESINTHEMAZE__); }
 
 		bool operator == (const ThingToCatchLocation& tL) const // It doesn't take into account the status!!
-							{ return (_thingType == tL._thingType && 
+							{ return (_thingId == tL._thingId && 
+									  _thingType == tL._thingType && 
 									  _roomNumber == tL._roomNumber && _position == tL._position); }
-
+		bool operator != (const ThingToCatchLocation& tL) const
+							{ return (_thingId != tL._thingId || 
+									  _thingType != tL._thingType || 
+									  _roomNumber != tL._roomNumber || _position != tL._position); }
 		friend std::ostream& operator << (std::ostream& oS, const ThingToCatchLocation& tL)
-							{ oS << tL._thingType << std::endl << tL._roomNumber << std::endl 
+							{ oS << tL._thingId << std::endl << tL._thingType << std::endl << tL._roomNumber << std::endl 
 								 << tL._canBeDestroyed << std::endl << tL._canBeCaught << std::endl << tL._position; return (oS); }
 		friend std::istream& operator >> (std::istream& iS, ThingToCatchLocation& tL)
-							{ iS >> tL._thingType >> tL._roomNumber 
+							{ iS >> tL._thingId >> tL._thingType >> tL._roomNumber 
 								 >> tL._canBeDestroyed >> tL._canBeCaught >> tL._position; return (iS); }
 
+		int _thingId;
 		int _thingType;
 		int _roomNumber;
 		bool _canBeDestroyed, _canBeCaught;
@@ -937,6 +945,7 @@ namespace TestPlatformGame
 		// Implementation
 		QGAMES::GUISystem* _guiSystem;
 		bool _nameIntroduced;
+		QGAMES::ShowingTextGameState::Properties _initialPlayerProperties;
 	};
 
 	/** 
@@ -1186,18 +1195,18 @@ namespace TestPlatformGame
 			void setMazeScene (int nP, int mS)
 							{ assert (nP > 0 && nP <= (int) _mazeScene.size ());
 							  _mazeScene [nP - 1] = (mS >= 0) ? mS : 0; }
-			const std::vector <int>& thingsCarried (int nP) const
+			const std::vector <ThingToCatchLocation>& thingsCarried (int nP) const
 							{ assert (nP > 0 && nP <= (int) _thingsCarried.size ());
 							  return (_thingsCarried [nP -1]); }
-			int firstThingCarried (int nP) const
+			const ThingToCatchLocation& firstThingCarried (int nP) const
 							{ assert (nP > 0 && nP <= (int) _thingsCarried.size ());
 							  return (_thingsCarried [nP -1][0]); }
 			void removeLastThingCarried (int nP);
-			void setThingsCarried (int nP, const std::vector <int>& tC)
+			void setThingsCarried (int nP, const std::vector <ThingToCatchLocation>& tC)
 							{ assert (nP > 0 && nP <= (int) _thingsCarried.size ());
 							  _thingsCarried [nP - 1] = tC; }
 			void iterateThingsCarried (int nP);
-			int carryThing (int nP, int tC);
+			ThingToCatchLocation carryThing (int nP, const ThingToCatchLocation& tC);
 
 			const std::vector <VillanerLocation>& villanersInMaze (int nP) const 
 							{ assert (nP > 0 && nP <= (int) _villanersInMaze.size ());
@@ -1246,7 +1255,7 @@ namespace TestPlatformGame
 			std::vector <std::string> _playerName;
 			std::vector <QGAMES::Position> _lastPositions;
 			std::vector <int> _mazeScene;
-			std::vector <std::vector <int>> _thingsCarried;
+			std::vector <std::vector <ThingToCatchLocation>> _thingsCarried;
 			std::vector <std::vector <VillanerLocation>> _villanersInMaze;
 			std::vector <std::vector <std::vector <ThingToCatchLocation>>> _thingsInMaze;
 			std::vector <std::vector <std::vector <MealLocation>>> _mealInMaze;
@@ -1311,22 +1320,22 @@ namespace TestPlatformGame
 							{ ((Game::Conf*) configuration ()) -> 
 								setMazeScene ((nP == -1) ? currentPlayer () : nP, l); }
 		/** To manage the things being varried by a player. */
-		std::vector <int> thingsCarried (int nP = -1)
+		const std::vector <TestPlatformGame::ThingToCatchLocation>& thingsCarried (int nP = -1)
 							{ return (((Game::Conf*) configuration ()) -> 
 								thingsCarried ((nP == -1) ? currentPlayer () : nP)); }
-		int firstThingCarried (int nP = -1)
+		const ThingToCatchLocation& firstThingCarried (int nP = -1)
 							{ return (((Game::Conf*) configuration ()) -> 
 								firstThingCarried ((nP == -1) ? currentPlayer () : nP)); }
 		void removeLastThingCarried (int nP = -1)
 							{ return (((Game::Conf*) configuration ()) -> 
 								removeLastThingCarried ((nP == -1) ? currentPlayer () : nP)); }
-		void setThingsCarried (const std::vector <int>& tC,int nP = -1)
+		void setThingsCarried (const std::vector <ThingToCatchLocation>& tC,int nP = -1)
 							{ ((Game::Conf*) configuration ()) -> 
 								setThingsCarried ((nP == -1) ? currentPlayer () : nP, tC); }
 		void iterateThingsCarried (int nP = -1)
 							{ ((Game::Conf*) configuration ()) -> 
 								iterateThingsCarried ((nP == -1) ? currentPlayer () : nP); }
-		int carryThing (int t, int nP = -1)
+		ThingToCatchLocation carryThing (const ThingToCatchLocation& t, int nP = -1)
 							{ return (((Game::Conf*) configuration ()) -> 
 								carryThing ((nP == -1) ? currentPlayer () : nP, t)); }
 		void leaveThing (const ThingToCatchLocation& tL, int nP = -1)
