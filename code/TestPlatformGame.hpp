@@ -1201,6 +1201,9 @@ namespace TestPlatformGame
 			const ThingToCatchLocation& firstThingCarried (int nP) const
 							{ assert (nP > 0 && nP <= (int) _thingsCarried.size ());
 							  return (_thingsCarried [nP -1][0]); }
+			const ThingToCatchLocation& lastThingCarried (int nP) const
+							{ assert (nP > 0 && nP <= (int) _thingsCarried.size ());
+							  return (_thingsCarried [nP -1][__GAMETEST_MAXNUMBERTHINGSCARRIED__ - 1]); }
 			void removeLastThingCarried (int nP);
 			void setThingsCarried (int nP, const std::vector <ThingToCatchLocation>& tC)
 							{ assert (nP > 0 && nP <= (int) _thingsCarried.size ());
@@ -1213,8 +1216,8 @@ namespace TestPlatformGame
 							  return (_villanersInMaze [nP -1]); }
 			const std::vector <VillanerLocation> villanersInMaze (int nP, int nR) const;
 			void actualizeVillanersInfo (int nP, const VillanerLocation& vL)
-							{ _villanersInMaze [nP - 1][vL._villanerId] = vL; }
-
+							{ assert (nP > 0 && nP <= (int) _villanersInMaze.size ());
+							  _villanersInMaze [nP - 1][vL._villanerId] = vL; }
 			const std::vector <std::vector <ThingToCatchLocation>>& thingsInMaze (int nP) const 
 							{ assert (nP > 0 && nP <= (int) _thingsInMaze.size ());
 							  return (_thingsInMaze [nP - 1]); }
@@ -1223,6 +1226,7 @@ namespace TestPlatformGame
 							  assert (nR >= 0 && nR < __GAMETEST_NUMBEROFSCENESINTHEMAZE__);
 							  return (_thingsInMaze [nP - 1][nR]); }
 			/** nR is the number of the room in the maze. */
+			bool spaceToLeave (int nP, int nR);
 			void leaveThing (int nP, const ThingToCatchLocation& tL);
 			void removeThing (int nP, const ThingToCatchLocation& tL);
 			void updateThingStatus (int nP, const ThingToCatchLocation& oTL, const ThingToCatchLocation& tL);
@@ -1326,9 +1330,12 @@ namespace TestPlatformGame
 		const ThingToCatchLocation& firstThingCarried (int nP = -1)
 							{ return (((Game::Conf*) configuration ()) -> 
 								firstThingCarried ((nP == -1) ? currentPlayer () : nP)); }
-		void removeLastThingCarried (int nP = -1)
+		const ThingToCatchLocation& lastThingCarried (int nP = -1)
 							{ return (((Game::Conf*) configuration ()) -> 
-								removeLastThingCarried ((nP == -1) ? currentPlayer () : nP)); }
+								lastThingCarried ((nP == -1) ? currentPlayer () : nP)); }
+		void removeLastThingCarried (int nP = -1)
+							{ ((Game::Conf*) configuration ()) -> 
+								removeLastThingCarried ((nP == -1) ? currentPlayer () : nP); }
 		void setThingsCarried (const std::vector <ThingToCatchLocation>& tC,int nP = -1)
 							{ ((Game::Conf*) configuration ()) -> 
 								setThingsCarried ((nP == -1) ? currentPlayer () : nP, tC); }
@@ -1338,9 +1345,12 @@ namespace TestPlatformGame
 		ThingToCatchLocation carryThing (const ThingToCatchLocation& t, int nP = -1)
 							{ return (((Game::Conf*) configuration ()) -> 
 								carryThing ((nP == -1) ? currentPlayer () : nP, t)); }
-		void leaveThing (const ThingToCatchLocation& tL, int nP = -1)
+		bool spaceToLeave (int nR, int nP = -1) const
 							{ return (((Game::Conf*) configuration ()) -> 
-								leaveThing ((nP == -1) ? currentPlayer () : nP, tL)); }
+								spaceToLeave ((nP == -1) ? currentPlayer () : nP, nR)); }
+		void leaveThing (const ThingToCatchLocation& tL, int nP = -1)
+							{ ((Game::Conf*) configuration ()) -> 
+								leaveThing ((nP == -1) ? currentPlayer () : nP, tL); }
 		const std::vector <VillanerLocation>& villanersInMaze (int nP = -1) const 
 							{ return (((Game::Conf*) configuration ()) -> 
 								villanersInMaze ((nP == -1) ? currentPlayer () : nP)); }

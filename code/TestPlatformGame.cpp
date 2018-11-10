@@ -295,53 +295,56 @@ void TestPlatformGame::Knight::toIterateThings ()
 // ---
 void TestPlatformGame::Knight::toCatchLeave ()
 {
-	TestPlatformGame::ThingToCatch* thg = NULL;
+	// If there will be something to leave, but thre won't be enought space in the room to do so, make no sense to progress
+	// Additionally a sound is emitted...
+	if ((((TestPlatformGame::Game*) game ()) -> lastThingCarried ()._thingId != -1) && !
+		((TestPlatformGame::Game*) game ()) -> spaceToLeave (((TestPlatformGame::Game*) game ()) -> mazeScene ()))
+	{
+		game () -> sound (__GAMETEST_NOACTIONPOSIBLESOUNDID__) -> play (__GAMETEST_KNIGHTSOUNDCHANNEL__);
+		return;
+	}
 
-	// Looks for something that could be caught!
+	// Something to catch?
+	TestPlatformGame::ThingToCatch* thg = NULL;
 	const QGAMES::Entities& eties = map () -> scene () -> entities ();
 	for (QGAMES::Entities::const_iterator i = eties.begin (); i != eties.end () && thg == NULL; i++)
 		if ((*i).second != this && // Not me,
 			(*i).second -> isVisible () && // Visible?,
 			dynamic_cast <TestPlatformGame::ThingToCatch*> ((*i).second) && // Something to catch?,
-			hasCollisionWith ((*i).second) && // Being touched by the knight?
+			isNearOf ((*i).second, 55) && // Being near of the knight?
 			((TestPlatformGame::ThingToCatch*) (*i).second) -> canBeCaught ())  // and can it be caught?
 				thg = ((TestPlatformGame::ThingToCatch*) (*i).second); 
 
-	// Something to catch?
 	TestPlatformGame::ThingToCatchLocation toLeave;
+	// What to leave (calculated depending on whether there is something to catch)
+	// If there is something to catch...
 	if (thg)
 	{
-		// and something to leave?...
-		toLeave = ((TestPlatformGame::Game*) game ()) -> carryThing (thg -> description ()); // I got it...
-		((TestPlatformGame::Game*) game ()) -> removeThing (thg -> description ()); // No longer in the maze!!...
+		toLeave = ((TestPlatformGame::Game*) game ()) -> carryThing (thg -> description ());
 		thg -> setVisible (false); // Not visible now...
-
-		// Happy to get a thing finally...
+		((TestPlatformGame::Game*) game ()) -> removeThing (thg -> description ()); // No longer in the maze!!...
 		game () -> sound (__QGAMES_EATWAVSOUND__) -> play (__GAMETEST_KNIGHTSOUNDCHANNEL__);
 	}
-	// nothing to catch?
 	else
-		// But something to leave instead?
 		toLeave = ((TestPlatformGame::Game*) game ()) -> carryThing (TestPlatformGame::ThingToCatchLocation ());
 
-	// Something real to leave?
-	// Then change where to leave it...(room number and position)
+	// What to leave, is left near the knight...
 	if (toLeave._thingId != -1)
 	{
-			QGAMES::Position pC = baseZone ().toBase ().center () -
-				game () -> form (__GAMETEST_THINGSCANBECAUGHTFORM__) -> baseZone (0).toBase ().center ();
-			toLeave._position = pC + (30 * _lastOrientation); // in the direction of the last movement...
-			toLeave._roomNumber = ((TestPlatformGame::Game*) game ()) -> mazeScene (); // Where the knight is now...
-			((TestPlatformGame::Game*) game ()) -> leaveThing (toLeave);
+		QGAMES::Position pC = baseZone ().toBase ().center () -
+			game () -> form (__GAMETEST_THINGSCANBECAUGHTFORM__) -> baseZone (0).toBase ().center ();
+		toLeave._position = pC + (30 * _lastOrientation); // in the direction of the last movement...
+		toLeave._roomNumber = ((TestPlatformGame::Game*) game ()) -> mazeScene (); // Where the knight is now...
+		((TestPlatformGame::Game*) game ()) -> leaveThing (toLeave);
 
-			// If the thing left belongs to the type used to unblock the villan in the exit place...
-			// A special notification is thrown!
-			if (toLeave._thingType >= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE1__ &&
-				toLeave._thingType <= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE2__)
-				notify (QGAMES::Event (__GAMETEST_THINGTOMOVEVILLANERLEFT__, NULL)); 
+		// If the thing left belongs to the type used to unblock the villan in the exit place...
+		// A special notification is thrown!
+		if (toLeave._thingType >= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE1__ &&
+			toLeave._thingType <= __GAMETEST_TYPEOFTHINGFORVILLANTOMOVE2__)
+			notify (QGAMES::Event (__GAMETEST_THINGTOMOVEVILLANERLEFT__, NULL)); 
 
-			// Any case, the scene has to be rebuilt...
-			notify (QGAMES::Event (__GAMETEST_TOREBUILDTHESCENE__, this)); // To rebuild the elements inside...
+		// Any case, the scene has to be rebuilt...
+		notify (QGAMES::Event (__GAMETEST_TOREBUILDTHESCENE__, this)); // To rebuild the elements inside...
 	}
 }
 
@@ -838,7 +841,7 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 	// Sets the position...
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
+	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	// ...and a movement if any...
 	// the villan has to be alived...otherwise it stays...
@@ -1503,7 +1506,7 @@ void TestPlatformGame::ThingToCatch::setDescription (const TestPlatformGame::Thi
 	
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
+	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	reStartAllCounters ();
 	reStartAllOnOffSwitches ();
@@ -1607,7 +1610,7 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 	_description._position = position ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal) + (oPos - nPos);
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, position ().posZ ())); // anchor it to the floor...
+	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	// Keep the changes in the configuration...
 	((TestPlatformGame::Game*) game ()) -> updateThingStatus (oldD, _description);
@@ -1628,7 +1631,7 @@ void TestPlatformGame::Meal::setDescription (const TestPlatformGame::MealLocatio
 	
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
+	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 }
 
 // ---
@@ -2792,8 +2795,8 @@ void TestPlatformGame::Playing::onEnter ()
 	QGAMES::Entity* ety = game () -> entity (__GAMETEST_MAINCHARACTERID__);
 	QGAMES::Position lP = ((TestPlatformGame::Game*) game ()) -> lastPosition ();
 	ety -> setPosition (lP - __GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD ety -> visualHeight ()));
-	((TestPlatformGame::Knight*) ety) -> 
-		fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, ety -> basePosition ().posZ ())); // anchor it to the floor...
+	((TestPlatformGame::Knight*) ety) -> fixBasePosition (); 
+	((TestPlatformGame::Knight*) ety) -> fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, ety -> basePosition ().posZ ())); // anchor it to the floor...
 	
 	// Stops music if the configuration says so...
 	if (!((TestPlatformGame::Game::Conf*) game () -> configuration ()) -> musicOn ())
@@ -3206,6 +3209,19 @@ const std::vector <TestPlatformGame::VillanerLocation> TestPlatformGame::Game::C
 }
 
 // ---
+bool TestPlatformGame::Game::Conf::spaceToLeave (int nP,int nR)
+{
+	assert (nP > 0 && nP <= (int) _thingsInMaze.size ());
+
+	bool result = false;
+	for (std::vector <TestPlatformGame::ThingToCatchLocation>::const_iterator i = _thingsInMaze [nP - 1][nR].begin ();
+			i != _thingsInMaze [nP - 1][nR].end () && !result; i++)
+		if ((*i)._thingId == -1)
+			result = true;
+	return (result);
+}
+
+// ---
 void TestPlatformGame::Game::Conf::leaveThing (int nP, const TestPlatformGame::ThingToCatchLocation& tL)
 {
 	assert (nP > 0 && nP <= (int) _thingsInMaze.size ());
@@ -3528,18 +3544,28 @@ void TestPlatformGame::Game::Conf::distributeElementsInTheMaze (int nP)
 	{
 		int nM = rand () % __GAMETEST_NUMBEROFSCENESINTHEMAZE__; // In which room?
 		int tR = TestPlatformGame::World::typeMazeScene (nM); // Which type is it?
-		std::vector <TestPlatformGame::ThingToCatchLocation> tL = tLR [nM];
+		std::vector <TestPlatformGame::ThingToCatchLocation> tL = tLR [nM]; // Get all objects already in the room selected
 		int pF = -1;
 		for (int k = 0; k < (int) tL.size () && pF == -1; k++)
-			if (tL [k]._thingType == -1) pF = k;
-		if (pF != -1)
+			if (tL [k]._thingType == -1) pF = k; // The element to set (there is a maximum per room) is one not used before...
+		if (pF != -1) // unless there is none free, then nothing else can be done...
 		{
+			// Two elements can't be in the same place,
+			// so it is necessary to know the positions already used in the room selected...
+			QGAMES::Positions pUsed;
+			for (int m = 0; m < (int) tL.size (); m++)
+				if (tL [m]._thingId != -1)
+					pUsed.push_back (tL [m]._position);
+
 			int nII = 0;
 			int tM = rand () % __GAMETEST_MAXTYPESOFTHINGSTOBECARRIED__; // Which type thing to be carried ?
-			int pM = rand () % __GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__; // In which position?
-			while ((_POSITIONSPERSCENETYPE [tR][pM] == -1 || _POSITIONSPERSCENETYPE [tR][pM] == 2) /* not in the center. */ && nII < 2) 
+			int pM = rand () % __GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__; // In which position? 
+			while ((_POSITIONSPERSCENETYPE [tR][pM] == -1 /** while not valid for this room */ || 
+					_POSITIONSPERSCENETYPE [tR][pM] == 2 /** not in the center. */ ||
+					std::find (pUsed.begin (), pUsed.end (), _POSIBBLEPOSITIONS [_POSITIONSPERSCENETYPE [tR][pM]]) != pUsed.end () /** Not used before. */) && 
+					nII < 2 /** to avoid infinite time. */) 
 				{ pM++; if (pM >= __GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__) { pM = 0; nII++; } }
-			if (nII < 2) 
+			if (nII < 2) // The thing to catch can be set...
 				tL [pF] = TestPlatformGame::ThingToCatchLocation 
 					(j, tM, nM, _POSIBBLEPOSITIONS [_POSITIONSPERSCENETYPE [tR][pM]]);
 		}
@@ -3572,12 +3598,21 @@ void TestPlatformGame::Game::Conf::distributeMealInTheMaze (int nP)
 			if (mL [k]._mealType == -1) pF = k;
 		if (pF != -1)
 		{
+			// Two elements can't be in the same place,
+			// so it is necessary to know the positions already used in the room selected...
+			QGAMES::Positions pUsed;
+			for (int m = 0; m < (int) mL.size (); m++)
+				if (mL [m]._mealType != -1)
+					pUsed.push_back (mL [m]._position);
+
 			int nII = 0;
 			int tM = rand () % __GAMETEST_MAXTYPESOFMEAL__;
 			int pM = rand () % __GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__;
-			while (_POSITIONSPERSCENETYPE [tR][pM] == -1 && nII < 2) 
+			while ((_POSITIONSPERSCENETYPE [tR][pM] == -1 /** while not valid for this room */ || 
+					std::find (pUsed.begin (), pUsed.end (), _POSIBBLEPOSITIONS [_POSITIONSPERSCENETYPE [tR][pM]]) != pUsed.end () /** Not used before. */) && 
+					nII < 2 /** to avoid infinite time. */) 
 				{ pM++; if (pM >= __GAMETEST_NUMBERPOSSIBLEPOSITIONSINAROOM__) { pM = 0; nII++; } }
-			if (nII < 2) // Hole is possible... 
+			if (nII < 2) // The location of the meal is possible... 
 				mL [pF] = TestPlatformGame::MealLocation (tM, nM, _POSIBBLEPOSITIONS [_POSITIONSPERSCENETYPE [tR][pM]]);
 		}
 
