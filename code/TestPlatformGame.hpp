@@ -82,7 +82,7 @@ namespace TestPlatformGame
 		NumberOfLivesScoreObject ();
 
 		/** @see parent. */
-		virtual QGAMES::Entity* clone ()
+		virtual QGAMES::Entity* clone () const
 							{ return (new NumberOfLivesScoreObject ()); }
 
 		/** @see parent. */
@@ -96,7 +96,7 @@ namespace TestPlatformGame
 		NumberOfPointsScoreObject ();
 
 		/** @see parent. */
-		virtual QGAMES::Entity* clone ()
+		virtual QGAMES::Entity* clone () const
 							{ return (new NumberOfPointsScoreObject ()); }
 
 		/** @see parent. */
@@ -115,7 +115,7 @@ namespace TestPlatformGame
 		ThingsBeingCarriedScoreObject ();
 
 		/** @see parent. */
-		virtual QGAMES::Entity* clone ()
+		virtual QGAMES::Entity* clone () const
 							{ return (new ThingsBeingCarriedScoreObject ()); }
 
 		/** @see parent. */
@@ -129,7 +129,7 @@ namespace TestPlatformGame
 		RemainingTimeScoreObject ();
 
 		/** @see parent. */
-		virtual QGAMES::Entity* clone ()
+		virtual QGAMES::Entity* clone () const
 							{ return (new RemainingTimeScoreObject ()); }
 
 		/** @see parent. */
@@ -164,7 +164,7 @@ namespace TestPlatformGame
 							{ }
 
 		/** @see parent. */
-		virtual Entity* clone ()
+		virtual Entity* clone () const
 							{ return (new Knight (_id, _forms, _data)); }
 
 		/** Energy level. */
@@ -283,7 +283,7 @@ namespace TestPlatformGame
 							{ }
 
 		/** @see parent. */
-		virtual Entity* clone ()
+		virtual Entity* clone () const
 							{ return (new Villaner (_id, _forms, _data)); }
 
 		// Manage the aspect
@@ -364,7 +364,7 @@ namespace TestPlatformGame
 							{ }
 
 			/** @see parent. */
-			virtual QGAMES::CharacterControlStep* clone ()
+			virtual QGAMES::CharacterControlStep* clone () const
 								{ return (new ControlStep (*this)); }
 
 			/** @see parent. */
@@ -451,7 +451,7 @@ namespace TestPlatformGame
 							{ setVisible (false); } 
 
 		/** @see parent. */
-		virtual Entity* clone ()
+		virtual Entity* clone () const
 							{ return (new ThingToCatch (_id, _forms, _data)); }
 
 		// Manage the aspect
@@ -534,7 +534,7 @@ namespace TestPlatformGame
 							{ setVisible (false); } 
 
 		/** @see parent. */
-		virtual Entity* clone ()
+		virtual Entity* clone () const
 							{ return (new Meal (_id, _forms, _data)); }
 
 		// Manage the aspect
@@ -1154,7 +1154,7 @@ namespace TestPlatformGame
 			Conf (int nP);
 
 			/** @see parent. */
-			virtual Configuration* clone ()
+			virtual Configuration* clone () const
 							{ return (new Conf (*this)); }
 
 			// To Read & Set the internal attributes

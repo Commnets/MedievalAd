@@ -3291,43 +3291,43 @@ void TestPlatformGame::Game::Conf::adjustToPlayers (int nP)
 {
 	QGAMES::AdvancedArcadeGame::Conf::adjustToPlayers (nP);
 
-	_score			= std::vector <int> (_numberPlayers, 0);
-	_weaponsLevel	= std::vector <int> (_numberPlayers, 0);
-	_level			= std::vector <int> (_numberPlayers, 1); // The first level is 1
-	_playerName		= std::vector <std::string> (_numberPlayers, std::string (__NULL_STRING__));
-	_lastPositions  = std::vector <QGAMES::Position> (_numberPlayers, __GAMETEST_FIRSTPOSITIONINMAZE__); // It will be modified later...
-	_mazeScene		= std::vector <int> (_numberPlayers, __GAMETEST_FIRSTSCENEINTHEMAZE__);
+	_score			= std::vector <int> (nP, 0);
+	_weaponsLevel	= std::vector <int> (nP, 0);
+	_level			= std::vector <int> (nP, 1); // The first level is 1
+	_playerName		= std::vector <std::string> (nP, std::string (__NULL_STRING__));
+	_lastPositions  = std::vector <QGAMES::Position> (nP, __GAMETEST_FIRSTPOSITIONINMAZE__); // It will be modified later...
+	_mazeScene		= std::vector <int> (nP, __GAMETEST_FIRSTSCENEINTHEMAZE__);
 	_thingsCarried	= std::vector <std::vector <TestPlatformGame::ThingToCatchLocation>> 
-		(_numberPlayers, std::vector <TestPlatformGame::ThingToCatchLocation> 
+		(nP, std::vector <TestPlatformGame::ThingToCatchLocation> 
 			(__GAMETEST_MAXNUMBERTHINGSCARRIED__, TestPlatformGame::ThingToCatchLocation () /** Nothing by default. */));
 
 	// ...and the villaners distributed across the maze...
 	_villanersInMaze = std::vector <std::vector <TestPlatformGame::VillanerLocation>>
-		(_numberPlayers, std::vector <TestPlatformGame::VillanerLocation> (__GAMETEST_NUMBERVILLANERS__, 
+		(nP, std::vector <TestPlatformGame::VillanerLocation> (__GAMETEST_NUMBERVILLANERS__, 
 			TestPlatformGame::VillanerLocation ()));
-	for (int i = 0; i < _numberPlayers; i++)
+	for (int i = 0; i < nP; i++)
 		distributeVillanersInTheMaze (i);
 
 	// ...and now the things are distributed across the maze...
 	_thingsInMaze	= std::vector <std::vector <std::vector <TestPlatformGame::ThingToCatchLocation>>>
-		(_numberPlayers, std::vector <std::vector <TestPlatformGame::ThingToCatchLocation>> 
+		(nP, std::vector <std::vector <TestPlatformGame::ThingToCatchLocation>> 
 			(__GAMETEST_NUMBEROFSCENESINTHEMAZE__, std::vector <TestPlatformGame::ThingToCatchLocation> 
 				(__GAMETEST_MAXNUMBERTHINGSINTHEMAZEPERROOM__, TestPlatformGame::ThingToCatchLocation ())));
-	for (int i = 0; i < _numberPlayers; i++)
+	for (int i = 0; i < nP; i++)
 		distributeElementsInTheMaze (i);
 
 	// ...and now the meal is distributed across the maze...
 	_mealInMaze	= std::vector <std::vector <std::vector <TestPlatformGame::MealLocation>>>
-		(_numberPlayers, std::vector <std::vector <TestPlatformGame::MealLocation>> 
+		(nP, std::vector <std::vector <TestPlatformGame::MealLocation>> 
 			(__GAMETEST_NUMBEROFSCENESINTHEMAZE__, std::vector <TestPlatformGame::MealLocation> 
 				(__GAMETEST_MAXNUMBEROFMEALSINMAZEPERROOM__, TestPlatformGame::MealLocation ())));
-	for (int i = 0; i < _numberPlayers; i++)
+	for (int i = 0; i < nP; i++)
 		distributeMealInTheMaze (i);
 
 	// Adjust the previous loaded elements to this game...
-	_currentWorld = std::vector <int> (_numberPlayers, __GAMETEST_WORLDID__);
-	_currentScene = std::vector <int> (_numberPlayers, __GAMETEST_SCENEID__);
-	_numberLives = std::vector <int> (_numberPlayers, __GAMETEST_MAXNUMBERLIVES__);
+	_currentWorld = std::vector <int> (nP, __GAMETEST_WORLDID__);
+	_currentScene = std::vector <int> (nP, __GAMETEST_SCENEID__);
+	_numberLives = std::vector <int> (nP, __GAMETEST_MAXNUMBERLIVES__);
 }
 
 // ---
