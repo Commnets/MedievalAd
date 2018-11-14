@@ -196,12 +196,12 @@ void TestPlatformGame::NumberOfLivesScoreObject::drawOn (QGAMES::Screen* scr, co
 TestPlatformGame::NumberOfPointsScoreObject::NumberOfPointsScoreObject ()
 	: QGAMES::ScoreObjectNumber (__GAMETEST_NUMBERPOINTSSCOREOBJECTID__, 0, QGAMES::Forms (), 16)
 { 
-	_forms.insert (QGAMES::Forms::value_type (__QGAMES_RAVIE24BLUELETTERS__, 
-		QGAMES::Game::game () -> form (__QGAMES_RAVIE24BLUELETTERS__)));
-	setCurrentForm (__QGAMES_RAVIE24BLUELETTERS__); 
+	_forms.insert (QGAMES::Forms::value_type (__QGAMES_SCARDGOTHIC24BLUELETTERS__, 
+		QGAMES::Game::game () -> form (__QGAMES_SCARDGOTHIC24BLUELETTERS__)));
+	setCurrentForm (__QGAMES_SCARDGOTHIC24BLUELETTERS__); 
 	setNumberLength (5);
 	setSpace (0);
-	setPosition (QGAMES::Position (__BD 10, __BD 120, __BD 0));
+	setPosition (QGAMES::Position (__BD 20, __BD 110, __BD 0));
 }
 
 // ---
@@ -247,12 +247,12 @@ void TestPlatformGame::ThingsBeingCarriedScoreObject::drawOn (QGAMES::Screen* sc
 TestPlatformGame::RemainingTimeScoreObject::RemainingTimeScoreObject ()
 	: QGAMES::ScoreObjectNumber (__GAMETEST_TIMETOLEFTSCOREOBJECTID__, 0, QGAMES::Forms (), 16)
 { 
-	_forms.insert (QGAMES::Forms::value_type (__QGAMES_RAVIE24ORANGELETTERS__, 
-		QGAMES::Game::game () -> form (__QGAMES_RAVIE24ORANGELETTERS__)));
-	setCurrentForm (__QGAMES_RAVIE24ORANGELETTERS__); 
+	_forms.insert (QGAMES::Forms::value_type (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__, 
+		QGAMES::Game::game () -> form (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__)));
+	setCurrentForm (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__); 
 	setNumberLength (5);
 	setSpace (0);
-	setPosition (QGAMES::Position (__BD 10, __BD (__GAMETEST_SCREENHEIGHT__ - 60), __BD 0));
+	setPosition (QGAMES::Position (__BD 20, __BD (__GAMETEST_SCREENHEIGHT__ - 70), __BD 0));
 }
 
 // ---
@@ -2427,11 +2427,11 @@ QGAMES::ScoreObjectText* TestPlatformGame::ShowingPartOfPresentationGameState::c
 	QGAMES::ScoreObjectText* result = NULL;
 
 	if (_textType == 2)
-		result = new QGAMES::Ravie36OrangeFont (_text);
+		result = new QGAMES::ShowcardGothic64YellowFont (_text);
 	else if (_textType == 1)
-		result = new QGAMES::Ravie24BlueFont (_text);
+		result = new QGAMES::ShowcardGothic36BlueFont (_text);
 	else
-		result = new QGAMES::Ravie24GreenFont (_text);
+		result = new QGAMES::ShowcardGothic32GreenFont (_text);
 
 	return (result);
 }
@@ -3099,7 +3099,7 @@ QGAMES::ScoreObjectText* TestPlatformGame::ShowingEntriesHallOfFame::createTextF
 	std::string scr = std::to_string (sV.openValue (__GAMETEST_SCOREPLAYEROPENVALUE__).intValue ());
 	if (scr.length () < 5)  // The score...
 		scr = std::string ("00000").substr (0, 5 - scr.length ()) + scr;
-	return (new QGAMES::Ravie24OrangeFont (scr + std::string ("  ") +
+	return (new QGAMES::ShowcardGothic24BrownFont (scr + std::string ("  ") +
 		sV.openValue (__GAMETEST_NAMEPLAYEROPENVALUE__).strValue ()));
 }
 // --------------------------------------------------------------------------------

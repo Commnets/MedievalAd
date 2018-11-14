@@ -105,7 +105,7 @@ namespace TestPlatformGame
 		protected:
 		/** @see parent */
 		virtual int formToDrawDigits ()
-							{ return (__QGAMES_RAVIE24BLUELETTERS__); }
+							{ return (__QGAMES_SCARDGOTHIC24BLUELETTERS__); }
 	};
 
 	/** This score object is to indicate the things the current character is carrying with him / her. */
@@ -138,7 +138,7 @@ namespace TestPlatformGame
 		protected:
 		/** @see parent */
 		virtual int formToDrawDigits ()
-							{ return (__QGAMES_RAVIE24ORANGELETTERS__); }
+							{ return (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__); }
 	};
 
 	/** The level of the energy. */
@@ -907,7 +907,7 @@ namespace TestPlatformGame
 		/** @see parent. */
 		virtual void actualizeText ();
 		virtual QGAMES::ScoreObjectText* createText ()
-							{ return (new QGAMES::Ravie36BlueFont (std::string ("---"))); }
+							{ return (new QGAMES::ShowcardGothic36BlueFont (std::string ("---"))); }
 	};
 
 	/**
@@ -1037,7 +1037,7 @@ namespace TestPlatformGame
 		private:
 		/** @see parent. */
 		virtual QGAMES::ScoreObjectText* createText ()
-							{ return (new QGAMES::Ravie72OrangeFont (std::string ("Game Over"))); }
+							{ return (new QGAMES::ShowcardGothic72BrownFont (std::string ("Game Over"))); }
 	};
 
 	/** 
@@ -1079,7 +1079,7 @@ namespace TestPlatformGame
 		private:
 		/** @see parent. */
 		virtual QGAMES::ScoreObjectText* createText ()
-							{ return (new QGAMES::Ravie72OrangeFont (std::string ("Player wins"))); }
+							{ return (new QGAMES::ShowcardGothic72YellowFont (std::string ("Player wins"))); }
 	};
 
 	/**

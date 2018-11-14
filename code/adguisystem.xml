@@ -20,7 +20,7 @@
 		<!-- Option 1: To start the game -->
 		<Widget id="10002" type="1" position="0,0,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -31,9 +31,9 @@
 		</Widget>
 		
 		<!-- Option 2: To load the last game  -->
-		<Widget id="10003" type="1" position="0,50,0">
+		<Widget id="10003" type="1" position="0,60,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -44,9 +44,9 @@
 		</Widget>
 		
 		<!-- Option 3: To introduce the number of players -->
-		<Widget id="10004" type="2" position="0,100,0">
+		<Widget id="10004" type="2" position="0,120,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -60,9 +60,9 @@
 		</Widget>
 		
 		<!-- Option 4: To select the type of control used to manage the game  -->
-		<Widget id="10005" type="3" position="0,150,0">
+		<Widget id="10005" type="3" position="0,180,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -74,9 +74,9 @@
 		</Widget>
 		
 		<!-- Option 5: To configure the keys of the game  -->
-		<Widget id="10006" type="1" position="0,200,0">
+		<Widget id="10006" type="1" position="0,240,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -87,9 +87,9 @@
 		</Widget>
 		
 		<!-- Option 6: To select the difficulty of the game  -->
-		<Widget id="10007" type="3" position="0,250,0">
+		<Widget id="10007" type="3" position="0,300,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -101,9 +101,9 @@
 		</Widget>
 		
 		<!-- Option 7: To determinate whether the music is on or off  -->
-		<Widget id="10008" type="3" position="0,300,0">
+		<Widget id="10008" type="3" position="0,360,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -115,9 +115,9 @@
 		</Widget>
 		
 		<!-- Option 8: Hall of fame -->
-		<Widget id="10009" type="1" position="0,350,0">
+		<Widget id="10009" type="1" position="0,420,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -128,9 +128,9 @@
 		</Widget>
 		
 		<!-- Option 9: Exit -->
-		<Widget id="10010" type="1" position="0,400,0">
+		<Widget id="10010" type="1" position="0,480,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -164,7 +164,7 @@
 		<!-- Option 1: Selecting key for moving up -->
 		<Widget id="10102" type="3" position="0,0,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -177,9 +177,9 @@
 		</Widget>
 
 		<!-- Option 2: Selecting key for moving down -->
-		<Widget id="10103" type="3" position="0,50,0">
+		<Widget id="10103" type="3" position="0,60,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -192,9 +192,9 @@
 		</Widget>
 
 		<!-- Option 3: Selecting key for moving left -->
-		<Widget id="10104" type="3" position="0,100,0">
+		<Widget id="10104" type="3" position="0,120,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -207,9 +207,9 @@
 		</Widget>
 
 		<!-- Option 4: Selecting key for moving right -->
-		<Widget id="10105" type="3" position="0,150,0">
+		<Widget id="10105" type="3" position="0,180,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -222,9 +222,9 @@
 		</Widget>
 
 		<!-- Option 5: Selecting key for fighting -->
-		<Widget id="10106" type="3" position="0,200,0">
+		<Widget id="10106" type="3" position="0,240,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -241,9 +241,9 @@
 			 TAKE THIS INTO ACCOUNT WHEN UPDATING THIS FILE -->
 
 		<!-- Option 9: Selecting key for iterating the things -->
-		<Widget id="10110" type="3" position="0,250,0">
+		<Widget id="10110" type="3" position="0,300,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -256,9 +256,9 @@
 		</Widget>
 
 		<!-- Option 10: Selecting key for catching / leaving the things -->
-		<Widget id="10111" type="3" position="0,300,0">
+		<Widget id="10111" type="3" position="0,360,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -273,9 +273,9 @@
 		<!-- -->
 
 		<!-- Option 6: Selecting key for pausing the game -->
-		<Widget id="10107" type="3" position="0,350,0">
+		<Widget id="10107" type="3" position="0,420,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -288,9 +288,9 @@
 		</Widget>
 
 		<!-- Option 7: Selecting key for save -->
-		<Widget id="10108" type="3" position="0,400,0">
+		<Widget id="10108" type="3" position="0,480,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
@@ -303,9 +303,9 @@
 		</Widget>
 		
 		<!-- Option 8: Back to the main menu -->
-		<Widget id="10109" type="1" position="0,450,0">
+		<Widget id="10109" type="1" position="0,540,0">
 			<Attributes>
-				<Attribute id="Form" value="20021"/>
+				<Attribute id="Form" value="20112"/>
 				<Attribute id="BaseChr" value="32"/>
 				<Attribute id="AlphaOn" value="255"/>
 				<Attribute id="AlphaOff" value="150"/>
