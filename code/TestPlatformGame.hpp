@@ -105,7 +105,7 @@ namespace TestPlatformGame
 		protected:
 		/** @see parent */
 		virtual int formToDrawDigits ()
-							{ return (__QGAMES_SCARDGOTHIC24BLUELETTERS__); }
+							{ return (__QGAMES_SCARDGOTHIC32BLUELETTERS__); }
 	};
 
 	/** This score object is to indicate the things the current character is carrying with him / her. */
@@ -138,7 +138,7 @@ namespace TestPlatformGame
 		protected:
 		/** @see parent */
 		virtual int formToDrawDigits ()
-							{ return (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__); }
+							{ return (__QGAMES_SCARDGOTHIC32YELLOWLETTERS__); }
 	};
 
 	/** The level of the energy. */
@@ -1015,6 +1015,9 @@ namespace TestPlatformGame
 		public:
 		LevelCompleted ();
 		~LevelCompleted ();
+
+		/** @see parent. */
+		virtual void onExit ();
 
 		private:
 		QGAMES::PlayingASoundGameState* _playingSound;

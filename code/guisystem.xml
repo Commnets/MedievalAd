@@ -20,7 +20,7 @@
 				<Attribute id="AlphaOff" value="255"/>
 				<Attribute id="PixelsAmong" value="0"/>
 				<Attribute id="Chars" value="3"/>
-				<Attribute id="Mask" value="AAA"/>
+				<Attribute id="Mask" value="xxx"/>
 				<Attribute id="CursorColor" value="150,150,150,255"/>
 				<Attribute id="Location" value="RIGHT"/>
 				<Attribute id="Text" value="Player Name?: "/>

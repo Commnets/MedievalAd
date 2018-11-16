@@ -196,9 +196,9 @@ void TestPlatformGame::NumberOfLivesScoreObject::drawOn (QGAMES::Screen* scr, co
 TestPlatformGame::NumberOfPointsScoreObject::NumberOfPointsScoreObject ()
 	: QGAMES::ScoreObjectNumber (__GAMETEST_NUMBERPOINTSSCOREOBJECTID__, 0, QGAMES::Forms (), 16)
 { 
-	_forms.insert (QGAMES::Forms::value_type (__QGAMES_SCARDGOTHIC24BLUELETTERS__, 
-		QGAMES::Game::game () -> form (__QGAMES_SCARDGOTHIC24BLUELETTERS__)));
-	setCurrentForm (__QGAMES_SCARDGOTHIC24BLUELETTERS__); 
+	_forms.insert (QGAMES::Forms::value_type (__QGAMES_SCARDGOTHIC32BLUELETTERS__, 
+		QGAMES::Game::game () -> form (__QGAMES_SCARDGOTHIC32BLUELETTERS__)));
+	setCurrentForm (__QGAMES_SCARDGOTHIC32BLUELETTERS__); 
 	setNumberLength (5);
 	setSpace (0);
 	setPosition (QGAMES::Position (__BD 20, __BD 110, __BD 0));
@@ -247,9 +247,9 @@ void TestPlatformGame::ThingsBeingCarriedScoreObject::drawOn (QGAMES::Screen* sc
 TestPlatformGame::RemainingTimeScoreObject::RemainingTimeScoreObject ()
 	: QGAMES::ScoreObjectNumber (__GAMETEST_TIMETOLEFTSCOREOBJECTID__, 0, QGAMES::Forms (), 16)
 { 
-	_forms.insert (QGAMES::Forms::value_type (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__, 
-		QGAMES::Game::game () -> form (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__)));
-	setCurrentForm (__QGAMES_SCARDGOTHIC24YELLOWLETTERS__); 
+	_forms.insert (QGAMES::Forms::value_type (__QGAMES_SCARDGOTHIC32YELLOWLETTERS__, 
+		QGAMES::Game::game () -> form (__QGAMES_SCARDGOTHIC32YELLOWLETTERS__)));
+	setCurrentForm (__QGAMES_SCARDGOTHIC32YELLOWLETTERS__); 
 	setNumberLength (5);
 	setSpace (0);
 	setPosition (QGAMES::Position (__BD 20, __BD (__GAMETEST_SCREENHEIGHT__ - 70), __BD 0));
@@ -2820,15 +2820,18 @@ void TestPlatformGame::Playing::onExit ()
 {
 	QGAMES::GameState::onExit ();
 
+	/*
+	It shouldn't happen here, but it's better the game continue with entities moving...
 	// Back to orthogonal...
 	game () -> mainScreen () -> currentCamera () -> setProjectType (QGAMES::Camera::ProjectionType::_ORTHOGONAL);
 	// ...and put the screen at the cero position...
 	game () -> mainScreen () -> setPosition (QGAMES::Position::_cero);
 
-	unObserve (game () -> entity (__GAMETEST_MAINCHARACTERID__));
-
 	(__AGM game ()) -> world (__GAMETEST_WORLDID__) -> finalize ();
 	(__AGM game ()) -> setWorld (__MININT__);
+	*/
+
+	unObserve (game () -> entity (__GAMETEST_MAINCHARACTERID__));
 
 	unObserve ((__AGM game ()) -> world (__GAMETEST_WORLDID__));
 
@@ -2933,6 +2936,16 @@ void TestPlatformGame::PlayerHasDied::onExit ()
 
 	((TestPlatformGame::Game*) game ()) -> addLives (-1); // One life less for the current player
 	((TestPlatformGame::Game*) game ()) -> setNextPlayer (); // Change the player...if any
+
+	// Instead of finishing the world in the playing state
+	// that is done here. It means that the world keeps moving after music after dead has finished!
+	// Back to orthogonal...
+	game () -> mainScreen () -> currentCamera () -> setProjectType (QGAMES::Camera::ProjectionType::_ORTHOGONAL);
+	// ...and put the screen at the cero position...
+	game () -> mainScreen () -> setPosition (QGAMES::Position::_cero);
+
+	(__AGM game ()) -> world (__GAMETEST_WORLDID__) -> finalize ();
+	(__AGM game ()) -> setWorld (__MININT__);
 }
 // --------------------------------------------------------------------------------
 
@@ -2957,6 +2970,20 @@ TestPlatformGame::LevelCompleted::~LevelCompleted ()
 {
 	delete (_playingSound);
 	_playingSound = NULL;
+}
+
+// ---
+void TestPlatformGame::LevelCompleted::onExit ()
+{
+	// Instead of finishing the world in the playing state
+	// that is done here. It means that the world keeps moving after music after dead has finished!
+	// Back to orthogonal...
+	game () -> mainScreen () -> currentCamera () -> setProjectType (QGAMES::Camera::ProjectionType::_ORTHOGONAL);
+	// ...and put the screen at the cero position...
+	game () -> mainScreen () -> setPosition (QGAMES::Position::_cero);
+
+	(__AGM game ()) -> world (__GAMETEST_WORLDID__) -> finalize ();
+	(__AGM game ()) -> setWorld (__MININT__);
 }
 // --------------------------------------------------------------------------------
 
@@ -3099,7 +3126,7 @@ QGAMES::ScoreObjectText* TestPlatformGame::ShowingEntriesHallOfFame::createTextF
 	std::string scr = std::to_string (sV.openValue (__GAMETEST_SCOREPLAYEROPENVALUE__).intValue ());
 	if (scr.length () < 5)  // The score...
 		scr = std::string ("00000").substr (0, 5 - scr.length ()) + scr;
-	return (new QGAMES::ShowcardGothic24BrownFont (scr + std::string ("  ") +
+	return (new QGAMES::ShowcardGothic32BrownFont (scr + std::string ("  ") +
 		sV.openValue (__GAMETEST_NAMEPLAYEROPENVALUE__).strValue ()));
 }
 // --------------------------------------------------------------------------------
