@@ -1424,10 +1424,6 @@ namespace TestPlatformGame
 		/** @see parent. */
 		virtual void initialize ();
 		virtual void additionalTasks ();
-
-		/** @see parent. */
-		virtual bool drawGameBeforeState () const
-							{ return (false); }
 	};
 	// --------------------------------------------------------------------------------
 }

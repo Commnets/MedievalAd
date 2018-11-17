@@ -167,7 +167,7 @@ void TestPlatformGame::InputHandlerBehaviour::manageJoystickButtonOnState (QGAME
 	TestPlatformGame::Knight* chr = 
 		dynamic_cast <TestPlatformGame::Knight*> (game () -> entity (__GAMETEST_MAINCHARACTERID__));
 	assert (chr); // Just in case...
-	if (!p && nB == 0)
+	if (!p && (nB == 0 || nB == 10)) // In some joysticks (nintendo like) this should be the main button...
 		chr -> toAttack ();
 }
 // --------------------------------------------------------------------------------
