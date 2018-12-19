@@ -2130,6 +2130,22 @@ void TestPlatformGame::Scene::initialize ()
 }
 
 // ---
+void TestPlatformGame::Scene::finalize ()
+{
+	QGAMES::Scene::finalize ();
+
+	removeEntity (__AT (__AGM game ()) -> artist (__GAMETEST_MAINCHARACTERID__));
+	for (int i = 0; i < __GAMETEST_NUMBERVILLANERS__; i++)
+		removeEntity (__AT (__AGM game ()) -> artist (__GAMETEST_VILLANERCHARACTERBASEID__ + i));
+	for (int i = 0; i < __GAMETEST_MAXNUMBERTHINGSINTHEMAZEPERROOM__; i++)
+		removeEntity (__AT (__AGM game ()) -> artist (__GAMETEST_THINGTOCATCHBASEID__ + i));
+	for (int i = 0; i < __GAMETEST_MAXNUMBEROFMEALSINMAZEPERROOM__; i++)
+		removeEntity (__AT (__AGM game ()) -> artist (__GAMETEST_MEALBASEID__ + i));
+
+	setMap (__MININT__);
+}
+
+// ---
 void TestPlatformGame::Scene::processEvent (const QGAMES::Event& e)
 {
 	// Comming from the knight...or from the villaner...

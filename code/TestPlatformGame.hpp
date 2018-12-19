@@ -674,6 +674,7 @@ namespace TestPlatformGame
 		/** @see parent. */
 		virtual void updatePositions ();
 		virtual void initialize ();
+		virtual void finalize ();
 
 		/** @see parent. */
 		virtual void processEvent (const QGAMES::Event& e);
