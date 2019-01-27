@@ -565,7 +565,7 @@ bool TestPlatformGame::Knight::canMove (const QGAMES::Vector& d, const QGAMES::V
 			result = false; // No movement possible...
 
 	// If the movement is still possible, then
-	// consider that the eneity is or not over a base...
+	// consider that the entity is or not over a base...
 	if (result)
 		result = isOnABase ();
 
@@ -2224,6 +2224,16 @@ QGAMES::Scene* TestPlatformGame::WorldBuilder::createSceneObject (int ns, const 
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
+QGAMES::Map* TestPlatformGame::TMXMapBuilder::createMapObject (int id, 
+	const QGAMES::Layers& l, int w, int h, int d,
+	int tW, int tH, int tD, const QGAMES::MapProperties& p)
+{
+	return (new TestPlatformGame::Map (id, l, w, h, tW, tH, p)); 
+}
+// --------------------------------------------------------------------------------
+
+
+// --------------------------------------------------------------------------------
 // ---
 TestPlatformGame::ControllingGameStates::ControllingGameStates (QGAMES::GameState* psSt)
 	: QGAMES::StandardGameStateControl (__GAMETEST_CONTROLGAMESTATE__, psSt, QGAMES::GameStates ())
@@ -3702,8 +3712,8 @@ QGAMES::MapBuilder* TestPlatformGame::Game::createMapBuilder ()
 	 
 	QGAMES::MapBuilder* result = new QGAMES::MapBuilder (parameter (__GAME_MAPSOBJECTSFILE__));
 	result -> addAddsOn (new QGAMES::ObjectMapBuilderAddsOn (objectBuilder ()));
-	QGAMES::PlatformTMXMapBuilder* mAdd = 
-		new QGAMES::PlatformTMXMapBuilder ((QGAMES::Sprite2DBuilder*) formBuilder ());
+	TestPlatformGame::TMXMapBuilder* mAdd = 
+		new TestPlatformGame::TMXMapBuilder ((QGAMES::Sprite2DBuilder*) formBuilder ());
 	std::vector <int> e; for (int i = 0; i < 64; i++) if (eE [i] == 1) e.push_back (i);
 	mAdd -> setBaseTilesExcluded (e);
 	result -> addAddsOn (mAdd);
@@ -3715,9 +3725,11 @@ QGAMES::MapBuilder* TestPlatformGame::Game::createMapBuilder ()
 void TestPlatformGame::Game::initialize ()
 {
 	if (isInitialized ())
-		return;
+		return; // Only once...
 
 	QGAMES::AdvancedArcadeGame::initialize ();
+	if (!isInitialized ())
+		return;
 
 	mainScreen () -> windowAtCenter ();
 	mainScreen () -> setIcon (form (__GAMETEST_MEDIEVALGAMEICON__));

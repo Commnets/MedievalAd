@@ -202,6 +202,13 @@ namespace TestPlatformGame
 		/** @see parent. */
 		virtual void whenCollisionWith (QGAMES::Entity* e);
 
+		protected:
+		/** @see parent. 
+			Not used in this implementation. */
+		virtual QGAMES::Tiles referenceTilesNow (const QGAMES::SetOfTiles& rT, 
+			const QGAMES::Vector& dr, const QGAMES::Vector& a) { return (QGAMES::Tiles ()); }
+		virtual void afterAllLayersTestedInWhenOnTile () { }
+
 		private:
 		/** To know wich is the current state orientation... */
 		QGAMES::Vector currentStateOrientation () const;
@@ -318,6 +325,13 @@ namespace TestPlatformGame
 
 		/** To change the room where the villan is following a direction. */
 		void moveToMazeScene (const QGAMES::Vector& dir);
+
+		protected:
+		/** @see parent. 
+			Not used in this implementation. */
+		virtual QGAMES::Tiles referenceTilesNow (const QGAMES::SetOfTiles& rT, 
+			const QGAMES::Vector& dr, const QGAMES::Vector& a) { return (QGAMES::Tiles ()); }
+		virtual void afterAllLayersTestedInWhenOnTile () { }
 
 		private:
 		// Different actions are managed in a private way...
@@ -472,6 +486,13 @@ namespace TestPlatformGame
 		virtual void updatePositions ();
 		virtual void drawOn (QGAMES::Screen* s, const QGAMES::Position& p = QGAMES::Position::_noPoint);
 
+		protected:
+		/** @see parent. 
+			Not used in this implementation. */
+		virtual QGAMES::Tiles referenceTilesNow (const QGAMES::SetOfTiles& rT, 
+			const QGAMES::Vector& dr, const QGAMES::Vector& a) { return (QGAMES::Tiles ()); }
+		virtual void afterAllLayersTestedInWhenOnTile () { }
+
 		private:
 		__DECLARECOUNTERS__ (Counters);
 		virtual QGAMES::Counters* createCounters ()
@@ -557,6 +578,13 @@ namespace TestPlatformGame
 
 		/** @see parent. */
 		virtual void whenCollisionWith (QGAMES::Entity* e);
+
+		protected:
+		/** @see parent. 
+			Not used in this implementation. */
+		virtual QGAMES::Tiles referenceTilesNow (const QGAMES::SetOfTiles& rT, 
+			const QGAMES::Vector& dr, const QGAMES::Vector& a) { return (QGAMES::Tiles ()); }
+		virtual void afterAllLayersTestedInWhenOnTile () { }
 
 		private:
 		MealLocation _description;
@@ -720,12 +748,12 @@ namespace TestPlatformGame
 	};
 
 	/** The class defining the type of map used in the system. */
-	class Map : public QGAMES::TiledMap
+	class Map : public QGAMES::PlatformMap
 	{
 		public:
-		Map (int c, const QGAMES::Layers& l, int w, int h, int d, int tW, int tH, int tD,
+		Map (int c, const QGAMES::Layers& l, int w, int h, int tW, int tH,
 			const QGAMES::MapProperties& p = QGAMES::MapProperties ())
-			: QGAMES::TiledMap (c, l, w, h, d, tW, tH, tD, p)
+			: QGAMES::PlatformMap (c, l, w, h, tW, tH, p)
 							{ }
 
 		/** To change the form of the map,, activating and desativating layers. */
@@ -750,6 +778,20 @@ namespace TestPlatformGame
 		virtual QGAMES::Scene* createSceneObject (int ns, const QGAMES::Maps& m, 
 			const QGAMES::Scene::Connections& cn, 
 			const QGAMES::SceneProperties& p, const QGAMES::EntitiesPerLayer& ePL);
+	};
+
+	/** The extension to create the maps. */
+	class TMXMapBuilder : public QGAMES::PlatformTMXMapBuilder
+	{
+		public:
+		TMXMapBuilder (QGAMES::Sprite2DBuilder* sB)
+			: QGAMES::PlatformTMXMapBuilder (sB)
+							{ }
+
+		protected:
+		/** @see parent. */
+		virtual QGAMES::Map* createMapObject (int id, const QGAMES::Layers& l, int w, int h, int d,
+			int tW, int tH, int tD, const QGAMES::MapProperties& p = QGAMES::MapProperties ());
 	};
 	// --------------------------------------------------------------------------------
 
