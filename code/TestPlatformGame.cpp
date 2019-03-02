@@ -2236,7 +2236,8 @@ QGAMES::Map* TestPlatformGame::TMXMapBuilder::createMapObject (int id,
 // --------------------------------------------------------------------------------
 // ---
 TestPlatformGame::ControllingGameStates::ControllingGameStates (QGAMES::GameState* psSt)
-	: QGAMES::StandardGameStateControl (__GAMETEST_CONTROLGAMESTATE__, psSt, QGAMES::GameStates ())
+	: QGAMES::AdvancedGameStateControl (__GAMETEST_CONTROLGAMESTATE__, psSt, 
+		QGAMES::GameStates (), QGAMES::GameStateControl::FlowMap ())
 {
 	QGAMES::GameStates sts;
 	sts [std::string (__QGAMES_GAMESTATELOADINGNAME__)] =

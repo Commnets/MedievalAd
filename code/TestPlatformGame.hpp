@@ -801,7 +801,7 @@ namespace TestPlatformGame
 	  *	The state to control the rest. 
 	  *	What is important here is to define the first game state in the process and the rules to move to the next ones.
 	  */
-	class ControllingGameStates : public QGAMES::StandardGameStateControl
+	class ControllingGameStates : public QGAMES::AdvancedGameStateControl
 	{
 		public:
 		ControllingGameStates (QGAMES::GameState* psSt);
