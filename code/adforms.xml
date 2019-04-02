@@ -3991,8 +3991,8 @@
 	</Form>
 	<!-- -->
 	
-	<!-- The count-down counter -->
-	<!-- The countdown 32 letters -->
+	<!-- The count-up counter -->
+	<!-- The countup 32 letters -->
 	<Form id="30000" name="CountoDown32" file="forms/CountDown32.png" width="256" height="128" 
             fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="00" fPosY="00" fWidth="00" fHeight="00" xoffset="0" yoffset="0" width="00" height="00"/>
@@ -4000,7 +4000,7 @@
 		<Frame id="2" fPosX="02" fPosY="02" fWidth="44" fHeight="46" xoffset="5" yoffset="5" width="44" height="46"/>
 		<Frame id="3" fPosX="02" fPosY="50" fWidth="45" fHeight="45" xoffset="5" yoffset="5" width="45" height="45"/>
 	</Form>
-	<!-- The countdown 60 letters -->
+	<!-- The countup 60 letters -->
 	<Form id="30001" name="CountoDown60" file="forms/CountDown60.png" width="256" height="128" 
             fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="00" fHeight="00" xoffset="0" yoffset="00" width="00" height="00"/>
@@ -4008,7 +4008,7 @@
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="73" fHeight="76" xoffset="6" yoffset="17" width="73" height="76"/>
 		<Frame id="3" fPosX="128" fPosY="2" fWidth="74" fHeight="75" xoffset="6" yoffset="15" width="74" height="75"/>
 	</Form>
-	<!-- The countdown 88 letters -->
+	<!-- The countup 88 letters -->
 	<Form id="30002" name="CountoDown88" file="forms/CountDown88.png" width="256" height="256" 
             fSpacing="2" fMargin="2" fWidth="64" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="000" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
@@ -4016,7 +4016,7 @@
 		<Frame id="2" fPosX="002" fPosY="002" fWidth="101" fHeight="107" xoffset="6" yoffset="27" width="101" height="107"/>
 		<Frame id="3" fPosX="002" fPosY="111" fWidth="103" fHeight="104" xoffset="6" yoffset="27" width="103" height="104"/>
 	</Form>
-	<!-- The countdown 116 letters -->
+	<!-- The countup 116 letters -->
 	<Form id="30003" name="CountoDown116" file="forms/CountDown116.png" width="512" height="256" 
             fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000" />
@@ -4024,7 +4024,7 @@
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="131" fHeight="138" xoffset="6" yoffset="38" width="131" height="138" />
 		<Frame id="3" fPosX="223" fPosY="2" fWidth="133" fHeight="135" xoffset="6" yoffset="37" width="133" height="135"/>
 	</Form>
-	<!-- The countdown 144 letters -->
+	<!-- The countup 144 letters -->
 	<Form id="30004" name="CountoDown144" file="forms/CountDown144.png" width="512" height="256" 
             fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000" />
@@ -4032,7 +4032,7 @@
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="159" fHeight="168" xoffset="7" yoffset="48" width="159" height="168"/>
 		<Frame id="3" fPosX="163" fPosY="2" fWidth="163" fHeight="165" xoffset="7" yoffset="47" width="163" height="165"/>
 	</Form>
-	<!-- The countdown 172 letters -->
+	<!-- The countup 172 letters -->
 	<Form id="30005" name="CountoDown172" file="forms/CountDown172.png" width="512" height="256" 
             fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
@@ -4040,7 +4040,7 @@
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="188" fHeight="199" xoffset="7" yoffset="60" width="188" height="199"/>
 		<Frame id="3" fPosX="316" fPosY="2" fWidth="192" fHeight="194" xoffset="7" yoffset="58" width="192" height="194"/>
 	</Form>
-	<!-- The countdown 200 letters -->
+	<!-- The countup 200 letters -->
 	<Form id="30006" name="CountoDown200" file="forms/CountDown200.png" width="512" height="512" 
             fSpacing="2" fMargin="2" fWidth="128" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="000" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
@@ -4048,7 +4048,7 @@
 		<Frame id="2" fPosX="002" fPosY="002" fWidth="218" fHeight="230" xoffset="7" yoffset="69" width="218" height="230"/>
 		<Frame id="3" fPosX="002" fPosY="234" fWidth="222" fHeight="225" xoffset="7" yoffset="68" width="222" height="225"/>
 	</Form>
-	<!-- The countdown 228 letters -->
+	<!-- The countup 228 letters -->
 	<Form id="30007" name="CountoDown228" file="forms/CountDown228.png" width="1024" height="512" 
             fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
@@ -4056,13 +4056,88 @@
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="246" fHeight="260" xoffset="8" yoffset="80" width="246" height="260"/>
 		<Frame id="3" fPosX="250" fPosY="2" fWidth="252" fHeight="255" xoffset="8" yoffset="79" width="252" height="255"/>
 	</Form>
-	<!-- The countdown 256 letters -->
+	<!-- The countup 256 letters -->
 	<Form id="30008" name="CountoDown256" file="forms/CountDown256.png" width="1024" height="512" 
             fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
 		<Frame id="1" fPosX="279" fPosY="2" fWidth="177" fHeight="284" xoffset="7" yoffset="91" width="177" height="284"/>
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="275" fHeight="291" xoffset="8" yoffset="91" width="275" height="291"/>
 		<Frame id="3" fPosX="458" fPosY="2" fWidth="281" fHeight="284" xoffset="8" yoffset="89" width="281" height="284"/>
+	</Form>
+	<!-- -->
+	
+	<!-- The count-down counter -->
+	<!-- The countdown 32 letters -->
+	<Form id="30010" name="CountoDown32" file="forms/CountDown32.png" width="256" height="128" 
+            fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="02" fPosY="50" fWidth="45" fHeight="45" xoffset="5" yoffset="5" width="45" height="45"/>
+		<Frame id="1" fPosX="02" fPosY="02" fWidth="44" fHeight="46" xoffset="5" yoffset="5" width="44" height="46"/>
+		<Frame id="2" fPosX="48" fPosY="02" fWidth="31" fHeight="45" xoffset="5" yoffset="5" width="31" height="45"/>
+		<Frame id="3" fPosX="00" fPosY="00" fWidth="00" fHeight="00" xoffset="0" yoffset="0" width="00" height="00"/>
+	</Form>
+	<!-- The countdown 60 letters -->
+	<Form id="30011" name="CountoDown60" file="forms/CountDown60.png" width="256" height="128" 
+            fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="128" fPosY="2" fWidth="74" fHeight="75" xoffset="6" yoffset="15" width="74" height="75"/>
+		<Frame id="1" fPosX="002" fPosY="2" fWidth="73" fHeight="76" xoffset="6" yoffset="17" width="73" height="76"/>
+		<Frame id="2" fPosX="077" fPosY="2" fWidth="49" fHeight="75" xoffset="6" yoffset="17" width="49" height="75"/>
+		<Frame id="3" fPosX="000" fPosY="0" fWidth="00" fHeight="00" xoffset="0" yoffset="00" width="00" height="00"/>
+	</Form>
+	<!-- The countdown 88 letters -->
+	<Form id="30012" name="CountoDown88" file="forms/CountDown88.png" width="256" height="256" 
+            fSpacing="2" fMargin="2" fWidth="64" fHeight="64" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="002" fPosY="111" fWidth="103" fHeight="104" xoffset="6" yoffset="27" width="103" height="104"/>
+		<Frame id="1" fPosX="002" fPosY="002" fWidth="101" fHeight="107" xoffset="6" yoffset="27" width="101" height="107"/>
+		<Frame id="2" fPosX="105" fPosY="002" fWidth="068" fHeight="104" xoffset="6" yoffset="28" width="068" height="104"/>
+		<Frame id="3" fPosX="000" fPosY="000" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
+	</Form>
+	<!-- The countdown 116 letters -->
+	<Form id="30013" name="CountoDown116" file="forms/CountDown116.png" width="512" height="256" 
+            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="223" fPosY="2" fWidth="133" fHeight="135" xoffset="6" yoffset="37" width="133" height="135"/>
+		<Frame id="1" fPosX="002" fPosY="2" fWidth="131" fHeight="138" xoffset="6" yoffset="38" width="131" height="138" />
+		<Frame id="2" fPosX="135" fPosY="2" fWidth="086" fHeight="135" xoffset="7" yoffset="39" width="086" height="135"/>
+		<Frame id="3" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000" />
+	</Form>
+	<!-- The countdown 144 letters -->
+	<Form id="30014" name="CountoDown144" file="forms/CountDown144.png" width="512" height="256" 
+            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="163" fPosY="2" fWidth="163" fHeight="165" xoffset="7" yoffset="47" width="163" height="165"/>
+		<Frame id="1" fPosX="002" fPosY="2" fWidth="159" fHeight="168" xoffset="7" yoffset="48" width="159" height="168"/>
+		<Frame id="2" fPosX="328" fPosY="2" fWidth="104" fHeight="164" xoffset="7" yoffset="48" width="104" height="164"/>
+		<Frame id="3" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000" />
+	</Form>
+	<!-- The countdown 172 letters -->
+	<Form id="30015" name="CountoDown172" file="forms/CountDown172.png" width="512" height="256" 
+            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="316" fPosY="2" fWidth="192" fHeight="194" xoffset="7" yoffset="58" width="192" height="194"/>
+		<Frame id="1" fPosX="002" fPosY="2" fWidth="188" fHeight="199" xoffset="7" yoffset="60" width="188" height="199"/>
+		<Frame id="2" fPosX="192" fPosY="2" fWidth="122" fHeight="194" xoffset="7" yoffset="60" width="122" height="194"/>
+		<Frame id="3" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
+	</Form>
+	<!-- The countdown 200 letters -->
+	<Form id="30016" name="CountoDown200" file="forms/CountDown200.png" width="512" height="512" 
+            fSpacing="2" fMargin="2" fWidth="128" fHeight="128" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="002" fPosY="234" fWidth="222" fHeight="225" xoffset="7" yoffset="68" width="222" height="225"/>
+		<Frame id="1" fPosX="002" fPosY="002" fWidth="218" fHeight="230" xoffset="7" yoffset="69" width="218" height="230"/>
+		<Frame id="2" fPosX="222" fPosY="002" fWidth="141" fHeight="225" xoffset="8" yoffset="69" width="141" height="225"/>
+		<Frame id="3" fPosX="000" fPosY="000" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
+	</Form>
+	<!-- The countdown 228 letters -->
+	<Form id="30017" name="CountoDown228" file="forms/CountDown228.png" width="1024" height="512" 
+            fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="250" fPosY="2" fWidth="252" fHeight="255" xoffset="8" yoffset="79" width="252" height="255"/>
+		<Frame id="1" fPosX="002" fPosY="2" fWidth="246" fHeight="260" xoffset="8" yoffset="80" width="246" height="260"/>
+		<Frame id="2" fPosX="504" fPosY="2" fWidth="159" fHeight="254" xoffset="7" yoffset="80" width="159" height="254"/>
+		<Frame id="3" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
+	</Form>
+	<!-- The countdown 256 letters -->
+	<Form id="30018" name="CountoDown256" file="forms/CountDown256.png" width="1024" height="512" 
+            fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
+		<Frame id="0" fPosX="458" fPosY="2" fWidth="281" fHeight="284" xoffset="8" yoffset="89" width="281" height="284"/>
+		<Frame id="1" fPosX="002" fPosY="2" fWidth="275" fHeight="291" xoffset="8" yoffset="91" width="275" height="291"/>
+		<Frame id="2" fPosX="279" fPosY="2" fWidth="177" fHeight="284" xoffset="7" yoffset="91" width="177" height="284"/>
+		<Frame id="3" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
 	</Form>
 	<!-- -->
 

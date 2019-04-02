@@ -2268,7 +2268,8 @@ TestPlatformGame::ControllingGameStates::ControllingGameStates (QGAMES::GameStat
 }
 
 // ---
-std::string TestPlatformGame::ControllingGameStates::nextGameState (QGAMES::GameState* st, const QGAMES::Event& evnt) const
+std::string TestPlatformGame::ControllingGameStates::nextGameState
+	(QGAMES::GameState* st, const QGAMES::Event& evnt)
 {
 	assert (st);
 
@@ -2851,7 +2852,7 @@ void TestPlatformGame::Playing::onExit ()
 	It shouldn't happen here, but it's better the game continue with entities moving...
 	// Back to orthogonal...
 	game () -> mainScreen () -> currentCamera () -> setProjectType (QGAMES::Camera::ProjectionType::_ORTHOGONAL);
-	// ...and put the screen at the cero position...
+	// ...and put the screen at the zero position...
 	game () -> mainScreen () -> setPosition (QGAMES::Position::_cero);
 
 	(__AGM game ()) -> world (__GAMETEST_WORLDID__) -> finalize ();
@@ -2873,9 +2874,9 @@ void TestPlatformGame::Playing::onExit ()
 	QGAMES::Entity* ety = game () -> entity (__GAMETEST_MAINCHARACTERID__);
 	((TestPlatformGame::Game*) game ()) -> setLastPosition (ety -> position () - 
 		QGAMES::Vector (__BD 0, __BD 0, ety -> position ().posZ ())); // 
-	// With no Z ccordinate (it will be set when the game starts back)
+	// With no Z coordinate (it will be set when the game starts back)
 	
-	// It is supossed that the result variable has been changed along the game...
+	// It is supposed that the result variable has been changed along the game...
 }
 
 // ---
@@ -2923,7 +2924,7 @@ void TestPlatformGame::Playing::processEvent (const QGAMES::Event& evnt)
 	else
 #endif 
 
-	// Comming from the knight...
+	// Coming from the knight...
 	if (evnt.code () == __GAMETEST_KNIGHTDIED__)
 		_result = TestPlatformGame::Playing::Result::_PLAYERDIED;
 	else if (evnt.code () == __GAMETEST_KNIGHTREACHEDENDOFMAZE__)

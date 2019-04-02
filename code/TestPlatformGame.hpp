@@ -237,21 +237,21 @@ namespace TestPlatformGame
 		The different status can be so far just two: 
 		0 Staying,
 		1 Walking towards the next point of decision.
-		2 Dieding. */
+		2 Dieing. */
 	struct VillanerLocation
 	{
 		VillanerLocation ();
 		/** 
 		 * To build up info.
 		 * @param vId	The id,
-		 * @param tp	The type of villan (0:NORMAL, 1:DARK, 2:WHITE).
+		 * @param tp	The type of villain (0:NORMAL, 1:DARK, 2:WHITE).
 		 * @param s		The status (0: IDLE, 1:WALKING, 2:DEADTH).
-		 * @param r		The room where the villan is in.
+		 * @param r		The room where the villain is in.
 		 * @param p		The position in the room.
-		 * @param v		The orientation (the direction the villan is looking to).
+		 * @param v		The orientation (the direction the villain is looking to).
 		 * @param spd	The speed of the movement (if any).
 		 * @param iP	The initial position in the maze.
-		 * @param fP	The final position inthe maze (when moves).
+		 * @param fP	The final position in the maze (when moves).
 		 * @param cpp	The last position in the movement in the maze (0 at the beginning).
 		 */
 		VillanerLocation 
@@ -399,7 +399,7 @@ namespace TestPlatformGame
 		/** The energy level. 
 			It is not persistent. */
 		int _energyLevel; // Between 0 and 100. When becomes 0, the villaner dies...
-		/** Whether the villan is inmortal or not. */
+		/** Whether the villain is inmortal or not. */
 		bool _inmortal;
 
 		// Implementation
@@ -408,7 +408,7 @@ namespace TestPlatformGame
 		QGAMES::Vector _lastOrientation;
 		/** The path to follow when moving automatically from one maze room to another. */
 		std::vector <QGAMES::MazeModel::PositionInMaze> _path;
-		/** When to cahnge the path. */
+		/** When to change the path. */
 		bool _changePath;
 	};
 
@@ -515,7 +515,7 @@ namespace TestPlatformGame
 		static const int _SWITCHCONTAINERBEINGDESTROYED = 0;
 	};
 
-	/** This structrure is used to keep information about the meal distributed across the maze. */
+	/** This structure is used to keep information about the meal distributed across the maze. */
 	struct MealLocation
 	{
 		MealLocation ()
@@ -674,10 +674,10 @@ namespace TestPlatformGame
 			Used to calculate movements of the villaners among rooms e.g. */
 		WorldModel _worldModel;
 
-		/** Switch to control whether, it is time to incremente the number of seconds. */
+		/** Switch to control whether, it is time to increment the number of seconds. */
 		static const int _SWITCHEXITVILLANTOMOVE = 0;
 
-		/** Definition of the maze (defines wich kind of scene is every part of the maze) */
+		/** Definition of the maze (defines which kind of scene is every part of the maze) */
 		static const int _MAZESCENES [__GAMETEST_NUMBEROFSCENESINTHEMAZE__];
 	};
 
@@ -739,7 +739,7 @@ namespace TestPlatformGame
 		// Implementation
 		/** To count the number of seconds from the beginning of the scene. */
 		static const int _COUNTERSECONDS = 0;
-		/** Switch to control whether, it is time to incremente the number of seconds. */
+		/** Switch to control whether, it is time to increment the number of seconds. */
 		static const int _SWITCHTOCOUNTSECONDS = 0;
 
 		// Implementation
@@ -810,7 +810,7 @@ namespace TestPlatformGame
 		/** @see parent. */
 		virtual std::string firstGameState () const
 							{ return (std::string (__QGAMES_GAMESTATELOADINGNAME__)); }
-		virtual std::string nextGameState (QGAMES::GameState* st, const QGAMES::Event& evnt) const;
+		virtual std::string nextGameState (QGAMES::GameState* st, const QGAMES::Event& evnt);
 	};
 
 	/** A state that finishes when the return key or the mouse left button is pressed. */
@@ -859,7 +859,7 @@ namespace TestPlatformGame
 	/**
 	  * Game State part of the presentation.
 	  * Every state of the presentation is made of the same things:
-	  * A very beautifll background with a text in the middle of the screen.
+	  * A very beautiful background with a text in the middle of the screen.
 	  * What the text represents will depend on the part of the presentation.
 	  * Several states of this type will be set at the beginning of the project, but they will be used
 	  * only as part of the next game state.
@@ -887,7 +887,7 @@ namespace TestPlatformGame
 	/** 
 	 * PRINCIPAL GAME STATE:
 	 * The presentation of the game rolls among different backgrounds with different titles.
-	 * Every state dissapear and the next one appears back.
+	 * Every state disappear and the next one appears back.
 	 * A music plays in the background, and the state is on until a key is pressed. 
 	 */
 	class PresentationGameState : public UntilReturnKeyOrMouseLeftButtonIsPressed
@@ -906,7 +906,7 @@ namespace TestPlatformGame
 
 	/** 
 	  * PRINCIPAL GAME STATE:
-	  * This state shows the standard menu, but with some additionals.
+	  * This state shows the standard menu, but with some additional.
 	  * The state finishes when a valid option is selected.
 	  * The state creates the nested stated it needs, and destroy them when it is destroyed as well.
 	  */
