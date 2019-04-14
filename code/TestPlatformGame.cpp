@@ -3714,6 +3714,7 @@ QGAMES::MapBuilder* TestPlatformGame::Game::createMapBuilder ()
 	 
 	QGAMES::MapBuilder* result = new QGAMES::MapBuilder (parameter (__GAME_MAPSOBJECTSFILE__));
 	result -> addAddsOn (new QGAMES::ObjectMapBuilderAddsOn (objectBuilder ()));
+	result -> addAddsOn (new QGAMES::BackgroundObjectMapBuilder (objectBuilder ()));
 	TestPlatformGame::TMXMapBuilder* mAdd = 
 		new TestPlatformGame::TMXMapBuilder ((QGAMES::Sprite2DBuilder*) formBuilder ());
 	std::vector <int> e; for (int i = 0; i < 64; i++) if (eE [i] == 1) e.push_back (i);

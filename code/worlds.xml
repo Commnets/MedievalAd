@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <Worlds>
 
+	<!-- Includes -->
+	<Include file="ptworlds.xml"/>
+
 	<World id="1">
 		<Scenes>
 			<Scene id="1">

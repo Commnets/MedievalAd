@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <Maps>
 
+	<!-- Includes -->
+	<Include file="admaps.xml"/>
+
+	<!-- The map with the tile to walk over them -->
 	<Map id="1" type="1" file="maps/scenes.tmx"/>
 	
 </Maps>
