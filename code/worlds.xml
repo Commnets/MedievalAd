@@ -7,16 +7,11 @@
 	<World id="1">
 		<Scenes>
 			<Scene id="1">
-				<Attributes/>
-				<Conexions/>
 				<Maps>
 					<Map id="1" file="./maps/scenes.tmx"/>
 				</Maps>
-				<Entities>
-				</Entities>
 			</Scene>
 		</Scenes>
-		<Attributes/>
 	</World>
 	
 </Worlds>

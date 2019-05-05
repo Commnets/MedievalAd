@@ -81,7 +81,8 @@ namespace TestPlatformGame
 		public:
 		NumberOfLivesScoreObject ();
 
-		/** @see parent. */
+		/** @see parent. 
+			It hasn't neither movements, nor animations, not states to copy. */
 		virtual QGAMES::Entity* clone () const
 							{ return (new NumberOfLivesScoreObject ()); }
 
@@ -95,7 +96,8 @@ namespace TestPlatformGame
 		public:
 		NumberOfPointsScoreObject ();
 
-		/** @see parent. */
+		/** @see parent. 
+			It hasn't neither movements, nor animations, not states to copy. */
 		virtual QGAMES::Entity* clone () const
 							{ return (new NumberOfPointsScoreObject ()); }
 
@@ -114,7 +116,8 @@ namespace TestPlatformGame
 		public:
 		ThingsBeingCarriedScoreObject ();
 
-		/** @see parent. */
+		/** @see parent. 
+			It hasn't neither movements, nor animations, not states to copy. */
 		virtual QGAMES::Entity* clone () const
 							{ return (new ThingsBeingCarriedScoreObject ()); }
 
@@ -128,7 +131,8 @@ namespace TestPlatformGame
 		public:
 		RemainingTimeScoreObject ();
 
-		/** @see parent. */
+		/** @see parent. 
+			It hasn't neither movements, nor animations, not states to copy. */
 		virtual QGAMES::Entity* clone () const
 							{ return (new RemainingTimeScoreObject ()); }
 
@@ -164,8 +168,7 @@ namespace TestPlatformGame
 							{ }
 
 		/** @see parent. */
-		virtual Entity* clone () const
-							{ return (new Knight (_id, _forms, _data)); }
+		virtual Entity* clone () const;
 
 		/** Energy level. */
 		int energyLevel () const
@@ -290,8 +293,7 @@ namespace TestPlatformGame
 							{ }
 
 		/** @see parent. */
-		virtual Entity* clone () const
-							{ return (new Villaner (_id, _forms, _data)); }
+		virtual Entity* clone () const;
 
 		// Manage the aspect
 		const VillanerLocation& description () const
@@ -465,8 +467,7 @@ namespace TestPlatformGame
 							{ setVisible (false); } 
 
 		/** @see parent. */
-		virtual Entity* clone () const
-							{ return (new ThingToCatch (_id, _forms, _data)); }
+		virtual Entity* clone () const;
 
 		// Manage the aspect
 		const ThingToCatchLocation& description () const
@@ -555,8 +556,7 @@ namespace TestPlatformGame
 							{ setVisible (false); } 
 
 		/** @see parent. */
-		virtual Entity* clone () const
-							{ return (new Meal (_id, _forms, _data)); }
+		virtual Entity* clone () const;
 
 		// Manage the aspect
 		const MealLocation& description () const

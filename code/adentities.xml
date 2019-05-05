@@ -9,10 +9,6 @@
 				 It is a simple ball rolling in a circle. --> 
 			<Form id="10003"/>
 		</Forms>
-		<Capacities>
-		</Capacities>
-		<Physics>
-		</Physics>
 		<Movements>
 			<!-- This movement means totally stopped -->
 			<Movement id="10000"/>

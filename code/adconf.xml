@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <Properties>
+
 	<!-- Where to extract all resources used by the game -->
 	<Property id="DATADIR" value="D:/Temp"/>
 	<!-- What is the name of the game -->
@@ -12,4 +13,5 @@
 	<!-- The size of the window to play -->
 	<Property id="SCREENWIDTH" value="640"/>
 	<Property id="SCREENHEIGHT" value="480"/>
+	
 </Properties>

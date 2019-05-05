@@ -287,6 +287,18 @@ void TestPlatformGame::KnightEnergyLevelScoreObject::updatePositions ()
 
 // --------------------------------------------------------------------------------
 // ---
+QGAMES::Entity* TestPlatformGame::Knight::clone () const
+{ 
+	QGAMES::Entity* result = new TestPlatformGame::Knight (_id, _forms, _data);
+
+	result -> setMovements (movements ());
+	result -> setAnimations (cloneAnimations ());
+	result -> setStates (cloneStates ());
+
+	return (result);
+}
+
+// ---
 void TestPlatformGame::Knight::toIterateThings ()
 {
 	((TestPlatformGame::Game*) game ()) -> iterateThingsCarried (); 
@@ -825,6 +837,18 @@ std::istream& TestPlatformGame::operator >> (std::istream& iS, TestPlatformGame:
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
+// ---
+QGAMES::Entity* TestPlatformGame::Villaner::clone () const
+{ 
+	QGAMES::Entity* result = new TestPlatformGame::Villaner (_id, _forms, _data);
+
+	result -> setMovements (movements ());
+	result -> setAnimations (cloneAnimations ());
+	result -> setStates (cloneStates ());
+
+	return (result);
+}
+
 // ---
 void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::VillanerLocation& vL)
 {
@@ -1496,6 +1520,18 @@ bool TestPlatformGame::Villaner::ControlStep::isEndOn (QGAMES::Character* a)
 const int TestPlatformGame::ThingToCatch::_INTENSITIES [6] = { 255, 200, 155, 100, 55, 0 };
 
 // ---
+QGAMES::Entity* TestPlatformGame::ThingToCatch::clone () const
+{ 
+	QGAMES::Entity* result = new TestPlatformGame::ThingToCatch (_id, _forms, _data);
+
+	result -> setMovements (movements ());
+	result -> setAnimations (cloneAnimations ());
+	result -> setStates (cloneStates ());
+
+	return (result);
+}
+
+// ---
 void TestPlatformGame::ThingToCatch::setDescription (const TestPlatformGame::ThingToCatchLocation& tL)
 { 
 	_description = tL; 
@@ -1620,6 +1656,18 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
+// ---
+QGAMES::Entity* TestPlatformGame::Meal::clone () const
+{ 
+	QGAMES::Entity* result = new TestPlatformGame::Meal (_id, _forms, _data);
+
+	result -> setMovements (movements ());
+	result -> setAnimations (cloneAnimations ());
+	result -> setStates (cloneStates ());
+
+	return (result);
+}
+
 // ---
 void TestPlatformGame::Meal::setDescription (const TestPlatformGame::MealLocation& mL)
 { 

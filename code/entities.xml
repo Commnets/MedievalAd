@@ -24,8 +24,6 @@
 			<Form id="213"/> <!-- Shadow -->
 			<Form id="223"/> <!-- Sword -->
 		</Forms>
-		<Capacities/>
-		<Physics/>
 		<Movements>
 			<!-- Moving -->
 			<Movement id="100"/>
@@ -530,8 +528,6 @@
 			<Form id="321"/>
 			<Form id="322"/>
 		</Forms>
-		<Capacities/>
-		<Physics/>
 		<MovementsBase>
 			<!-- Moving always -->
 			<Movement id="200"/>
@@ -924,8 +920,6 @@
 			<!-- A thins is its shadow -->
 			<Form id="114"/>
 		</Forms>
-		<Capacities/>
-		<Physics/>
 		<MovementsBase>
 			<!-- Staying always -->
 			<Movement id="300"/>
@@ -948,8 +942,6 @@
 			<!-- The shadow of the box containing the meal -->
 			<Form id="116"/>
 		</Forms>
-		<Capacities/>
-		<Physics/>
 		<MovementsBase>
 			<!-- Staying always -->
 			<Movement id="400"/>
