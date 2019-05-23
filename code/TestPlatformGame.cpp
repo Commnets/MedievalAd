@@ -865,7 +865,9 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 	// Sets the position...
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
+	setFixBasePosition (); 
+	setFixBasePosition 
+		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	// ...and a movement if any...
 	// the villan has to be alived...otherwise it stays...
@@ -1542,7 +1544,9 @@ void TestPlatformGame::ThingToCatch::setDescription (const TestPlatformGame::Thi
 	
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
+	setFixBasePosition (); 
+	setFixBasePosition 
+		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	reStartAllCounters ();
 	reStartAllOnOffSwitches ();
@@ -1646,7 +1650,9 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 	_description._position = position ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal) + (oPos - nPos);
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
+	setFixBasePosition (); 
+	setFixBasePosition 
+		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
 	// Keep the changes in the configuration...
 	((TestPlatformGame::Game*) game ()) -> updateThingStatus (oldD, _description);
@@ -1679,7 +1685,9 @@ void TestPlatformGame::Meal::setDescription (const TestPlatformGame::MealLocatio
 	
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
-	fixBasePosition (); fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
+	setFixBasePosition (); 
+	setFixBasePosition
+		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 }
 
 // ---
@@ -2871,8 +2879,9 @@ void TestPlatformGame::Playing::onEnter ()
 	QGAMES::Entity* ety = game () -> entity (__GAMETEST_MAINCHARACTERID__);
 	QGAMES::Position lP = ((TestPlatformGame::Game*) game ()) -> lastPosition ();
 	ety -> setPosition (lP - __GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD ety -> visualHeight ()));
-	((TestPlatformGame::Knight*) ety) -> fixBasePosition (); 
-	((TestPlatformGame::Knight*) ety) -> fixBasePosition (QGAMES::Position (__MINBDATA__, __MINBDATA__, ety -> basePosition ().posZ ())); // anchor it to the floor...
+	((TestPlatformGame::Knight*) ety) -> setFixBasePosition (); 
+	((TestPlatformGame::Knight*) ety) -> setFixBasePosition 
+		(QGAMES::Position (__MINBDATA__, __MINBDATA__, ety -> basePosition ().posZ ())); // anchor it to the floor...
 	
 	// Stops music if the configuration says so...
 	if (!((TestPlatformGame::Game::Conf*) game () -> configuration ()) -> musicOn ())
