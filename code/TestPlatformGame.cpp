@@ -850,6 +850,15 @@ QGAMES::Entity* TestPlatformGame::Villaner::clone () const
 }
 
 // ---
+bool TestPlatformGame::Villaner::isPossiblePosInMap (const QGAMES::Position& v)
+{
+	if (map () == NULL)	return (true); // If there is no map, the movement is possible...(no sense but...)
+
+	return (v.posX () > __BD -100 && v.posX () < __BD (map () -> width () + 100) &&
+			v.posY () > __BD -100 && v.posY () < __BD (map () -> height () + 100)); // To be out a little bit...
+}
+
+// ---
 void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::VillanerLocation& vL)
 {
 	_description = vL;
@@ -1686,7 +1695,7 @@ void TestPlatformGame::Meal::setDescription (const TestPlatformGame::MealLocatio
 	setPosition (_description._position - 
 		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
 	setFixBasePosition (); 
-	setFixBasePosition
+	setFixBasePosition 
 		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 }
 
@@ -2879,7 +2888,7 @@ void TestPlatformGame::Playing::onEnter ()
 	QGAMES::Entity* ety = game () -> entity (__GAMETEST_MAINCHARACTERID__);
 	QGAMES::Position lP = ((TestPlatformGame::Game*) game ()) -> lastPosition ();
 	ety -> setPosition (lP - __GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD ety -> visualHeight ()));
-	((TestPlatformGame::Knight*) ety) -> setFixBasePosition (); 
+	((TestPlatformGame::Knight*) ety) -> setFixBasePosition ();
 	((TestPlatformGame::Knight*) ety) -> setFixBasePosition 
 		(QGAMES::Position (__MINBDATA__, __MINBDATA__, ety -> basePosition ().posZ ())); // anchor it to the floor...
 	

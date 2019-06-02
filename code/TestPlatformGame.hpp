@@ -295,6 +295,9 @@ namespace TestPlatformGame
 		/** @see parent. */
 		virtual Entity* clone () const;
 
+		/** @see parent. */
+		bool isPossiblePosInMap (const QGAMES::Position& v);
+
 		// Manage the aspect
 		const VillanerLocation& description () const
 							{ return (_description); }
