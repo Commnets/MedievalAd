@@ -1,4 +1,4 @@
-/** \addtogroup AdArcadeGame */
+/** \ingroup Example */
 /*@{*/
 
 /**	
