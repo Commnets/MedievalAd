@@ -14,6 +14,7 @@
 	<Sound id="10009" type="1" loop="-1" file="sounds/wick.wav"/>
 	<Sound id="10010" type="1" loop="0"  file="sounds/explosion.wav"/>
 	<Sound id="10011" type="1" loop="0"  file="sounds/beep.wav"/>
+	<Sound id="10012" type="1" loop="0"  file="sounds/gamesaved.wav"/>
 	<!-- -->
 	
 </Sounds>
