@@ -4938,6 +4938,21 @@
     <Image Include="forms\Villager\Walk\villager_walk_70014.png">
       <Filter>Data\Forms\Sources\VIllaner\Walk</Filter>
     </Image>
+    <Image Include="Formulas1.jpg">
+      <Filter>Data</Filter>
+    </Image>
+    <Image Include="Formulas2.jpg">
+      <Filter>Data</Filter>
+    </Image>
+    <Image Include="Formulas3.jpg">
+      <Filter>Data</Filter>
+    </Image>
+    <Image Include="Formulas4.jpg">
+      <Filter>Data</Filter>
+    </Image>
+    <Image Include="Maze.jpg">
+      <Filter>Data</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="maps\scenebegin.tmx">
