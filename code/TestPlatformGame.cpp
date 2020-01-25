@@ -1807,15 +1807,19 @@ QGAMES::Movement* TestPlatformGame::MovementBuilder::createMovement (const QGAME
 // --------------------------------------------------------------------------------
 // ---
 TestPlatformGame::WorldModel::WorldModel ()
-	: QGAMES::MazeModel (__GAMETEST_HORIZONTALSCENESINMAZE__, 
-						 __GAMETEST_VERTICALSCENESINMAZE__, 
-						 std::vector <int> (__GAMETEST_HORIZONTALSCENESINMAZE__ * __GAMETEST_VERTICALSCENESINMAZE__, 0 /** not used. */))
+	: QGAMES::MazeModel (__GAMETEST_HORIZONTALSCENESINMAZE__,  __GAMETEST_VERTICALSCENESINMAZE__, 
+						 std::vector <QGAMES::SetOfOpenValues> 
+							(__GAMETEST_HORIZONTALSCENESINMAZE__ * __GAMETEST_VERTICALSCENESINMAZE__))
 {
 	assert (_mazeModel.size () == (sizeof (TestPlatformGame::World::_MAZESCENES) / sizeof (int)));
 	for (int i = 0; i < (int) _mazeModel.size (); i++)
-		_mazeModel [i] = TestPlatformGame::World::_MAZESCENES [i];
-	// Now both will be the same...
-	// What is kept in the maze model vector is the type of scene...
+	{
+		QGAMES::SetOfOpenValues oV;
+		oV.addOpenValue (0, QGAMES::OpenValue (TestPlatformGame::World::_MAZESCENES [i]));
+		_mazeModel [i] = oV; // only the basic value is stored (the type of moze scene)
+		// Now both will be the same...
+		// What is kept in the maze model vector is the type of scene...
+	}
 }
 
 // ---
@@ -1825,7 +1829,8 @@ std::vector <bool> TestPlatformGame::WorldModel::possibleConnectionsAt (const QG
 	// possible maximum connections, by default all of them are not possible...
 	
 	bool r = false; bool l = false; bool u = false; bool d = false;
-	switch (mazeInfoAt (QGAMES::MazeModel::PositionInMaze (p._positionX, p._positionY)))
+	switch (mazeInfoAt (QGAMES::MazeModel::PositionInMaze 
+		(p._positionX, p._positionY)).openValue (0).intValue ())
 	{
 		case  1: u = d =			true; break;
 		case  2: r = l =			true; break;
