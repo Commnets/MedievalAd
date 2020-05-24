@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="isometric" renderorder="right-down" width="25" height="25" tilewidth="64" tileheight="32" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" name="goundtileset" tilewidth="64" tileheight="64" tilecount="56" columns="8">
+  <image source="groundtilessmall.png" width="512" height="448"/>
+ </tileset>
+ <tileset firstgid="57" name="pine1" tilewidth="256" tileheight="256" tilecount="1" columns="1">
+  <image source="pine1.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="58" name="bamboo1" tilewidth="256" tileheight="128" tilecount="1" columns="1">
+  <image source="bamboo1.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="59" name="hemp1" tilewidth="256" tileheight="128" tilecount="1" columns="1">
+  <image source="hemp1.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="60" name="weed1" tilewidth="128" tileheight="64" tilecount="1" columns="1">
+  <image source="weed1.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="61" name="house1" tilewidth="512" tileheight="384" tilecount="1" columns="1">
+  <image source="house1.png" width="512" height="384"/>
+ </tileset>
+ <layer name="CespedUp" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYCICUwJwmclIBzvo4Q9a2oEeRtSyA5e59AgrZLtpZcdQjXNc8cJIoR2jYBSMglEwCoYfAAAQxgDD
+  </data>
+ </layer>
+ <layer name="SandUp" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYWBgYCECUwKIMX/UjlE7Ru2gnR2jYBSMglEwCoYfAABxeAGR
+  </data>
+ </layer>
+ <layer name="FloorUp" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjZmBgYCYCUwKIMX/UjlE7Ru2gnR2jYBSMglEwCoYfAABXiwEt
+  </data>
+ </layer>
+ <layer name="LimitsFloorUp" width="25" height="25" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJzTYWBgMELChmg0CGsxUAZMKNRPDDCmgx2j/iAeDBd/0MMOSvPXKBgFo2AUjIKRCQBReAOs
+  </data>
+ </layer>
+ <layer name="HouseUp" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALqA9uBdsAoGAWjYBQMcwAAU5sAPg==
+  </data>
+ </layer>
+ <layer name="ForestUp1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgewGqgHTDEgBUOTG07sNlHC0BLf4yCUTAKRsEoGAWDEQAAmlsDZw==
+  </data>
+ </layer>
+ <layer name="ForestUp2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgYYENHe+hlF7WBNY3MhYWHNQ3tgAFam09rO6zR6FEwCkbBKBgFo2CwAAAMuAKO
+  </data>
+ </layer>
+ <layer name="ForestUp3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF5ADLIWwXPd0+CsgDo3E0CkbBKBgFo4AQAADdhgDl
+  </data>
+ </layer>
+ <layer name="BaseLeft1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDHfAQSSmBDATiUftYGBgJxKPglEwCkYBPgAAw7AA8Q==
+  </data>
+ </layer>
+ <layer name="LimitsBaseLeft1" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDHdghIQNodgICx4F9AFmSNgUB9tswFw3CkbBKBgqAAAvwAQN
+  </data>
+ </layer>
+ <layer name="BaseLeft2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDHfATCQetYM+drATiUfBKBgFowAfAACiLQC/
+  </data>
+ </layer>
+ <layer name="LimitsBaseLeft2" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRQE9ghoRNcbDNBsx1o2AUjIKhAgDsIAIb
+  </data>
+ </layer>
+ <layer name="BaseLeft3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDHfAQSSmBDATiUftoI8do2AUjILhDwAaoADJ
+  </data>
+ </layer>
+ <layer name="LimitsBaseLeft3" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDHdghIQNodgICx4Fo2AUjIJRMHQAAE1VAfM=
+  </data>
+ </layer>
+ <layer name="BaseLeft4" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDHfATCQetWP42DEKRsEoGP4AAPkOAJc=
+  </data>
+ </layer>
+ <layer name="LimitsBaseLeft4" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAHgzCcQAAQ==
+  </data>
+ </layer>
+ <layer name="BaseCespedLeft" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDHfARCQetWP42DEKRsEoGP4AAP6bAGU=
+  </data>
+ </layer>
+ <layer name="ForestBaseLeft1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjARgM8TNx2WXFZXtt0HC6GZT249WSHaMglEwCkYBqQAAl4YDBQ==
+  </data>
+ </layer>
+ <layer name="ForestBaseLeft2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhA6wH2gE0AsPVX6NgFIwC2gEALXoAdw==
+  </data>
+ </layer>
+ <layer name="ForestBaseLeft3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhByyhmFZmj4JRMApGwWAHAFDpAKw=
+  </data>
+ </layer>
+ <layer name="CespedLeft" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMNwAEx7MiMSmhh3I5mHD1LCDEB61A388D2V/0MIOQmmW1v6gVh4EAJ83AMQ=
+  </data>
+ </layer>
+ <layer name="SandLeft" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMNwAC5F41I5RO0aiHYx0sIMe/gAARtkBjg==
+  </data>
+ </layer>
+ <layer name="FloorLeft" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMNwAM5F41I5RO0btGLp2AAB5UgEt
+  </data>
+ </layer>
+ <layer name="LimitsFlootLeft" width="25" height="25" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMNyAHh3sMBkmdhjTwY7RsCIeDJew0gdiUyA2Q8PIYpTmUwDetAPY
+  </data>
+ </layer>
+ <layer name="ForestLeft1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMByBzQixc6gAKygGARskMWoCGyQahmlhB7Z4plbco5tDbfdjA1Zo9FABAPblBCs=
+  </data>
+ </layer>
+ <layer name="ForestLeft2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApIBzY4+DZY5EYBKrAcImYOBMDmj+HiN2oDALhQAdU=
+  </data>
+ </layer>
+ <layer name="ForestLeft3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGNrAmwB8qYKi6e6DAUA8vAOWDAO0=
+  </data>
+ </layer>
+ <layer name="BaseUp1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOsAIxMxJmI1IfKWDUjlE7Ru0YWDtGwSgYBaNgFAwdAAAl3gDJ
+  </data>
+ </layer>
+ <layer name="LimitsBaseUp1" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOmKDxLYjURwoYrnaY08AOYzT+aFjhBqNhNQpGwSgYBaNgOAIA48wENA==
+  </data>
+ </layer>
+ <layer name="BaseUp2" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOMKNhNiL1kQJG7Ri1Y9SOgbVjFIyCUTAKRsHQAQCIxwC1
+  </data>
+ </layer>
+ <layer name="LimitsBaseUp2" width="25" height="25" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAPWJCpbyTaYU4HO0bDingwGlajYBSMglEwCoYDAAD++AIu
+  </data>
+ </layer>
+ <layer name="BaseUp3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOsAIxMxqmNhi1Y9SOUTsG1o5RMApGwSgYBUMHAAA8IwCr
+  </data>
+ </layer>
+ <layer name="LimitsBaseUp3" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOmBCpjhIwagfxwJgOdoyGFfFguITVKBgFo2AUjIKhAwDuiQIH
+  </data>
+ </layer>
+ <layer name="BaseUp4" width="25" height="25" visible="0" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOMGPB1AajdozaMWrHwNoxCkbBKBgFo2DoAACfDACX
+  </data>
+ </layer>
+ <layer name="LimitsBaseUp4" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAHgzCcQAAQ==
+  </data>
+ </layer>
+ <layer name="BaseCespedUp" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOMGHB1AajdozaMWrHwNoxCkbBKBgFo2DoAAAX+QBl
+  </data>
+ </layer>
+ <layer name="ForestBaseUp1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg8wIZO9ljRwQ4bBtr6x4rG5tPbDlrGiRUSpiWgR7oaBaNgFIyCUTAKYAAAfQoDcw==
+  </data>
+ </layer>
+ <layer name="ForestBaseUp2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFtADWQ9TsUUAeGI2TUTAKRsEoGAX0BgBVNwCy
+  </data>
+ </layer>
+ <layer name="ForestBaseUp3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DggeVAO2AIAEuG0XAaBaNgFIyCUYAAAFwoAKw=
+  </data>
+ </layer>
+ <layer name="BaseCenter1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIEABiZiTMRwM7mLHgUTuwA1408/lpYMcoGAWjYOgCAFs2AHo=
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenter1" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII0ELjGwyIK0YBDOih8XUGxBWjYBSMgsEKAHohALU=
+  </data>
+ </layer>
+ <layer name="BaseCenter2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIEABiZiTMRwM7mLHgUTuwA1462DEKRsEoGLoAACpGAG4=
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenter2" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII0ELjGwyIK0YBDOgNtANGwSgYBYMaAADGogCJ
+  </data>
+ </layer>
+ <layer name="BaseCenter3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIEABiZjRMbYBu/qgduAEvmvn8NLBjFIyCUTB0AQAdKgBv
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenter3" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII0BpoB4wCFKCHxtcZEFeMglEwCgYrAABrUgCF
+  </data>
+ </layer>
+ <layer name="BaseCenter4" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIYMaCR+0YODt40cznp4Edo2AUjIKhCwDS9wBi
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenter4" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALswGCgHTDCgR4aX2dAXDEKRsEoGKwAAIqKAIs=
+  </data>
+ </layer>
+ <layer name="BaseCenter5" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIEABiZiTMRwM7mLHgUTuIs4OfBnaMglEwCoYuAAAxzgBw
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenter5" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII0ELjGwyIK0YBLqAz0A4YBaNgFAwqAAC7mgCH
+  </data>
+ </layer>
+ <layer name="BaseCenter6" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIYEbDfHSwg3nUDqLt4KeBHaNgFIyCoQsA55sAYw==
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenter6" width="25" height="25" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALswGCgHTAKUIDOQDtgFIyCUTCoAADMAwBd
+  </data>
+ </layer>
+ <layer name="BaseCenter7" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIYMaCR+0Y3naMglEwCoYuAAB4nwBM
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenter7" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAHgzCcQAAQ==
+  </data>
+ </layer>
+ <layer name="BaseCenterOpenLeft" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII4EDDnDSwgxkNs43agROwo2EeGtgxCkbBKBi6AACebgCI
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenterOpenLeft" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIMELDenSw02LUDpzADA1r0cCOUTAKRsHQBQDS2AKh
+  </data>
+ </layer>
+ <layer name="BaseCenterOpenLeftRight" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII4MCCqQ2YseBRO7ADdix4FIyCUTAKYAAAWKoAeQ==
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenterOpenLeftRight" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIMMKCR8HAATM0bDqwzhkFo2AUDDIAAOW3Agg=
+  </data>
+ </layer>
+ <layer name="BaseCenterOpenUp" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIYAViZiTMNmrHgNrBBcTsSJiHBnaMglEwCoYuAABRRgB8
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenterOpenUp" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIMEHjW4zaMaB26AOxGRLWooEdo2AUjIKhCwCmtAKs
+  </data>
+ </layer>
+ <layer name="BaseCenterOpenUpDown" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIYAViZiTMNmrHsLdjFIyCUTB0AQDyuwBl
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenterOpenUpDown" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIMEHjW4zaMeztGAWjYBQMXQAAWqoCHQ==
+  </data>
+ </layer>
+ <layer name="BaseCenterOpenRight" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII4AZiDjRMbcAKxMxoeNQO7IALiNnR8CgYBaNgFMAAAJO6AIU=
+  </data>
+ </layer>
+ <layer name="LimitsBaseCenterOpenRight" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII0AFiIzRMbWBCAzOHqx0GQGyGhkfBKBgFowAGAK64Apk=
+  </data>
+ </layer>
+ <layer name="BaseCenterOpenDown" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAII4AZiDiTMSQM7WNH4bKN2DKgdo2AUjIKhCwDR6wBZ
+  </data>
+ </layer>
+ <layer name="BaseCespedCenter" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAIIYMKCR+0Y3naMglEwCoYuAAD+TAAz
+  </data>
+ </layer>
+ <layer name="ForestBaseCenter1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAysgtkHDtAC0Nh8GrKCY1oAedoyCUTAKhiYAAKtwAo0=
+  </data>
+ </layer>
+ <layer name="ForestBaseCenter2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhBSwH2gGjYBSMglFABwAAIl8AOg==
+  </data>
+ </layer>
+ <layer name="ForestBaseCenter3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhA6yhmNZ2jIJRMApGwUADAFvpALI=
+  </data>
+ </layer>
+ <layer name="CespedRight" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAfMAExI5TGhRkpMB9mByFMDzuYaGgHchjSyg5q+oNQnNPCH9jsHIp20DNdUcuOUTAKRsEoGAWDEwAA1SMAwg==
+  </data>
+ </layer>
+ <layer name="SandRight" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAfsBCBGSkwfzDZwTJqx6gdI9SOUTAKRsEoGAWDEwAA3H0Biw==
+  </data>
+ </layer>
+ <layer name="FloorRight" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAfMBOJKQGjdozaMWrHwNoxCkbBKBgFo2BwAgAROwEt
+  </data>
+ </layer>
+ <layer name="ForestRight1" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIZIMVoBqyFuPi3toZXbYfFrRQc7aGkPPdPpKBgFo2AUjIKRCQC/JgL9
+  </data>
+ </layer>
+ <layer name="ForestRight2" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF9ADWUNpqQF1BPWBNWAlVAbXDjdbux+VeattrhWQXOj0KRsEoGAWjYHgDABrrAoM=
+  </data>
+ </layer>
+ <layer name="ForestRight3" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4AyYElj86ht/igYBaNgFIyCUTAcAADlUACs
+  </data>
+ </layer>
+ <layer name="LimitsFloorRight" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAfGACxERAbotHIbD0KzCcWWNDBDnM62EEPf4zaQTwYLnFuQAc7RsEoGAWjYBTQHwAAl1QD2g==
+  </data>
+ </layer>
+ <layer name="BaseRight1" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALcgINITAlgJhKP2sHAwE4kHgWjYBQMfwAAi3AA8Q==
+  </data>
+ </layer>
+ <layer name="LimitsBaseRight1" width="25" height="25" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALcwAgJG2Lhw8RGAX2AGRI2RaOR8SgYBaNg+AMAN2kEDA==
+  </data>
+ </layer>
+ <layer name="BaseRight2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALcgINITAlgJhKP2kEfO0bBKBgFQwMAAOuxAMk=
+  </data>
+ </layer>
+ <layer name="LimitsBaseRight2" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALcwAgJG2Lhw8RGwSgYBaNgFNAXAADTGgHy
+  </data>
+ </layer>
+ <layer name="BaseRight3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALcgJlIPGoHfexgJxKPglEwCoY/AAB1pQC/
+  </data>
+ </layer>
+ <layer name="LimitsBaseRight3" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFSAGRI2RaOR8SgYBaNg+AMAbgQCGw==
+  </data>
+ </layer>
+ <layer name="BaseRight4" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALcgJlIPGrH8LFjFIyCUTA0AADV5gCX
+  </data>
+ </layer>
+ <layer name="LimitsBaseRight4" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAHgzCcQAAQ==
+  </data>
+ </layer>
+ <layer name="BaseCespedRight" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALcgIlIPGrH8LFjFIyCUTA0AADnKwBl
+  </data>
+ </layer>
+ <layer name="ForestBaseRight1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKRA6ygeKiZjc9OZHoUjIJRMHIAAAlOAV0=
+  </data>
+ </layer>
+ <layer name="ForestBaseRight2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhDyxHqN2UgqHs9lEwCoY7AADlFgCs
+  </data>
+ </layer>
+ <layer name="ForestBaseRight3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILBCWygeKiAgXLrUAqjUTAKRgH1AABsMADx
+  </data>
+ </layer>
+ <layer name="BaseDown1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFIBKxAzI2G2UTtG7Ri1Y8jYAQCRswDJ
+  </data>
+ </layer>
+ <layer name="LimitsBaseDown1" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFKBCRrfYojaYYzGN6eBHQMRVrTwB3pYjcY5bjDY8wcAQwgEMw==
+  </data>
+ </layer>
+ <layer name="BaseDown2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFIBKxAzo+FRO0btGLVjaNgBAFfPAKs=
+  </data>
+ </layer>
+ <layer name="LimitsBaseDown2" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFKByTCxw5gOdoyGFfFg1B/0sQMAECgCBg==
+  </data>
+ </layer>
+ <layer name="BaseDown3" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFIBMxpmG7Vj1I5RO4aMHQBp2wC1
+  </data>
+ </layer>
+ <layer name="LimitsBaseDown3" width="25" height="25" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAogwGKY2GFOBztG/TG47BiJYQUAPKQCLg==
+  </data>
+ </layer>
+ <layer name="BaseDown4" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFIBMxY8aseoHaN2DA07AC/3AJc=
+  </data>
+ </layer>
+ <layer name="LimitsBaseDown4" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAHgzCcQAAQ==
+  </data>
+ </layer>
+ <layer name="BaseCespedDown" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFIBExY8aseoHaN2DA07AM3cAGU=
+  </data>
+ </layer>
+ <layer name="ForestBaseDown1" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqGPrChkblWaDQtAa38gGw+CNPaLzZImJbm0xLQ2nxqAABGzwMH
+  </data>
+ </layer>
+ <layer name="ForestBaseDown2" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUADayS25YC5gnJgTVjJKEAD5MY3AGcTAOk=
+  </data>
+ </layer>
+ <layer name="ForestBaseDown3" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGASFgOdAOGGJgOIXXYPULAA3jAKw=
+  </data>
+ </layer>
+ <layer name="CespedDown" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoQgIlITAs7GOlgB7X9ge5meoUVre3A5i9q2zFUwwpXnCOLU2oHMRgAcksAxA==
+  </data>
+ </layer>
+ <layer name="SandDown" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoQgIVIPGrHqB2jdgysHQDrYgGR
+  </data>
+ </layer>
+ <layer name="FloorDown" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoQgJlIPGrHqB2jdgysHQAzAgEt
+  </data>
+ </layer>
+ <layer name="ForestDown1" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAogwAaJRsajABMQChdLKtmDbg61zIUBkD+sqWzmQAD0+AD5yRKJPdQAejxj8wMABvQD6g==
+  </data>
+ </layer>
+ <layer name="ForestDown2" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqGF7CG0jZImAGNTS1gw4BpjzVu5WQBayx2UBtgM5+admELJ1rZgUuOWnZQO37JBQDKaAbJ
+  </data>
+ </layer>
+ <layer name="ForestDown3" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGATnAEkpb0cEumB20tBPdzKFmBy6z6BE/tACWBOQBSywCtg==
+  </data>
+ </layer>
+ <layer name="LimitsFloorDown" width="25" height="25" visible="0" offsetx="0" offsety="-32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApIAzp0sMNi1A6igTkd7BgNK+IBpf4A5S8zIDaF0sgYJqYJxADphQPu
+  </data>
+ </layer>
+</map>
