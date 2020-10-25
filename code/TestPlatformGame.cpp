@@ -2880,11 +2880,7 @@ void TestPlatformGame::Playing::onEnter ()
 	// ...and the main of the full playing zone is visible!
 	QGAMES::TiledMap* tM = __TM wrld -> activeScene () -> activeMap ();
 	int mCX = tM -> width () >> 1; int mCY = tM -> height () >> 1;
-	game () -> mainScreen () -> setPosition (
-		QGAMES::Position (
-			__BD (((mCX - mCY) >> 1) - (__GAMETEST_SCREENWIDTH__ >> 1)), // (mCX - mCY) >> 1 is the middle of the maze in diedric...
-			__BD ((((mCX + mCY) >> 1) - (__GAMETEST_SCREENHEIGHT__ >> 1)) - 32), 
-			__BD 0));
+	game () -> mainScreen () -> setPosition (QGAMES::Position (__BD -320, __BD 200, __BD 0));
 
 	// The type of projection in this game is diedric (the map is diediric too)...
 	game () -> mainScreen () -> currentCamera () -> setProjectType (QGAMES::Camera::ProjectionType::_QUICKDIEDRIC);
