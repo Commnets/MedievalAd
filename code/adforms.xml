@@ -5,57 +5,57 @@
 	<!-- -->
 	<!-- Icons for the game -->
 	<Form id="10000" name="GameLogoLittle" file="forms/CommnetsIconLittle.png" width="32" height="32" 
-            fSpacing="0" fMargin="0" fWidth="32" fHeight="32" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="32" fHeight="32" aColor="255" nFrames="1"/>
 	<Form id="10001" name="Commtynets" file="forms/Commnets.png" width="100" height="34" 
-            fSpacing="0" fMargin="0" fWidth="100" fHeight="34" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="100" fHeight="34" aColor="255" nFrames="1"/>
 	<Form id="10002" name="CommtynetsBig" file="forms/CommnetsBig.png" width="500" height="169" 
-            fSpacing="0" fMargin="0" fWidth="500" fHeight="169" aColor="255" nFrames="1"/>
-	<Form id="10003" name="BallRolling" file="forms/BallRolling.png" width="1600" height="100" 
-            fSpacing="0" fMargin="0" fWidth="100" fHeight="100" aColor="255" nFrames="16"/>
+						fSpacing="0" fMargin="0" fWidth="500" fHeight="169" aColor="255" nFrames="1"/>
+	<Form id="10003" name="BallRolling" file="forms/BallRolling.png" width="3200" height="200" 
+						fSpacing="0" fMargin="0" fWidth="200" fHeight="200" aColor="255" nFrames="16"/>
 	<Form id="10004" name="GameLogo" file="forms/CommnetsIcon.png" width="128" height="128" 
-            fSpacing="0" fMargin="0" fWidth="128" fHeight="128" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="128" fHeight="128" aColor="255" nFrames="1"/>
 	
 	<!-- Forms used in environmental conditions -->
 	<Form id="10010" name="RainDrop" file="forms/raindrop.png" width="7" height="15" 
-            fSpacing="0" fMargin="0" fWidth="7" fHeight="15" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="7" fHeight="15" aColor="255" nFrames="1"/>
 	<Form id="10011" name="WindTrace" file="forms/windtrace.png" width="100" height="50" 
-            fSpacing="0" fMargin="0" fWidth="100" fHeight="50" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="100" fHeight="50" aColor="255" nFrames="1"/>
 	<Form id="10012" name="Rainbow" file="forms/rainbow.png" width="1067" height="600" 
-            fSpacing="0" fMargin="0" fWidth="1067" fHeight="600" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="1067" fHeight="600" aColor="255" nFrames="1"/>
 	<Form id="10013" name="Cloud1" file="forms/cloud1.png" width="587" height="217" 
-            fSpacing="0" fMargin="0" fWidth="587" fHeight="217" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="587" fHeight="217" aColor="255" nFrames="1"/>
 	<Form id="10014" name="Cloud2" file="forms/cloud2.png" width="364" height="162" 
-            fSpacing="0" fMargin="0" fWidth="364" fHeight="162" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="364" fHeight="162" aColor="255" nFrames="1"/>
 	<Form id="10015" name="Cloud3" file="forms/cloud3.png" width="470" height="182" 
-            fSpacing="0" fMargin="0" fWidth="470" fHeight="182" aColor="255" nFrames="1"/>
-    <Form id="10016" name="bubbles1" file="forms/bubbles1.png" width="112" height="16"
+						fSpacing="0" fMargin="0" fWidth="470" fHeight="182" aColor="255" nFrames="1"/>
+		<Form id="10016" name="bubbles1" file="forms/bubbles1.png" width="112" height="16"
 		fSpacing="0" fMargin="0" fWidth="16" fHeight="16" aColor="255" nFrames="7"/>
-    <Form id="10017" name="bubbles2" file="forms/bubbles2.png" width="112" height="16"
+		<Form id="10017" name="bubbles2" file="forms/bubbles2.png" width="112" height="16"
 		fSpacing="0" fMargin="0" fWidth="16" fHeight="16" aColor="255" nFrames="7"/>
 	<!-- -->
 	
 	<!-- Forms used in some standard score objects -->
 	<!-- The standard energy bars -->
 	<Form id="10020" name="BlueEnergyBar" file="forms/BlueEnergyBar.png" width="303" height="90" 
-            fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
+						fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
 	<Form id="10021" name="RedEnergyBar" file="forms/RedEnergyBar.png" width="303" height="90" 
-            fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
+						fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
 	<Form id="10022" name="GreenEnergyBar" file="forms/GreenEnergyBar.png" width="303" height="90" 
-            fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
+						fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
 	<Form id="10023" name="YellowEnergyBar" file="forms/YellowEnergyBar.png" width="303" height="90" 
-            fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
+						fSpacing="0" fMargin="0" fWidth="303" fHeight="45" aColor="255" nFrames="2"/>
 	<!-- A set of balls to represent lives in use and lives already used -->
 	<Form id="10024" name="RedBall" file="forms/redball.png" width="50" height="50" 
-            fSpacing="0" fMargin="0" fWidth="50" fHeight="50" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="50" fHeight="50" aColor="255" nFrames="1"/>
 	<Form id="10025" name="GreenBall" file="forms/greenball.png" width="50" height="50" 
-            fSpacing="0" fMargin="0" fWidth="50" fHeight="50" aColor="255" nFrames="1"/>
+						fSpacing="0" fMargin="0" fWidth="50" fHeight="50" aColor="255" nFrames="1"/>
 	<!-- -->
 
 	<!-- -->
 	<!-- Some fonts -->
 	<!-- 10 Courier Black -->
 	<Form id="20000" name="Courier10Black" file="forms/Courier10Black.png" width="128" height="128" 
-            fSpacing="2" fMargin="2" fWidth="9" fHeight="11" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="9" fHeight="11" aColor="255" nFrames="95">
 		<Frame id="00" fPosX="073" fPosY="66" fWidth="0" fHeight="00" xoffset="0" yoffset="12" width="8"/>
 		<Frame id="01" fPosX="037" fPosY="26" fWidth="3" fHeight="09" xoffset="4" yoffset="04" width="8"/>
 		<Frame id="02" fPosX="010" fPosY="66" fWidth="5" fHeight="04" xoffset="2" yoffset="04" width="8"/>
@@ -155,7 +155,7 @@
 	
 	<!-- 10 Courier White -->
 	<Form id="20001" name="Courier10White" file="forms/Courier10White.png" width="128" height="128" 
-            fSpacing="2" fMargin="2" fWidth="9" fHeight="11" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="9" fHeight="11" aColor="255" nFrames="95">
 		<Frame id="00" fPosX="073" fPosY="66" fWidth="0" fHeight="00" xoffset="0" yoffset="12" width="8"/>
 		<Frame id="01" fPosX="037" fPosY="26" fWidth="3" fHeight="09" xoffset="4" yoffset="04" width="8"/>
 		<Frame id="02" fPosX="010" fPosY="66" fWidth="5" fHeight="04" xoffset="2" yoffset="04" width="8"/>
@@ -255,7 +255,7 @@
 
 	<!-- 12 Ravie Blue -->
 	<Form id="20010" name="Ravie12Blue" file="forms/Ravie12Blue.png" width="256" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="21" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="21" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="203" fPosY="123" fWidth="04" fHeight="04" xoffset="1" yoffset="15" width="06"/>
 		<Frame id="01" fPosX="002" fPosY="046" fWidth="11" fHeight="18" xoffset="0" yoffset="02" width="07"/>
 		<Frame id="02" fPosX="123" fPosY="123" fWidth="10" fHeight="09" xoffset="2" yoffset="02" width="08"/>
@@ -356,7 +356,7 @@
 
 	<!-- 12 Ravie Green -->
 	<Form id="20011" name="Ravie12Green" file="forms/Ravie12Green.png" width="256" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="21" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="21" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="203" fPosY="123" fWidth="04" fHeight="04" xoffset="1" yoffset="15" width="06"/>
 		<Frame id="01" fPosX="002" fPosY="046" fWidth="11" fHeight="18" xoffset="0" yoffset="02" width="07"/>
 		<Frame id="02" fPosX="123" fPosY="123" fWidth="10" fHeight="09" xoffset="2" yoffset="02" width="08"/>
@@ -457,7 +457,7 @@
 
 	<!-- 12 Ravie Orange -->
 	<Form id="20012" name="Ravie12Orange" file="forms/Ravie12Orange.png" width="256" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="21" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="21" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="203" fPosY="123" fWidth="04" fHeight="04" xoffset="1" yoffset="15" width="06"/>
 		<Frame id="01" fPosX="002" fPosY="046" fWidth="11" fHeight="18" xoffset="0" yoffset="02" width="07"/>
 		<Frame id="02" fPosX="123" fPosY="123" fWidth="10" fHeight="09" xoffset="2" yoffset="02" width="08"/>
@@ -558,7 +558,7 @@
 	
 	<!-- 24 Ravie Blue -->
 	<Form id="20020" name="Ravie24Blue" file="forms/Ravie24Blue.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="47" fHeight="39" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="47" fHeight="39" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="385" fPosY="182" fWidth="06" fHeight="06" xoffset="3" yoffset="31" width="13"/>
 		<Frame id="01" fPosX="294" fPosY="043" fWidth="19" fHeight="34" xoffset="3" yoffset="05" width="13"/>
 		<Frame id="02" fPosX="197" fPosY="182" fWidth="18" fHeight="16" xoffset="5" yoffset="05" width="15"/>
@@ -659,7 +659,7 @@
 
 	<!-- 24 Ravie Green -->
 	<Form id="20021" name="Ravie24Green" file="forms/Ravie24Green.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="47" fHeight="39" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="47" fHeight="39" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="385" fPosY="182" fWidth="06" fHeight="06" xoffset="3" yoffset="31" width="13"/>
 		<Frame id="01" fPosX="294" fPosY="043" fWidth="19" fHeight="34" xoffset="3" yoffset="05" width="13"/>
 		<Frame id="02" fPosX="197" fPosY="182" fWidth="18" fHeight="16" xoffset="5" yoffset="05" width="15"/>
@@ -760,7 +760,7 @@
 	
 	<!-- 24 Ravie Orange -->
 	<Form id="20022" name="Ravie24Orange" file="forms/Ravie24Orange.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="47" fHeight="39" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="47" fHeight="39" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="385" fPosY="182" fWidth="06" fHeight="06" xoffset="3" yoffset="31" width="13"/>
 		<Frame id="01" fPosX="294" fPosY="043" fWidth="19" fHeight="34" xoffset="3" yoffset="05" width="13"/>
 		<Frame id="02" fPosX="197" fPosY="182" fWidth="18" fHeight="16" xoffset="5" yoffset="05" width="15"/>
@@ -861,7 +861,7 @@
 
 	<!-- 36 Ravie Blue -->
 	<Form id="20030" name="Ravie36Blue" file="forms/Ravie36Blue.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="68" fHeight="58" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="68" fHeight="58" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="035" fPosY="465" fWidth="10" fHeight="10" xoffset="4" yoffset="45" width="19"/>
 		<Frame id="01" fPosX="249" fPosY="119" fWidth="30" fHeight="51" xoffset="3" yoffset="07" width="20"/>
 		<Frame id="02" fPosX="264" fPosY="424" fWidth="28" fHeight="25" xoffset="7" yoffset="07" width="23"/>
@@ -962,7 +962,7 @@
 
 	<!-- 36 Ravie Green -->
 	<Form id="20031" name="Ravie36Green" file="forms/Ravie36Green.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="68" fHeight="58" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="68" fHeight="58" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="035" fPosY="465" fWidth="10" fHeight="10" xoffset="4" yoffset="45" width="19"/>
 		<Frame id="01" fPosX="249" fPosY="119" fWidth="30" fHeight="51" xoffset="3" yoffset="07" width="20"/>
 		<Frame id="02" fPosX="264" fPosY="424" fWidth="28" fHeight="25" xoffset="7" yoffset="07" width="23"/>
@@ -1063,7 +1063,7 @@
 	
 	<!-- 36 Ravie Orange -->
 	<Form id="20032" name="Ravie36Orange" file="forms/Ravie36Orange.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="68" fHeight="58" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="68" fHeight="58" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="035" fPosY="465" fWidth="10" fHeight="10" xoffset="4" yoffset="45" width="19"/>
 		<Frame id="01" fPosX="249" fPosY="119" fWidth="30" fHeight="51" xoffset="3" yoffset="07" width="20"/>
 		<Frame id="02" fPosX="264" fPosY="424" fWidth="28" fHeight="25" xoffset="7" yoffset="07" width="23"/>
@@ -1164,7 +1164,7 @@
 	
 	<!-- 72 Ravie Blue -->
 	<Form id="20040" name="Ravie72Blue" file="forms/Ravie72Blue.png" width="1024" height="1024" 
-            fSpacing="2" fMargin="2" fWidth="113" fHeight="107" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="113" fHeight="107" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="540" fPosY="649" fWidth="010" fHeight="010" xoffset="04" yoffset="095" width="038"/>
 		<Frame id="01" fPosX="002" fPosY="208" fWidth="049" fHeight="092" xoffset="03" yoffset="018" width="040"/>
 		<Frame id="02" fPosX="123" fPosY="649" fWidth="045" fHeight="039" xoffset="09" yoffset="018" width="046"/>
@@ -1265,7 +1265,7 @@
 	
 	<!-- 72 Ravie Green -->
 	<Form id="20041" name="Ravie72Green" file="forms/Ravie72Green.png" width="1024" height="1024" 
-            fSpacing="2" fMargin="2" fWidth="113" fHeight="107" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="113" fHeight="107" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="540" fPosY="649" fWidth="010" fHeight="010" xoffset="04" yoffset="095" width="038"/>
 		<Frame id="01" fPosX="002" fPosY="208" fWidth="049" fHeight="092" xoffset="03" yoffset="018" width="040"/>
 		<Frame id="02" fPosX="123" fPosY="649" fWidth="045" fHeight="039" xoffset="09" yoffset="018" width="046"/>
@@ -1366,7 +1366,7 @@
 	
 	<!-- 72 Ravie Orange -->
 	<Form id="20042" name="Ravie72Orange" file="forms/Ravie72Orange.png" width="1024" height="1024" 
-            fSpacing="2" fMargin="2" fWidth="113" fHeight="107" aColor="255" nFrames="100">
+						fSpacing="2" fMargin="2" fWidth="113" fHeight="107" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="540" fPosY="649" fWidth="010" fHeight="010" xoffset="04" yoffset="095" width="038"/>
 		<Frame id="01" fPosX="002" fPosY="208" fWidth="049" fHeight="092" xoffset="03" yoffset="018" width="040"/>
 		<Frame id="02" fPosX="123" fPosY="649" fWidth="045" fHeight="039" xoffset="09" yoffset="018" width="046"/>
@@ -1467,7 +1467,7 @@
 	
 	<!-- 24 ShowCard Gothic Blue -->
 	<Form id="20100" name="ShowCardGothic24Blue" file="forms/ShowCardGothic24Blue.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="186" fPosY="133" fWidth="04" fHeight="04" xoffset="2" yoffset="31" width="06"/>
 		<Frame id="01" fPosX="364" fPosY="040" fWidth="14" fHeight="29" xoffset="5" yoffset="07" width="14"/>
 		<Frame id="02" fPosX="034" fPosY="133" fWidth="13" fHeight="16" xoffset="3" yoffset="07" width="13"/>
@@ -1568,7 +1568,7 @@
 	
 	<!-- 24 ShowCard Gothic Brown -->
 	<Form id="20101" name="ShowCardGothic24Brown" file="forms/ShowCardGothic24Brown.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="186" fPosY="133" fWidth="04" fHeight="04" xoffset="2" yoffset="31" width="06"/>
 		<Frame id="01" fPosX="364" fPosY="040" fWidth="14" fHeight="29" xoffset="5" yoffset="07" width="14"/>
 		<Frame id="02" fPosX="034" fPosY="133" fWidth="13" fHeight="16" xoffset="3" yoffset="07" width="13"/>
@@ -1669,7 +1669,7 @@
 	
 	<!-- 24 ShowCard Gothic Green -->
 	<Form id="20102" name="ShowCardGothic24Green" file="forms/ShowCardGothic24Green.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="186" fPosY="133" fWidth="04" fHeight="04" xoffset="2" yoffset="31" width="06"/>
 		<Frame id="01" fPosX="364" fPosY="040" fWidth="14" fHeight="29" xoffset="5" yoffset="07" width="14"/>
 		<Frame id="02" fPosX="034" fPosY="133" fWidth="13" fHeight="16" xoffset="3" yoffset="07" width="13"/>
@@ -1770,7 +1770,7 @@
 	
 	<!-- 24 ShowCard Gothic Red -->
 	<Form id="20103" name="ShowCardGothic24Red" file="forms/ShowCardGothic24Red.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="186" fPosY="133" fWidth="04" fHeight="04" xoffset="2" yoffset="31" width="06"/>
 		<Frame id="01" fPosX="364" fPosY="040" fWidth="14" fHeight="29" xoffset="5" yoffset="07" width="14"/>
 		<Frame id="02" fPosX="034" fPosY="133" fWidth="13" fHeight="16" xoffset="3" yoffset="07" width="13"/>
@@ -1871,7 +1871,7 @@
 	
 	<!-- 24 ShowCard Gothic Yellow -->
 	<Form id="20104" name="ShowCardGothic24Yellow" file="forms/ShowCardGothic24Yellow.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="186" fPosY="133" fWidth="04" fHeight="04" xoffset="2" yoffset="31" width="06"/>
 		<Frame id="01" fPosX="364" fPosY="040" fWidth="14" fHeight="29" xoffset="5" yoffset="07" width="14"/>
 		<Frame id="02" fPosX="034" fPosY="133" fWidth="13" fHeight="16" xoffset="3" yoffset="07" width="13"/>
@@ -1972,7 +1972,7 @@
 
 	<!-- 32 ShowCard Gothic Blue  -->
 	<Form id="20110" name="ShowCardGothic32Blue" file="forms/ShowCardGothic32Blue.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="269" fPosY="210" fWidth="04" fHeight="04" xoffset="02" yoffset="42" width="09"/>
 		<Frame id="01" fPosX="040" fPosY="132" fWidth="18" fHeight="37" xoffset="05" yoffset="10" width="19"/>
 		<Frame id="02" fPosX="082" fPosY="210" fWidth="16" fHeight="20" xoffset="04" yoffset="10" width="17"/>
@@ -2073,7 +2073,7 @@
 
 	<!-- 32 ShowCard Gothic Brown  -->
 	<Form id="20111" name="ShowCardGothic32Brown" file="forms/ShowCardGothic32Brown.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="269" fPosY="210" fWidth="04" fHeight="04" xoffset="02" yoffset="42" width="09"/>
 		<Frame id="01" fPosX="040" fPosY="132" fWidth="18" fHeight="37" xoffset="05" yoffset="10" width="19"/>
 		<Frame id="02" fPosX="082" fPosY="210" fWidth="16" fHeight="20" xoffset="04" yoffset="10" width="17"/>
@@ -2174,7 +2174,7 @@
 
 	<!-- 32 ShowCard Gothic Green  -->
 	<Form id="20112" name="ShowCardGothic32Green" file="forms/ShowCardGothic32Green.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="269" fPosY="210" fWidth="04" fHeight="04" xoffset="02" yoffset="42" width="09"/>
 		<Frame id="01" fPosX="040" fPosY="132" fWidth="18" fHeight="37" xoffset="05" yoffset="10" width="19"/>
 		<Frame id="02" fPosX="082" fPosY="210" fWidth="16" fHeight="20" xoffset="04" yoffset="10" width="17"/>
@@ -2275,7 +2275,7 @@
 
 	<!-- 32 ShowCard Gothic Red  -->
 	<Form id="20113" name="ShowCardGothic32Red" file="forms/ShowCardGothic32Red.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="269" fPosY="210" fWidth="04" fHeight="04" xoffset="02" yoffset="42" width="09"/>
 		<Frame id="01" fPosX="040" fPosY="132" fWidth="18" fHeight="37" xoffset="05" yoffset="10" width="19"/>
 		<Frame id="02" fPosX="082" fPosY="210" fWidth="16" fHeight="20" xoffset="04" yoffset="10" width="17"/>
@@ -2376,7 +2376,7 @@
 
 	<!-- 32 ShowCard Gothic Yellow  -->
 	<Form id="20114" name="ShowCardGothic32Yellow" file="forms/ShowCardGothic32Yellow.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="52" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="269" fPosY="210" fWidth="04" fHeight="04" xoffset="02" yoffset="42" width="09"/>
 		<Frame id="01" fPosX="040" fPosY="132" fWidth="18" fHeight="37" xoffset="05" yoffset="10" width="19"/>
 		<Frame id="02" fPosX="082" fPosY="210" fWidth="16" fHeight="20" xoffset="04" yoffset="10" width="17"/>
@@ -2477,7 +2477,7 @@
 
 	<!-- 36 ShowCard Gothic Blue  -->
 	<Form id="20120" name="ShowCardGothic36Blue" file="forms/ShowCardGothic36Blue.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="492" fPosY="230" fWidth="04" fHeight="04" xoffset="02" yoffset="48" width="10"/>
 		<Frame id="01" fPosX="046" fPosY="145" fWidth="19" fHeight="41" xoffset="06" yoffset="12" width="21"/>
 		<Frame id="02" fPosX="305" fPosY="230" fWidth="18" fHeight="21" xoffset="04" yoffset="12" width="19"/>
@@ -2578,7 +2578,7 @@
 
 	<!-- 36 ShowCard Gothic Brown  -->
 	<Form id="20121" name="ShowCardGothic36Brown" file="forms/ShowCardGothic36Brown.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="492" fPosY="230" fWidth="04" fHeight="04" xoffset="02" yoffset="48" width="10"/>
 		<Frame id="01" fPosX="046" fPosY="145" fWidth="19" fHeight="41" xoffset="06" yoffset="12" width="21"/>
 		<Frame id="02" fPosX="305" fPosY="230" fWidth="18" fHeight="21" xoffset="04" yoffset="12" width="19"/>
@@ -2679,7 +2679,7 @@
 
 	<!-- 36 ShowCard Gothic Green  -->
 	<Form id="20122" name="ShowCardGothic36Green" file="forms/ShowCardGothic36Green.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="492" fPosY="230" fWidth="04" fHeight="04" xoffset="02" yoffset="48" width="10"/>
 		<Frame id="01" fPosX="046" fPosY="145" fWidth="19" fHeight="41" xoffset="06" yoffset="12" width="21"/>
 		<Frame id="02" fPosX="305" fPosY="230" fWidth="18" fHeight="21" xoffset="04" yoffset="12" width="19"/>
@@ -2780,7 +2780,7 @@
 
 	<!-- 36 ShowCard Gothic Red  -->
 	<Form id="20123" name="ShowCardGothic36Red" file="forms/ShowCardGothic36Red.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="492" fPosY="230" fWidth="04" fHeight="04" xoffset="02" yoffset="48" width="10"/>
 		<Frame id="01" fPosX="046" fPosY="145" fWidth="19" fHeight="41" xoffset="06" yoffset="12" width="21"/>
 		<Frame id="02" fPosX="305" fPosY="230" fWidth="18" fHeight="21" xoffset="04" yoffset="12" width="19"/>
@@ -2881,7 +2881,7 @@
 
 	<!-- 36 ShowCard Gothic Yellow  -->
 	<Form id="20124" name="ShowCardGothic36Yellow" file="forms/ShowCardGothic36Yellow.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="24" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="492" fPosY="230" fWidth="04" fHeight="04" xoffset="02" yoffset="48" width="10"/>
 		<Frame id="01" fPosX="046" fPosY="145" fWidth="19" fHeight="41" xoffset="06" yoffset="12" width="21"/>
 		<Frame id="02" fPosX="305" fPosY="230" fWidth="18" fHeight="21" xoffset="04" yoffset="12" width="19"/>
@@ -2982,7 +2982,7 @@
 
 	<!-- 64 ShowCard Gothic Blue  -->
 	<Form id="20130" name="ShowCardGothic64Blue" file="forms/ShowCardGothic64Blue.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="866" fPosY="308" fWidth="04" fHeight="04" xoffset="02" yoffset="85" width="17"/>
 		<Frame id="01" fPosX="065" fPosY="166" fWidth="30" fHeight="70" xoffset="08" yoffset="21" width="37"/>
 		<Frame id="02" fPosX="534" fPosY="308" fWidth="28" fHeight="34" xoffset="07" yoffset="21" width="34"/>
@@ -3083,7 +3083,7 @@
 
 	<!-- 64 ShowCard Gothic Brown  -->
 	<Form id="20131" name="ShowCardGothic64Brown" file="forms/ShowCardGothic64Brown.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="866" fPosY="308" fWidth="04" fHeight="04" xoffset="02" yoffset="85" width="17"/>
 		<Frame id="01" fPosX="065" fPosY="166" fWidth="30" fHeight="70" xoffset="08" yoffset="21" width="37"/>
 		<Frame id="02" fPosX="534" fPosY="308" fWidth="28" fHeight="34" xoffset="07" yoffset="21" width="34"/>
@@ -3184,7 +3184,7 @@
 
 	<!-- 64 ShowCard Gothic Green  -->
 	<Form id="20132" name="ShowCardGothic64Green" file="forms/ShowCardGothic64Green.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="866" fPosY="308" fWidth="04" fHeight="04" xoffset="02" yoffset="85" width="17"/>
 		<Frame id="01" fPosX="065" fPosY="166" fWidth="30" fHeight="70" xoffset="08" yoffset="21" width="37"/>
 		<Frame id="02" fPosX="534" fPosY="308" fWidth="28" fHeight="34" xoffset="07" yoffset="21" width="34"/>
@@ -3285,7 +3285,7 @@
 
 	<!-- 64 ShowCard Gothic Red  -->
 	<Form id="20133" name="ShowCardGothic64Red" file="forms/ShowCardGothic64Red.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="866" fPosY="308" fWidth="04" fHeight="04" xoffset="02" yoffset="85" width="17"/>
 		<Frame id="01" fPosX="065" fPosY="166" fWidth="30" fHeight="70" xoffset="08" yoffset="21" width="37"/>
 		<Frame id="02" fPosX="534" fPosY="308" fWidth="28" fHeight="34" xoffset="07" yoffset="21" width="34"/>
@@ -3386,7 +3386,7 @@
 
 	<!-- 64 ShowCard Gothic Yellow  -->
 	<Form id="20134" name="ShowCardGothic64Yellow" file="forms/ShowCardGothic64Yellow.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="866" fPosY="308" fWidth="04" fHeight="04" xoffset="02" yoffset="85" width="17"/>
 		<Frame id="01" fPosX="065" fPosY="166" fWidth="30" fHeight="70" xoffset="08" yoffset="21" width="37"/>
 		<Frame id="02" fPosX="534" fPosY="308" fWidth="28" fHeight="34" xoffset="07" yoffset="21" width="34"/>
@@ -3487,7 +3487,7 @@
 
 	<!-- 72 ShowCard Gothic Blue  -->
 	<Form id="20140" name="ShowCardGothic72Blue" file="forms/ShowCardGothic72Blue.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="409" fPosY="425" fWidth="004" fHeight="004" xoffset="02" yoffset="097" width="19"/>
 		<Frame id="01" fPosX="213" fPosY="187" fWidth="034" fHeight="078" xoffset="09" yoffset="025" width="42"/>
 		<Frame id="02" fPosX="045" fPosY="425" fWidth="031" fHeight="038" xoffset="07" yoffset="025" width="38"/>
@@ -3588,7 +3588,7 @@
 
 	<!-- 72 ShowCard Gothic Brown  -->
 	<Form id="20141" name="ShowCardGothic72Brown" file="forms/ShowCardGothic72Brown.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="409" fPosY="425" fWidth="004" fHeight="004" xoffset="02" yoffset="097" width="19"/>
 		<Frame id="01" fPosX="213" fPosY="187" fWidth="034" fHeight="078" xoffset="09" yoffset="025" width="42"/>
 		<Frame id="02" fPosX="045" fPosY="425" fWidth="031" fHeight="038" xoffset="07" yoffset="025" width="38"/>
@@ -3689,7 +3689,7 @@
 
 	<!-- 72 ShowCard Gothic Green  -->
 	<Form id="20142" name="ShowCardGothic72Green" file="forms/ShowCardGothic72Green.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="409" fPosY="425" fWidth="004" fHeight="004" xoffset="02" yoffset="097" width="19"/>
 		<Frame id="01" fPosX="213" fPosY="187" fWidth="034" fHeight="078" xoffset="09" yoffset="025" width="42"/>
 		<Frame id="02" fPosX="045" fPosY="425" fWidth="031" fHeight="038" xoffset="07" yoffset="025" width="38"/>
@@ -3790,7 +3790,7 @@
 
 	<!-- 72 ShowCard Gothic Red  -->
 	<Form id="20143" name="ShowCardGothic72Red" file="forms/ShowCardGothic72Red.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="409" fPosY="425" fWidth="004" fHeight="004" xoffset="02" yoffset="097" width="19"/>
 		<Frame id="01" fPosX="213" fPosY="187" fWidth="034" fHeight="078" xoffset="09" yoffset="025" width="42"/>
 		<Frame id="02" fPosX="045" fPosY="425" fWidth="031" fHeight="038" xoffset="07" yoffset="025" width="38"/>
@@ -3891,7 +3891,7 @@
 
 	<!-- 72 ShowCard Gothic Yellow  -->
 	<Form id="20144" name="ShowCardGothic72Yellow" file="forms/ShowCardGothic72Yellow.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
+						fSpacing="2" fMargin="2" fWidth="48" fHeight="104" aColor="255" nFrames="96">
 		<Frame id="00" fPosX="409" fPosY="425" fWidth="004" fHeight="004" xoffset="02" yoffset="097" width="19"/>
 		<Frame id="01" fPosX="213" fPosY="187" fWidth="034" fHeight="078" xoffset="09" yoffset="025" width="42"/>
 		<Frame id="02" fPosX="045" fPosY="425" fWidth="031" fHeight="038" xoffset="07" yoffset="025" width="38"/>
@@ -3994,7 +3994,7 @@
 	<!-- The count-up counter -->
 	<!-- The countup 32 letters -->
 	<Form id="30000" name="CountoDown32" file="forms/CountDown32.png" width="256" height="128" 
-            fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="00" fPosY="00" fWidth="00" fHeight="00" xoffset="0" yoffset="0" width="00" height="00"/>
 		<Frame id="1" fPosX="48" fPosY="02" fWidth="31" fHeight="45" xoffset="5" yoffset="5" width="31" height="45"/>
 		<Frame id="2" fPosX="02" fPosY="02" fWidth="44" fHeight="46" xoffset="5" yoffset="5" width="44" height="46"/>
@@ -4002,7 +4002,7 @@
 	</Form>
 	<!-- The countup 60 letters -->
 	<Form id="30001" name="CountoDown60" file="forms/CountDown60.png" width="256" height="128" 
-            fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="00" fHeight="00" xoffset="0" yoffset="00" width="00" height="00"/>
 		<Frame id="1" fPosX="077" fPosY="2" fWidth="49" fHeight="75" xoffset="6" yoffset="17" width="49" height="75"/>
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="73" fHeight="76" xoffset="6" yoffset="17" width="73" height="76"/>
@@ -4010,7 +4010,7 @@
 	</Form>
 	<!-- The countup 88 letters -->
 	<Form id="30002" name="CountoDown88" file="forms/CountDown88.png" width="256" height="256" 
-            fSpacing="2" fMargin="2" fWidth="64" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="64" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="000" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
 		<Frame id="1" fPosX="105" fPosY="002" fWidth="068" fHeight="104" xoffset="6" yoffset="28" width="068" height="104"/>
 		<Frame id="2" fPosX="002" fPosY="002" fWidth="101" fHeight="107" xoffset="6" yoffset="27" width="101" height="107"/>
@@ -4018,7 +4018,7 @@
 	</Form>
 	<!-- The countup 116 letters -->
 	<Form id="30003" name="CountoDown116" file="forms/CountDown116.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000" />
 		<Frame id="1" fPosX="135" fPosY="2" fWidth="086" fHeight="135" xoffset="7" yoffset="39" width="086" height="135"/>
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="131" fHeight="138" xoffset="6" yoffset="38" width="131" height="138" />
@@ -4026,7 +4026,7 @@
 	</Form>
 	<!-- The countup 144 letters -->
 	<Form id="30004" name="CountoDown144" file="forms/CountDown144.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000" />
 		<Frame id="1" fPosX="328" fPosY="2" fWidth="104" fHeight="164" xoffset="7" yoffset="48" width="104" height="164"/>
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="159" fHeight="168" xoffset="7" yoffset="48" width="159" height="168"/>
@@ -4034,7 +4034,7 @@
 	</Form>
 	<!-- The countup 172 letters -->
 	<Form id="30005" name="CountoDown172" file="forms/CountDown172.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
 		<Frame id="1" fPosX="192" fPosY="2" fWidth="122" fHeight="194" xoffset="7" yoffset="60" width="122" height="194"/>
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="188" fHeight="199" xoffset="7" yoffset="60" width="188" height="199"/>
@@ -4042,7 +4042,7 @@
 	</Form>
 	<!-- The countup 200 letters -->
 	<Form id="30006" name="CountoDown200" file="forms/CountDown200.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="128" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="000" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
 		<Frame id="1" fPosX="222" fPosY="002" fWidth="141" fHeight="225" xoffset="8" yoffset="69" width="141" height="225"/>
 		<Frame id="2" fPosX="002" fPosY="002" fWidth="218" fHeight="230" xoffset="7" yoffset="69" width="218" height="230"/>
@@ -4050,7 +4050,7 @@
 	</Form>
 	<!-- The countup 228 letters -->
 	<Form id="30007" name="CountoDown228" file="forms/CountDown228.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
 		<Frame id="1" fPosX="504" fPosY="2" fWidth="159" fHeight="254" xoffset="7" yoffset="80" width="159" height="254"/>
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="246" fHeight="260" xoffset="8" yoffset="80" width="246" height="260"/>
@@ -4058,7 +4058,7 @@
 	</Form>
 	<!-- The countup 256 letters -->
 	<Form id="30008" name="CountoDown256" file="forms/CountDown256.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="000" fPosY="0" fWidth="000" fHeight="000" xoffset="0" yoffset="00" width="000" height="000"/>
 		<Frame id="1" fPosX="279" fPosY="2" fWidth="177" fHeight="284" xoffset="7" yoffset="91" width="177" height="284"/>
 		<Frame id="2" fPosX="002" fPosY="2" fWidth="275" fHeight="291" xoffset="8" yoffset="91" width="275" height="291"/>
@@ -4069,7 +4069,7 @@
 	<!-- The count-down counter -->
 	<!-- The countdown 32 letters -->
 	<Form id="30010" name="CountoDown32" file="forms/CountDown32.png" width="256" height="128" 
-            fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="02" fPosY="50" fWidth="45" fHeight="45" xoffset="5" yoffset="5" width="45" height="45"/>
 		<Frame id="1" fPosX="02" fPosY="02" fWidth="44" fHeight="46" xoffset="5" yoffset="5" width="44" height="46"/>
 		<Frame id="2" fPosX="48" fPosY="02" fWidth="31" fHeight="45" xoffset="5" yoffset="5" width="31" height="45"/>
@@ -4077,7 +4077,7 @@
 	</Form>
 	<!-- The countdown 60 letters -->
 	<Form id="30011" name="CountoDown60" file="forms/CountDown60.png" width="256" height="128" 
-            fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="64" fHeight="32" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="128" fPosY="2" fWidth="74" fHeight="75" xoffset="6" yoffset="15" width="74" height="75"/>
 		<Frame id="1" fPosX="002" fPosY="2" fWidth="73" fHeight="76" xoffset="6" yoffset="17" width="73" height="76"/>
 		<Frame id="2" fPosX="077" fPosY="2" fWidth="49" fHeight="75" xoffset="6" yoffset="17" width="49" height="75"/>
@@ -4085,7 +4085,7 @@
 	</Form>
 	<!-- The countdown 88 letters -->
 	<Form id="30012" name="CountoDown88" file="forms/CountDown88.png" width="256" height="256" 
-            fSpacing="2" fMargin="2" fWidth="64" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="64" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="002" fPosY="111" fWidth="103" fHeight="104" xoffset="6" yoffset="27" width="103" height="104"/>
 		<Frame id="1" fPosX="002" fPosY="002" fWidth="101" fHeight="107" xoffset="6" yoffset="27" width="101" height="107"/>
 		<Frame id="2" fPosX="105" fPosY="002" fWidth="068" fHeight="104" xoffset="6" yoffset="28" width="068" height="104"/>
@@ -4093,7 +4093,7 @@
 	</Form>
 	<!-- The countdown 116 letters -->
 	<Form id="30013" name="CountoDown116" file="forms/CountDown116.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="223" fPosY="2" fWidth="133" fHeight="135" xoffset="6" yoffset="37" width="133" height="135"/>
 		<Frame id="1" fPosX="002" fPosY="2" fWidth="131" fHeight="138" xoffset="6" yoffset="38" width="131" height="138" />
 		<Frame id="2" fPosX="135" fPosY="2" fWidth="086" fHeight="135" xoffset="7" yoffset="39" width="086" height="135"/>
@@ -4101,7 +4101,7 @@
 	</Form>
 	<!-- The countdown 144 letters -->
 	<Form id="30014" name="CountoDown144" file="forms/CountDown144.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="163" fPosY="2" fWidth="163" fHeight="165" xoffset="7" yoffset="47" width="163" height="165"/>
 		<Frame id="1" fPosX="002" fPosY="2" fWidth="159" fHeight="168" xoffset="7" yoffset="48" width="159" height="168"/>
 		<Frame id="2" fPosX="328" fPosY="2" fWidth="104" fHeight="164" xoffset="7" yoffset="48" width="104" height="164"/>
@@ -4109,7 +4109,7 @@
 	</Form>
 	<!-- The countdown 172 letters -->
 	<Form id="30015" name="CountoDown172" file="forms/CountDown172.png" width="512" height="256" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="64" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="316" fPosY="2" fWidth="192" fHeight="194" xoffset="7" yoffset="58" width="192" height="194"/>
 		<Frame id="1" fPosX="002" fPosY="2" fWidth="188" fHeight="199" xoffset="7" yoffset="60" width="188" height="199"/>
 		<Frame id="2" fPosX="192" fPosY="2" fWidth="122" fHeight="194" xoffset="7" yoffset="60" width="122" height="194"/>
@@ -4117,7 +4117,7 @@
 	</Form>
 	<!-- The countdown 200 letters -->
 	<Form id="30016" name="CountoDown200" file="forms/CountDown200.png" width="512" height="512" 
-            fSpacing="2" fMargin="2" fWidth="128" fHeight="128" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="128" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="002" fPosY="234" fWidth="222" fHeight="225" xoffset="7" yoffset="68" width="222" height="225"/>
 		<Frame id="1" fPosX="002" fPosY="002" fWidth="218" fHeight="230" xoffset="7" yoffset="69" width="218" height="230"/>
 		<Frame id="2" fPosX="222" fPosY="002" fWidth="141" fHeight="225" xoffset="8" yoffset="69" width="141" height="225"/>
@@ -4125,7 +4125,7 @@
 	</Form>
 	<!-- The countdown 228 letters -->
 	<Form id="30017" name="CountoDown228" file="forms/CountDown228.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="250" fPosY="2" fWidth="252" fHeight="255" xoffset="8" yoffset="79" width="252" height="255"/>
 		<Frame id="1" fPosX="002" fPosY="2" fWidth="246" fHeight="260" xoffset="8" yoffset="80" width="246" height="260"/>
 		<Frame id="2" fPosX="504" fPosY="2" fWidth="159" fHeight="254" xoffset="7" yoffset="80" width="159" height="254"/>
@@ -4133,7 +4133,7 @@
 	</Form>
 	<!-- The countdown 256 letters -->
 	<Form id="30018" name="CountoDown256" file="forms/CountDown256.png" width="1024" height="512" 
-            fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
+						fSpacing="2" fMargin="2" fWidth="256" fHeight="128" aColor="255" nFrames="4">
 		<Frame id="0" fPosX="458" fPosY="2" fWidth="281" fHeight="284" xoffset="8" yoffset="89" width="281" height="284"/>
 		<Frame id="1" fPosX="002" fPosY="2" fWidth="275" fHeight="291" xoffset="8" yoffset="91" width="275" height="291"/>
 		<Frame id="2" fPosX="279" fPosY="2" fWidth="177" fHeight="284" xoffset="7" yoffset="91" width="177" height="284"/>
