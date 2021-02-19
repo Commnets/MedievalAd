@@ -872,8 +872,7 @@ void TestPlatformGame::Villaner::setDescription (const TestPlatformGame::Villane
 	};
 
 	// Sets the position...
-	setPosition (_description._position - 
-		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
+	setPositionOnBase (_description._position - __GAMETEST_REFERENCEALTITUDOFBASE__);
 	setFixBasePosition (); 
 	setFixBasePosition 
 		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
@@ -1551,8 +1550,7 @@ void TestPlatformGame::ThingToCatch::setDescription (const TestPlatformGame::Thi
 	setCurrentAspect (_description._thingType);
 	setVisible (true);
 	
-	setPosition (_description._position - 
-		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
+	setPositionOnBase (_description._position - __GAMETEST_REFERENCEALTITUDOFBASE__);
 	setFixBasePosition (); 
 	setFixBasePosition 
 		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
@@ -1657,8 +1655,7 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 	QGAMES::Position nPos = baseZone ().center ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal);
 	// ...and also the position...
 	_description._position = position ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal) + (oPos - nPos);
-	setPosition (_description._position - 
-		__GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD visualHeight ()));
+	setPositionOnBase (_description._position - __GAMETEST_REFERENCEALTITUDOFBASE__);
 	setFixBasePosition (); 
 	setFixBasePosition 
 		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
@@ -2888,7 +2885,7 @@ void TestPlatformGame::Playing::onEnter ()
 	// Sets the initial position of the entity...
 	QGAMES::Entity* ety = game () -> entity (__GAMETEST_MAINCHARACTERID__);
 	QGAMES::Position lP = ((TestPlatformGame::Game*) game ()) -> lastPosition ();
-	ety -> setPosition (lP - __GAMETEST_REFERENCEALTITUDOFBASE__ - QGAMES::Vector (__BD 0, __BD 0, __BD ety -> visualHeight ()));
+	ety -> setPositionOnBase (lP - __GAMETEST_REFERENCEALTITUDOFBASE__);
 	((TestPlatformGame::Knight*) ety) -> setFixBasePosition ();
 	((TestPlatformGame::Knight*) ety) -> setFixBasePosition 
 		(QGAMES::Position (__MINBDATA__, __MINBDATA__, ety -> basePosition ().posZ ())); // anchor it to the floor...
@@ -2914,17 +2911,6 @@ void TestPlatformGame::Playing::updatePositions ()
 void TestPlatformGame::Playing::onExit ()
 {
 	QGAMES::GameState::onExit ();
-
-	/*
-	It shouldn't happen here, but it's better the game continue with entities moving...
-	// Back to orthogonal...
-	game () -> mainScreen () -> currentCamera () -> setProjectType (QGAMES::Camera::ProjectionType::_ORTHOGONAL);
-	// ...and put the screen at the zero position...
-	game () -> mainScreen () -> setPosition (QGAMES::Position::_cero);
-
-	(__AGM game ()) -> world (__GAMETEST_WORLDID__) -> finalize ();
-	(__AGM game ()) -> setWorld (__MININT__);
-	*/
 
 	unObserve (game () -> entity (__GAMETEST_MAINCHARACTERID__));
 
