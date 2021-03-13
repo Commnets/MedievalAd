@@ -1649,12 +1649,9 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 	_description._canBeCaught = true;
 
 	// ...and the form also changes...
-	QGAMES::Position oPos = baseZone ().center ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal);
 	setCurrentForm (__GAMETEST_THINGSCANBECAUGHTFORM__);
 	setCurrentAspect (_description._thingType);
-	QGAMES::Position nPos = baseZone ().center ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal);
 	// ...and also the position...
-	_description._position = position ().projectOver (QGAMES::Position::_cero, QGAMES::Vector::_zNormal) + (oPos - nPos);
 	setPositionOnBase (_description._position - __GAMETEST_REFERENCEALTITUDOFBASE__);
 	setFixBasePosition (); 
 	setFixBasePosition 
