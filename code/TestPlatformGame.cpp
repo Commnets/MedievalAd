@@ -1652,8 +1652,8 @@ void TestPlatformGame::ThingToCatch::toBeCaught ()
 	setCurrentForm (__GAMETEST_THINGSCANBECAUGHTFORM__);
 	setCurrentAspect (_description._thingType);
 	// ...and also the position...
-	setPositionOnBase (_description._position - __GAMETEST_REFERENCEALTITUDOFBASE__);
 	setFixBasePosition (); 
+	setPositionOnBase (_description._position - __GAMETEST_REFERENCEALTITUDOFBASE__);
 	setFixBasePosition 
 		(QGAMES::Position (__MINBDATA__, __MINBDATA__, basePosition ().posZ ())); // anchor it to the floor...
 
