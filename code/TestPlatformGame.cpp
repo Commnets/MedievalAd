@@ -1801,7 +1801,7 @@ QGAMES::Movement* TestPlatformGame::MovementBuilder::createMovement (const QGAME
 // --------------------------------------------------------------------------------
 // ---
 TestPlatformGame::WorldModel::WorldModel ()
-	: QGAMES::MazeModel (__GAMETEST_HORIZONTALSCENESINMAZE__,  __GAMETEST_VERTICALSCENESINMAZE__, 
+	: QGAMES::MazeModel (__GAMETEST_HORIZONTALSCENESINMAZE__,  __GAMETEST_VERTICALSCENESINMAZE__, 1,
 						 std::vector <QGAMES::SetOfOpenValues> 
 							(__GAMETEST_HORIZONTALSCENESINMAZE__ * __GAMETEST_VERTICALSCENESINMAZE__))
 {
@@ -1824,7 +1824,7 @@ std::vector <bool> TestPlatformGame::WorldModel::possibleConnectionsAt (const QG
 	
 	bool r = false; bool l = false; bool u = false; bool d = false;
 	switch (mazeInfoAt (QGAMES::MazeModel::PositionInMaze 
-		(p._positionX, p._positionY)).openValue (0).intValue ())
+		(p._positionX, p._positionY, 0)).openValue (0).intValue ())
 	{
 		case  1: u = d =			true; break;
 		case  2: r = l =			true; break;
@@ -1987,7 +1987,7 @@ void TestPlatformGame::World::updatePositions ()
 				setDescription (TestPlatformGame::VillanerLocation (0, 2, 0, 0, 
 					QGAMES::Position (__BD (01 * 32), __BD (13 * 32), __BD 0), 
 					QGAMES::Vector (__BD 1, __BD 0, __BD 0), 3 /** Speed */, 
-					QGAMES::MazeModel::PositionInMaze (0, 0), QGAMES::MazeModel::PositionInMaze (5, 4), 0));
+					QGAMES::MazeModel::PositionInMaze (0, 0, 0), QGAMES::MazeModel::PositionInMaze (5, 4, 0), 0));
 		}
 	}
 }
@@ -3579,10 +3579,10 @@ void TestPlatformGame::Game::Conf::distributeVillanersInTheMaze (int nP)
 
 	// Posible destinations of the villan moving...
 	std::vector <QGAMES::MazeModel::PositionInMaze> tPM (4);
-	tPM [0] = QGAMES::MazeModel::PositionInMaze (5, 4); // The four corners big...
-	tPM [1] = QGAMES::MazeModel::PositionInMaze (7, 7); // The four corners little...
-	tPM [2] = QGAMES::MazeModel::PositionInMaze (9, 0); // The top limit of the maze...
-	tPM [3] = QGAMES::MazeModel::PositionInMaze (0, 3); // A limit in the middle...
+	tPM [0] = QGAMES::MazeModel::PositionInMaze (5, 4, 0); // The four corners big...
+	tPM [1] = QGAMES::MazeModel::PositionInMaze (7, 7, 0); // The four corners little...
+	tPM [2] = QGAMES::MazeModel::PositionInMaze (9, 0, 0); // The top limit of the maze...
+	tPM [3] = QGAMES::MazeModel::PositionInMaze (0, 3, 0); // A limit in the middle...
 
 	// A vector with scenes already used and where another villaner can't be located...
 	std::vector <int> rUsed;
@@ -3597,11 +3597,11 @@ void TestPlatformGame::Game::Conf::distributeVillanersInTheMaze (int nP)
 	// This villan doesn't move until the knight put a collection of objects at the center scene
 	vll [0] = TestPlatformGame::VillanerLocation 
 		(0, 2 /* type BRIGHT */, 0 /* Idle */, rUsed [0], posWatching, QGAMES::Vector (__BD 1, __BD 0, __BD 0), 1 /* normal speed */,
-		 QGAMES::MazeModel::PositionInMaze (0, 0), QGAMES::MazeModel::PositionInMaze (0, 0), 0);
+		 QGAMES::MazeModel::PositionInMaze (0, 0, 0), QGAMES::MazeModel::PositionInMaze (0, 0, 0), 0);
 	// There is a villan at the center of the maze moving to a very specific scene room...
 	vll [1] = TestPlatformGame::VillanerLocation 
 		(1, 1 /* type DARK */, 0 /* Idle */, rUsed [1], posMiddle, QGAMES::Vector (__BD 1, __BD 0, __BD 0), 2 /* double speed */,
-		 tPM [0], QGAMES::MazeModel::PositionInMaze (3, 6) /* 63 = rUsed [2]. */, 0); // This villan moves in a very special way...
+		 tPM [0], QGAMES::MazeModel::PositionInMaze (3, 6, 0) /* 63 = rUsed [2]. */, 0); // This villan moves in a very special way...
 
 	// Now the rest of the villan ar located ramdomly...
 	for (int i = 0; i < (__GAMETEST_NUMBERVILLANERS__ - 2); i++) 
@@ -3613,7 +3613,8 @@ void TestPlatformGame::Game::Conf::distributeVillanersInTheMaze (int nP)
 		} while (std::find (rUsed.begin (), rUsed.end (), nM) != rUsed.end ()); // Until finding a room not ocuppied already...
 
 		rUsed.push_back (nM);
-		QGAMES::MazeModel::PositionInMaze pM (nM % __GAMETEST_HORIZONTALSCENESINMAZE__, nM / __GAMETEST_HORIZONTALSCENESINMAZE__);
+		QGAMES::MazeModel::PositionInMaze pM 
+			(nM % __GAMETEST_HORIZONTALSCENESINMAZE__, nM / __GAMETEST_HORIZONTALSCENESINMAZE__, 0);
 		vll [i + 2] = 
 			TestPlatformGame::VillanerLocation 
 			(i + 2, (rand () % 2) /* type NORMAL or DARK. */, 0 /* Idle */, nM, posMiddle, 
